@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { verifyEmailToken, resendVerificationEmail } from "@/lib/email";
 import { UserStatus } from "@prisma/client";
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id: userId },
     });
 
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Update user - mark email as verified and change status to PENDING_APPROVAL
-    await db.user.update({
+    await prisma.user.update({
       where: { id: userId },
       data: {
         emailVerified: new Date(),

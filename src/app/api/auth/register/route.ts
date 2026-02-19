@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { hashPassword, validatePasswordStrength } from "@/lib/password";
 import { sendVerificationEmail } from "@/lib/email";
 import { UserStatus } from "@prisma/client";
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = await db.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await hashPassword(password);
 
     // Create user with PENDING_VERIFICATION status
-    const user = await db.user.create({
+    const user = await prisma.user.create({
       data: {
         email: email.toLowerCase(),
         password: hashedPassword,

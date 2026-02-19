@@ -3,7 +3,7 @@
  */
 
 import nodemailer from "nodemailer";
-import { db } from "./db";
+import { prisma } from "./db";
 import crypto from "crypto";
 
 /**
@@ -67,7 +67,7 @@ export async function sendVerificationEmail(
     expires.setHours(expires.getHours() + 24); // 24 hour expiry
 
     // Store token in database
-    await db.verificationToken.create({
+    await prisma.verificationToken.create({
       data: {
         identifier: userId,
         token,
@@ -170,7 +170,7 @@ export async function verifyEmailToken(
   token: string
 ): Promise<{ userId: string | null; error?: string }> {
   try {
-    const verificationToken = await db.verificationToken.findUnique({
+    const verificationToken = await prisma.verificationToken.findUnique({
       where: { token },
     });
 
@@ -181,14 +181,14 @@ export async function verifyEmailToken(
     // Check if token is expired
     if (verificationToken.expires < new Date()) {
       // Delete expired token
-      await db.verificationToken.delete({
+      await prisma.verificationToken.delete({
         where: { token },
       });
       return { userId: null, error: "Verification token has expired" };
     }
 
     // Delete token after use (one-time use)
-    await db.verificationToken.delete({
+    await prisma.verificationToken.delete({
       where: { token },
     });
 
@@ -208,7 +208,7 @@ export async function resendVerificationEmail(
 ): Promise<{ success: boolean; message: string }> {
   try {
     // Find user by email
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
     });
 
@@ -222,7 +222,7 @@ export async function resendVerificationEmail(
     }
 
     // Delete old tokens for this user
-    await db.verificationToken.deleteMany({
+    await prisma.verificationToken.deleteMany({
       where: { identifier: user.id },
     });
 
