@@ -3,14 +3,12 @@
  * Handles authentication, session management, and role-based access
  */
 
-import NextAuth, { NextAuthConfig } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
-import { UserRole, UserStatus } from "@/types/auth";
-
-const prisma = new PrismaClient();
+import NextAuth, { NextAuthConfig } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import bcrypt from 'bcryptjs';
+import { UserRole, UserStatus } from '@/types/auth';
+import { prisma } from './db';
 
 /**
  * Auth.js configuration
@@ -19,10 +17,10 @@ export const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma) as any,
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -39,10 +37,7 @@ export const authOptions: NextAuthConfig = {
         }
 
         // Verify password
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password as string,
-          user.password
-        );
+        const isPasswordValid = await bcrypt.compare(credentials.password as string, user.password);
 
         if (!isPasswordValid) {
           return null;
@@ -62,12 +57,12 @@ export const authOptions: NextAuthConfig = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/auth/login",
-    error: "/auth/error",
+    signIn: '/auth/login',
+    error: '/auth/error',
   },
   callbacks: {
     /**
@@ -84,12 +79,11 @@ export const authOptions: NextAuthConfig = {
       }
 
       // Update session trigger (when session.update() is called)
-      if (trigger === "update" && session) {
+      if (trigger === 'update' && session) {
         token.role = session.role || token.role;
         token.status = session.status || token.status;
         token.regionId = session.regionId || token.regionId;
-        token.supervisorRegionId =
-          session.supervisorRegionId || token.supervisorRegionId;
+        token.supervisorRegionId = session.supervisorRegionId || token.supervisorRegionId;
       }
 
       return token;
@@ -104,15 +98,13 @@ export const authOptions: NextAuthConfig = {
         session.user.role = token.role as UserRole;
         session.user.status = token.status as UserStatus;
         session.user.regionId = token.regionId as string | null;
-        session.user.supervisorRegionId = token.supervisorRegionId as
-          | string
-          | null;
+        session.user.supervisorRegionId = token.supervisorRegionId as string | null;
       }
 
       return session;
     },
   },
-  debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV === 'development',
 };
 
 /**
