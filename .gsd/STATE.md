@@ -3,8 +3,8 @@
 ## Current Status
 
 **Phase**: Phase 01 - Foundation & Approval System (In Progress)  
-**Active Plans**: 01-01 Complete, 01-02 Complete, 01-03 Complete, 01-04 Complete, 01-05 to 01-06 Pending  
-**Completed Requirements**: 10/25 (User registration, login, and role management complete)
+**Active Plans**: 01-01 Complete, 01-02 Complete, 01-03 Complete, 01-04 Complete, 01-05 Complete, 01-06 Pending  
+**Completed Requirements**: 13/25 (User registration, login, role management, and profile creation complete)
 
 ---
 
@@ -21,7 +21,7 @@
 - ✅ 01-02: Authentication Foundation & Role Schema (Complete)
 - ✅ 01-03: User Registration & Login System (Complete)
 - ✅ 01-04: Role Management & Administration (Complete)
-- ⬜ 01-05: Biodata Forms & Photo Upload
+- ✅ 01-05: Biodata Forms & Photo Upload (Complete)
 - ⬜ 01-06: Supervision Workflows & Approvals
 
 ### Phase 02 - Discovery & Matching Core
@@ -44,9 +44,9 @@
 
 ### v1 Requirements (25 total)
 
-**Not Started**: 15  
+**Not Started**: 12  
 **In Progress**: 0  
-**Completed**: 10
+**Completed**: 13
 
 #### By Category
 

@@ -39,7 +39,7 @@ Plans:
 - [x] 01-02-PLAN.md — Authentication Foundation & Role Schema
 - [x] 01-03-PLAN.md — User Registration & Login System
 - [x] 01-04-PLAN.md — Role Management & Administration
-- [ ] 01-05-PLAN.md — Biodata Forms & Photo Upload
+- [x] 01-05-PLAN.md — Biodata Forms & Photo Upload
 - [ ] 01-06-PLAN.md — Supervision Workflows & Approvals
 
 ---
