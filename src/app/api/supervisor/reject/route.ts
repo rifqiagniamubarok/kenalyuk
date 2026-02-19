@@ -8,6 +8,7 @@ import { getServerSession } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { UserRole, UserStatus } from '@/types/auth';
 import { createAuditLog, AuditAction } from '@/lib/audit';
+import { sendRejectionNotification } from '@/lib/notifications';
 
 /**
  * POST /api/supervisor/reject
@@ -94,6 +95,9 @@ export async function POST(request: NextRequest) {
       reason: reason.trim(),
       timestamp: new Date().toISOString(),
     });
+
+    // Send rejection notification to user
+    await sendRejectionNotification(user.email, user.name || 'User', reason.trim());
 
     return NextResponse.json({
       success: true,

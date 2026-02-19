@@ -8,6 +8,7 @@ import { getServerSession } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { UserRole, UserStatus } from '@/types/auth';
 import { createAuditLog, AuditAction } from '@/lib/audit';
+import { sendApprovalNotification } from '@/lib/notifications';
 
 /**
  * POST /api/supervisor/approve
@@ -89,6 +90,9 @@ export async function POST(request: NextRequest) {
       regionId: user.regionId,
       timestamp: new Date().toISOString(),
     });
+
+    // Send approval notification to user
+    await sendApprovalNotification(user.email, user.name || 'User');
 
     return NextResponse.json({
       success: true,
