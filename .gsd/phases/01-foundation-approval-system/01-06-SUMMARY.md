@@ -16,24 +16,12 @@ provides:
   - Email notification system for status changes
   - Approval history tracking
   - Re-approval workflow for profile edits
-affects:
-  [
-    02-discovery-matching,
-    03-communication,
-    supervisor-features,
-    user-lifecycle,
-  ]
+affects: [02-discovery-matching, 03-communication, supervisor-features, user-lifecycle]
 
 # Tech tracking
 tech-stack:
   added: [nodemailer (existing), audit logging integration]
-  patterns:
-    [
-      Regional filtering pattern,
-      Audit logging for supervisor actions,
-      Email notification templates,
-      Status change notifications,
-    ]
+  patterns: [Regional filtering pattern, Audit logging for supervisor actions, Email notification templates, Status change notifications]
 
 key-files:
   created:
@@ -49,8 +37,7 @@ key-files:
       'src/components/ApprovalModal.tsx',
       'src/lib/notifications.ts',
     ]
-  modified:
-    ['src/app/api/biodata/route.ts (re-approval)', 'src/app/api/upload/route.ts (re-approval)']
+  modified: ['src/app/api/biodata/route.ts (re-approval)', 'src/app/api/upload/route.ts (re-approval)']
 
 key-decisions:
   - 'Email notifications use existing SMTP configuration from email.ts'

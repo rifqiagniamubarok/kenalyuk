@@ -36,17 +36,17 @@ key-files:
     - .env.local
 
 key-decisions:
-  - "Client-side image compression before upload to optimize for Indonesian mobile networks"
-  - "Automatic status transition to PENDING_APPROVAL when both biodata AND photos complete"
-  - "Re-approval required when editing profile (for ACTIVE or REJECTED users)"
-  - "Filesystem storage for photos with configurable upload directory"
-  - "5-9 photo requirement with comprehensive validation"
+  - 'Client-side image compression before upload to optimize for Indonesian mobile networks'
+  - 'Automatic status transition to PENDING_APPROVAL when both biodata AND photos complete'
+  - 'Re-approval required when editing profile (for ACTIVE or REJECTED users)'
+  - 'Filesystem storage for photos with configurable upload directory'
+  - '5-9 photo requirement with comprehensive validation'
 
 patterns-established:
-  - "Profile completion workflow: biodata → photos → dashboard"
-  - "Form validation with client and server-side checks"
-  - "Image optimization: compress → validate → preview → upload → save"
-  - "Status-based UI with visual progress indicators"
+  - 'Profile completion workflow: biodata → photos → dashboard'
+  - 'Form validation with client and server-side checks'
+  - 'Image optimization: compress → validate → preview → upload → save'
+  - 'Status-based UI with visual progress indicators'
 
 # Metrics
 duration: 45min
@@ -99,49 +99,59 @@ Each task was committed atomically:
 ## Files Created/Modified
 
 ### Components
+
 - `src/components/BiodataForm.tsx` - Comprehensive biodata collection with validation
 - `src/components/PhotoUpload.tsx` - Multi-photo upload with compression and preview
 
 ### Pages
+
 - `src/app/(user)/layout.tsx` - User layout with authentication check
 - `src/app/(user)/dashboard/page.tsx` - Dashboard with completion tracking
 - `src/app/(user)/biodata/page.tsx` - Biodata collection page
 - `src/app/(user)/photos/page.tsx` - Photo upload page
 
 ### API Routes
+
 - `src/app/api/biodata/route.ts` - Save/retrieve user biodata (GET, POST)
 - `src/app/api/upload/route.ts` - Photo upload and user photos update (POST, PUT)
 
 ### Libraries
+
 - `src/lib/image.ts` - Client-side image compression and validation utilities
 - `src/lib/upload.ts` - Server-side file upload and storage utilities
 
 ### Configuration
+
 - `.env.local` - Added UPLOAD_DIRECTORY configuration for photo storage
 
 ## Decisions Made
 
 ### 1. Client-side Image Compression
+
 **Rationale:** Indonesian mobile networks often have limited bandwidth. Compressing images on the client before upload reduces data transfer and improves user experience.
 
 **Implementation:** Used browser Canvas API to compress images to max 1200x1600px with 80% JPEG quality.
 
 ### 2. Automatic Status Progression
+
 **Rationale:** Reduce manual steps and provide clear workflow. When both biodata AND photos are complete, user automatically becomes PENDING_APPROVAL.
 
 **Implementation:** Status check in both biodata and photo upload API routes. Only transitions to PENDING_APPROVAL when both conditions met.
 
 ### 3. Re-approval Workflow
+
 **Rationale:** Profile changes after approval require re-verification by supervisor to maintain quality control.
 
 **Implementation:** When ACTIVE or REJECTED users edit biodata/photos, status resets to PENDING_APPROVAL.
 
 ### 4. 5-9 Photo Requirement
+
 **Rationale:** Minimum 5 photos provide sufficient profile representation, maximum 9 prevents excessive storage and ensures quality over quantity.
 
 **Implementation:** Client-side validation in PhotoUpload component, server-side validation in upload API.
 
 ### 5. Filesystem Storage
+
 **Rationale:** Simple, cost-effective for MVP. Easy to migrate to cloud storage (S3, Cloudinary) later.
 
 **Implementation:** Photos stored in `public/uploads/` with unique filenames, configurable via UPLOAD_DIRECTORY env var.
@@ -149,6 +159,7 @@ Each task was committed atomically:
 ## Deviations from Plan
 
 None - plan executed exactly as written. All must_haves satisfied:
+
 - ✅ User can complete biodata form with all required fields
 - ✅ User can upload 5-9 photos with client-side compression and preview
 - ✅ User status becomes PENDING_APPROVAL automatically after biodata completion
@@ -161,14 +172,16 @@ None - implementation proceeded smoothly with clear requirements.
 
 ## User Setup Required
 
-**File storage configuration required.** 
+**File storage configuration required.**
 
 Environment variable added to `.env.local`:
+
 ```bash
 UPLOAD_DIRECTORY="./public/uploads"
 ```
 
 The upload directory will be created automatically on first upload. For production, consider:
+
 - Cloud storage (AWS S3, Google Cloud Storage, Cloudinary)
 - CDN for photo delivery
 - Update `UPLOAD_DIRECTORY` to cloud storage configuration
@@ -176,17 +189,20 @@ The upload directory will be created automatically on first upload. For producti
 ## Verification Results
 
 ### Must-haves Verified
+
 1. ✅ **Biodata form** - 100+ lines, validates all required fields
 2. ✅ **Photo upload** - Supports 5-9 photos with compression and preview
 3. ✅ **Status management** - Automatically transitions to PENDING_APPROVAL
 4. ✅ **Dashboard** - Shows completion status and navigation
 
 ### Key Links Verified
+
 1. ✅ **BiodataForm → /api/biodata** - Form submission saves profile data
 2. ✅ **PhotoUpload → image.ts** - Client-side compression before upload
 3. ✅ **Upload API → upload.ts** - Server-side file storage
 
 ### Artifacts Verified
+
 1. ✅ `BiodataForm.tsx` - 483 lines, comprehensive form with validation
 2. ✅ `PhotoUpload.tsx` - 316 lines, contains compression logic
 3. ✅ `upload/route.ts` - Exports POST and PUT methods
@@ -200,6 +216,7 @@ The upload directory will be created automatically on first upload. For producti
 ## Next Phase Readiness
 
 **Ready for phase 01-06 (Supervision Workflows & Approvals):**
+
 - Users can complete profiles and reach PENDING_APPROVAL status
 - Profile data stored in database with all required fields
 - Photos uploaded and linked to user profiles
