@@ -34,7 +34,8 @@
 **Plans**: 6 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project Setup & Database Foundation
+
+- [x] 01-01-PLAN.md — Project Setup & Database Foundation
 - [ ] 01-02-PLAN.md — Authentication Foundation & Role Schema
 - [ ] 01-03-PLAN.md — User Registration & Login System
 - [ ] 01-04-PLAN.md — Role Management & Administration
