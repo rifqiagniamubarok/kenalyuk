@@ -86,6 +86,7 @@ Each task was committed atomically:
 ## Files Created/Modified
 
 ### Created
+
 - `src/lib/auth.ts` - Auth.js configuration with Prisma adapter, credentials provider, JWT/session callbacks
 - `src/types/auth.ts` - UserRole and UserStatus enums, extended Session and User types for next-auth
 - `src/app/api/auth/[...nextauth]/route.ts` - Auth.js API route handlers for Next.js 15 App Router
@@ -94,6 +95,7 @@ Each task was committed atomically:
 - `prisma/migrations/20260219172425_add_auth_tables/migration.sql` - Database migration for auth tables
 
 ### Modified
+
 - `prisma/schema.prisma` - Added Auth.js tables, emailVerified field, PENDING_VERIFICATION status
 - `.env` - Updated DATABASE_URL with correct PostgreSQL credentials
 - `package.json` - Added next-auth, @auth/prisma-adapter, bcryptjs dependencies
@@ -101,20 +103,24 @@ Each task was committed atomically:
 ## Decisions Made
 
 **Auth.js v5 (beta) chosen for Next.js 15 compatibility**
+
 - Next.js 15 App Router requires Auth.js v5 beta
 - Provides native support for Next.js middleware and server components
 
 **JWT session strategy over database sessions**
+
 - Better performance for read-heavy authentication checks
 - 30-day session expiry with persistent login across browser restarts
 - Session includes user ID, role, status, and region information
 
 **Role hierarchy implementation**
+
 - Numeric hierarchy: SUPERADMIN (3) > SUPERVISOR (2) > USER (1)
 - Allows "has at least role X" checks with simple comparisons
 - Supervisors inherit user permissions, superadmins inherit supervisor permissions
 
 **Five-state user lifecycle**
+
 - PENDING_VERIFICATION: Email not verified
 - PENDING_APPROVAL: Email verified, awaiting supervisor approval
 - ACTIVE: Approved and can access full features
@@ -122,6 +128,7 @@ Each task was committed atomically:
 - SUSPENDED: Temporarily blocked by admin
 
 **Prisma 7 configuration**
+
 - Datasource URL moved from schema.prisma to prisma.config.ts
 - Compatible with Prisma 7.4.0 new configuration pattern
 
@@ -173,11 +180,13 @@ Each task was committed atomically:
 ## Issues Encountered
 
 **PostgreSQL database not pre-configured**
+
 - Database `kenalyuk` didn't exist when running first migration
 - Resolved by creating database with `createdb kenalyuk` and updating .env with correct user
 - Future executions will work with existing database
 
 **Auth.js v5 beta stability**
+
 - Using beta version due to Next.js 15 requirements
 - Type compatibility issues handled with minimal workarounds
 - Functionality verified through TypeScript compilation
@@ -217,6 +226,7 @@ npm run dev
 ## Next Phase Readiness
 
 **Ready for next phase (01-03: User Registration & Login System)**
+
 - Auth.js configured and operational
 - Database schema includes all authentication tables
 - Role and status enums defined and enforced
@@ -226,6 +236,7 @@ npm run dev
 **Blockers:** None
 
 **Notes for next phase:**
+
 - Registration flow needs to implement email verification (PENDING_VERIFICATION → PENDING_APPROVAL)
 - Login endpoint should use Auth.js signIn with credentials provider
 - Password hashing with bcrypt configured and ready to use

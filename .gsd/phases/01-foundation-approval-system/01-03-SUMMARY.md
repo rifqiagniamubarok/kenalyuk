@@ -95,34 +95,37 @@ Each task was committed atomically:
 
 1. **Task 1: Create user registration with email verification** - `0567288` (feat)
    - Registration page, API endpoint, password hashing, email verification token generation
-   
 2. **Task 2: Implement email verification flow** - `8984fc9` (feat)
    - Verification page, token validation, status updates, resend functionality
-   
 3. **Task 3: Build login system with Auth.js integration** - `a5f604c` (feat)
    - Login page, AuthForm components, logout button, session management
 
 ## Files Created/Modified
 
 ### Libraries (src/lib/)
+
 - `password.ts` - Password hashing with bcryptjs, strength validation (8+ chars, uppercase, lowercase, number)
 - `email.ts` - SMTP integration with nodemailer, verification email sending, token management
 - `auth.ts` - Updated signIn page path to /auth/login
 
 ### API Routes (src/app/api/auth/)
+
 - `register/route.ts` - POST endpoint for user registration with validation and duplicate prevention
 - `verify-email/route.ts` - POST endpoint for email verification and resend functionality
 
 ### Pages (src/app/(auth)/)
+
 - `register/page.tsx` - Registration form with email, password, confirm password fields
 - `login/page.tsx` - Login form with Auth.js signIn integration
 - `verify-email/page.tsx` - Email verification page with multiple states (verifying, success, error, expired)
 
 ### Components (src/components/)
+
 - `AuthForm.tsx` - Reusable form wrapper with AuthInput component for consistent styling
 - `LogoutButton.tsx` - Logout button with variants (default, icon, text)
 
 ### Other
+
 - `middleware.ts` - Updated public routes to include /auth/login, /auth/register, /auth/verify-email
 - `page.tsx` - Enhanced homepage with session detection, login/logout actions, improved design
 
@@ -145,6 +148,7 @@ Each task was committed atomically:
 **Auto-fixed Issues:**
 
 **1. Auth.js signIn path mismatch**
+
 - **Found during:** Task 3 (Build login system)
 - **Issue:** Auth configuration had signIn path as "/auth/signin" but plan specified "/auth/login"
 - **Fix:** Updated src/lib/auth.ts pages.signIn to "/auth/login"
@@ -153,6 +157,7 @@ Each task was committed atomically:
 - **Committed in:** a5f604c (part of task 3 commit)
 
 **2. Middleware route configuration outdated**
+
 - **Found during:** Task 3 (Build login system)
 - **Issue:** Middleware had old auth routes ("/auth/signin", "/auth/signup") instead of new routes
 - **Fix:** Updated routeConfig.public to include ["/auth/login", "/auth/register", "/auth/verify-email"]
@@ -168,11 +173,13 @@ Each task was committed atomically:
 ## Issues Encountered
 
 **1. Nodemailer peer dependency conflict:**
+
 - **Problem:** npm tried to install nodemailer v8 but next-auth v5 requires v7
 - **Resolution:** Explicitly installed nodemailer@^7.0.7 compatible with next-auth peer dependencies
 - **Impact:** Email functionality works correctly with stable version
 
 **2. Email configuration warning:**
+
 - **Note:** SMTP environment variables not configured yet (SMTP_HOST, SMTP_USER, SMTP_PASSWORD, SMTP_FROM)
 - **Handled:** Email library includes graceful fallback with console warning, user receives notification if email fails
 - **User action required:** See User Setup Required section below
@@ -182,6 +189,7 @@ Each task was committed atomically:
 **External services require manual configuration.**
 
 ### Email Service (SMTP)
+
 Email verification requires SMTP configuration. Add these environment variables to `.env`:
 
 ```env
@@ -198,12 +206,14 @@ NEXTAUTH_URL=http://localhost:3000    # Your app URL (update for production)
 ```
 
 **Options for SMTP providers:**
+
 1. **Gmail:** Use App Password (not regular password) - [Generate here](https://support.google.com/accounts/answer/185833)
 2. **Resend:** Modern transactional email service - [Get API key](https://resend.com)
 3. **SendGrid:** Enterprise email service - [Get API key](https://sendgrid.com)
 4. **Mailgun:** Developer-friendly email API - [Get credentials](https://mailgun.com)
 
 **Verification:**
+
 ```bash
 # After configuring SMTP, test registration:
 # 1. Visit http://localhost:3000/auth/register
@@ -216,6 +226,7 @@ NEXTAUTH_URL=http://localhost:3000    # Your app URL (update for production)
 ## Next Phase Readiness
 
 ### Ready for Next Phase
+
 - ✅ User registration and login system fully functional
 - ✅ Email verification flow complete with token management
 - ✅ Session persistence across browser restarts (30-day JWT)
@@ -224,17 +235,20 @@ NEXTAUTH_URL=http://localhost:3000    # Your app URL (update for production)
 - ✅ User status lifecycle established (PENDING_VERIFICATION → PENDING_APPROVAL)
 
 ### Blockers
+
 None. Plan 01-04 (Role Management & Administration) can proceed immediately.
 
 ### Notes for Future Plans
+
 - **Plan 01-04 (Role Management):** Can use AuthForm component for admin user creation
 - **Plan 01-05 (Biodata Forms):** Users in PENDING_APPROVAL status ready for biodata collection
 - **Plan 01-06 (Supervision Workflows):** User approval flow ready to implement
 - **Email templates pattern:** Established in src/lib/email.ts, can be extended for approval notifications
 
 ### Success Criteria Met
+
 - ✅ **AUTH-01:** User registration with email/password using Auth.js - COMPLETE
-- ✅ **AUTH-02:** User email verification before account activation - COMPLETE  
+- ✅ **AUTH-02:** User email verification before account activation - COMPLETE
 - ✅ **AUTH-03:** User login with session persistence across browser restarts - COMPLETE
 - ✅ **AUTH-07:** User logout functionality from any page - COMPLETE
 
