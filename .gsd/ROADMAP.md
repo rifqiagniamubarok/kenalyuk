@@ -31,6 +31,16 @@
 
 **Total Requirements**: 19/25 (76% of v1 scope)
 
+**Plans**: 6 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Project Setup & Database Foundation
+- [ ] 01-02-PLAN.md — Authentication Foundation & Role Schema
+- [ ] 01-03-PLAN.md — User Registration & Login System
+- [ ] 01-04-PLAN.md — Role Management & Administration
+- [ ] 01-05-PLAN.md — Biodata Forms & Photo Upload
+- [ ] 01-06-PLAN.md — Supervision Workflows & Approvals
+
 ---
 
 ## Phase 02 - Discovery & Matching Core
