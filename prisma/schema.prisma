@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User roles enum
+enum UserRole {
+  USER
+  SUPERVISOR
+  SUPERADMIN
+}
+
+// User status enum
+enum UserStatus {
+  PENDING_APPROVAL
+  ACTIVE
+  REJECTED
+  SUSPENDED
+}
+
+// Gender enum
+enum Gender {
+  MALE
+  FEMALE
+}
+
+// Region model - geographical areas for supervision
+model Region {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       User[]
+  supervisors User[]   @relation("SupervisorRegion")
+
+  @@map("regions")
+}
+
+// User model - core user entity
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  role      UserRole   @default(USER)
+  status    UserStatus @default(PENDING_APPROVAL)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  // Profile information
+  name             String?
+  gender           Gender?
+  age              Int?
+  height           Int?
+  city             String?
+  education        String?
+  occupation       String?
+  religionLevel    String?
+  aboutMe          String?
+  photoUrls        String[] // Array of photo URLs
+
+  // Region relationship
+  regionId         String?
+  region           Region?  @relation(fields: [regionId], references: [id])
+
+  // Supervisor relationship (for supervisors only)
+  supervisorRegionId String?
+  supervisorRegion   Region?  @relation("SupervisorRegion", fields: [supervisorRegionId], references: [id])
+
+  @@map("users")
+}
