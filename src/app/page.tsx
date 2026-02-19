@@ -1,24 +1,133 @@
-export default function Home() {
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import LogoutButton from "@/components/LogoutButton";
+
+export default async function Home() {
+  const session = await auth();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6">
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="max-w-5xl w-full">
-        <h1 className="text-4xl font-bold text-center mb-4">Kenalyuk!</h1>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">Syariah-Compliant Matchmaking Platform</p>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div className="p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2">Modern UX</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Intuitive swipe-based interface for discovering marriage-minded profiles</p>
+        {/* Header with Auth Actions */}
+        <div className="flex justify-end mb-8">
+          {session ? (
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-gray-600">
+                Welcome, {session.user.email}
+              </span>
+              <LogoutButton />
+            </div>
+          ) : (
+            <div className="flex gap-4">
+              <Link
+                href="/auth/login"
+                className="px-4 py-2 text-purple-600 border border-purple-600 rounded-md hover:bg-purple-50 transition"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/auth/register"
+                className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-md hover:from-purple-700 hover:to-pink-700 transition"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <h1 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          Kenalyuk!
+        </h1>
+        <p className="text-center text-gray-600 mb-12 text-lg">
+          Syariah-Compliant Matchmaking Platform
+        </p>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+                />
+              </svg>
+            </div>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">
+              Modern UX
+            </h2>
+            <p className="text-sm text-gray-600">
+              Intuitive swipe-based interface for discovering marriage-minded
+              profiles
+            </p>
           </div>
-          <div className="p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2">Regional Supervision</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Local supervisors ensure syariah-compliant interactions and serious intentions</p>
+          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">
+              Regional Supervision
+            </h2>
+            <p className="text-sm text-gray-600">
+              Local supervisors ensure syariah-compliant interactions and
+              serious intentions
+            </p>
           </div>
-          <div className="p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2">Trust Network</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Build meaningful connections with profiles approved by your regional community</p>
+          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">
+              Trust Network
+            </h2>
+            <p className="text-sm text-gray-600">
+              Build meaningful connections with profiles approved by your
+              regional community
+            </p>
           </div>
         </div>
+
+        {!session && (
+          <div className="mt-12 text-center">
+            <Link
+              href="/auth/register"
+              className="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-medium rounded-md hover:from-purple-700 hover:to-pink-700 transition"
+            >
+              Get Started Today
+            </Link>
+          </div>
+        )}
       </div>
     </main>
   );
 }
+

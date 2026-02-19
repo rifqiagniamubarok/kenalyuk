@@ -13,7 +13,7 @@ import { UserRole, UserStatus } from "@/types/auth";
  */
 const routeConfig = {
   // Public routes - no authentication required
-  public: ["/", "/auth/signin", "/auth/signup", "/auth/error"],
+  public: ["/", "/auth/login", "/auth/register", "/auth/verify-email", "/auth/error"],
   
   // Protected routes requiring authentication
   protected: {
@@ -67,7 +67,7 @@ export async function middleware(request: NextRequest) {
 
   // For protected routes, require authentication
   if (!session) {
-    const signInUrl = new URL("/auth/signin", request.url);
+    const signInUrl = new URL("/auth/login", request.url);
     signInUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(signInUrl);
   }
