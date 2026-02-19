@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 // User roles enum
@@ -19,6 +18,7 @@ enum UserRole {
 
 // User status enum
 enum UserStatus {
+  PENDING_VERIFICATION
   PENDING_APPROVAL
   ACTIVE
   REJECTED
@@ -47,13 +47,14 @@ model Region {
 
 // User model - core user entity
 model User {
-  id        String     @id @default(cuid())
-  email     String     @unique
-  password  String
-  role      UserRole   @default(USER)
-  status    UserStatus @default(PENDING_APPROVAL)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id            String     @id @default(cuid())
+  email         String     @unique
+  emailVerified DateTime?
+  password      String
+  role          UserRole   @default(USER)
+  status        UserStatus @default(PENDING_VERIFICATION)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 
   // Profile information
   name             String?
@@ -75,5 +76,51 @@ model User {
   supervisorRegionId String?
   supervisorRegion   Region?  @relation("SupervisorRegion", fields: [supervisorRegionId], references: [id])
 
+  // Auth.js relations
+  accounts Account[]
+  sessions Session[]
+
   @@map("users")
+}
+
+// Auth.js Account model (for OAuth providers)
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+// Auth.js Session model
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// Auth.js VerificationToken model (for email verification)
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
 }
