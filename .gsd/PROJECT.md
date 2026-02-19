@@ -106,7 +106,7 @@ Existing dating apps create misalignment with serious marriage intentions, espec
 
 ## Technical Approach
 
-**Stack**: Next.js (App Router) + TypeScript + PostgreSQL + Prisma + Socket.IO + TailwindCSS
+**Stack**: Next.js (App Router) + TypeScript + Auth.js + PostgreSQL + Prisma + Socket.IO + TailwindCSS
 **Architecture**: Monolithic for MVP simplicity, optimized for Indonesian mobile performance
 **Development**: Solo + AI coding tools (GitHub Copilot, GPT, Cursor)
 **Hosting**: Single VPS or small cloud instance, managed PostgreSQL if cost-effective
