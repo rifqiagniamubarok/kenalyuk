@@ -79,6 +79,7 @@ Plans:
 ## Phase 03 - Communication & Moderation
 
 **Duration**: Weeks 6-8  
+**Status**: In Progress 🔄  
 **Goal**: Supervised real-time chat enabling meaningful marriage-intention conversations
 
 ### Success Criteria
@@ -94,6 +95,15 @@ Plans:
 - **CHAT-01 to CHAT-06**: Complete moderated chat system (6 requirements)
 
 **Total Requirements**: 6/25 (24% of v1 scope)
+
+**Plans**: 4 plans
+
+Plans:
+
+- [x] 03-01-PLAN.md — Database schema for chat (Message model)
+- [ ] 03-02-PLAN.md — Chat API implementation (send, receive, mark as read)
+- [ ] 03-03-PLAN.md — Chat UI components (message list, input, real-time updates)
+- [ ] 03-04-PLAN.md — Supervisor chat monitoring dashboard
 
 ---
 
