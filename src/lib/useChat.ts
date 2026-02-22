@@ -27,6 +27,7 @@ interface UseChatReturn {
   loading: boolean;
   error: string | null;
   isTyping: boolean;
+  currentUserId: string | null;
   sendMessage: (content: string) => Promise<void>;
   setTyping: (typing: boolean) => void;
 }
@@ -41,6 +42,7 @@ export function useChat(matchId: string): UseChatReturn {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const eventSourceRef = useRef<EventSource | null>(null);
 
   // Fetch message history on mount
@@ -59,6 +61,7 @@ export function useChat(matchId: string): UseChatReturn {
 
         const data = await response.json();
         setMessages(data.messages);
+        setCurrentUserId(data.currentUserId);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
@@ -155,6 +158,7 @@ export function useChat(matchId: string): UseChatReturn {
     loading,
     error,
     isTyping,
+    currentUserId,
     sendMessage,
     setTyping,
   };

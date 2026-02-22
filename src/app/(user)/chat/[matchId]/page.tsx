@@ -11,18 +11,16 @@ import { Card, CardBody, CardHeader, Input, Button, Skeleton, Divider, Spinner }
 import { toast } from 'sonner';
 import { useChat } from '@/lib/useChat';
 import ChatMessage from '@/components/ChatMessage';
-import { useSession } from 'next-auth/react';
 
 export default function ChatRoomPage() {
   const params = useParams();
   const matchId = params.matchId as string;
-  const { data: session } = useSession();
   const [inputValue, setInputValue] = useState('');
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const { messages, loading, error, sendMessage, isTyping } = useChat(matchId);
+  const { messages, loading, error, sendMessage, isTyping, currentUserId } = useChat(matchId);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -95,7 +93,7 @@ export default function ChatRoomPage() {
   }
 
   // Determine other user's name for header
-  const otherUserName = messages.length > 0 ? messages.find((msg) => msg.senderId !== session?.user?.id)?.sender.name || 'Chat' : 'Chat';
+  const otherUserName = messages.length > 0 ? messages.find((msg) => msg.senderId !== currentUserId)?.sender.name || 'Chat' : 'Chat';
 
   return (
     <div className="space-y-6">
@@ -127,7 +125,7 @@ export default function ChatRoomPage() {
 
             {/* Messages list */}
             {messages.map((message) => (
-              <ChatMessage key={message.id} message={message} isOwn={message.senderId === session?.user?.id} />
+              <ChatMessage key={message.id} message={message} isOwn={message.senderId === currentUserId} />
             ))}
 
             {/* Auto-scroll anchor */}

@@ -66,7 +66,7 @@ export async function GET(request: Request, { params }: { params: { matchId: str
       },
     });
 
-    return NextResponse.json({ messages });
+    return NextResponse.json({ messages, currentUserId: userId });
   } catch (error) {
     console.error('Error fetching messages:', error);
     return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
