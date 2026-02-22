@@ -26,6 +26,15 @@ export enum UserStatus {
 }
 
 /**
+ * Match status enum - lifecycle states for matches
+ */
+export enum MatchStatus {
+  ACTIVE = 'ACTIVE',
+  UNMATCHED = 'UNMATCHED',
+  CLOSED = 'CLOSED',
+}
+
+/**
  * Extended session user type with role and region
  */
 declare module 'next-auth' {
