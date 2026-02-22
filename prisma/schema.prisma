@@ -94,6 +94,7 @@ model User {
   passedBy       Pass[]  @relation("UserPassedBy")
   matchesAsUser1 Match[] @relation("MatchUser1")
   matchesAsUser2 Match[] @relation("MatchUser2")
+  messages       Message[] @relation("UserMessages")
 
   @@map("users")
 }
@@ -196,8 +197,9 @@ model Match {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
-  user1 User @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
-  user2 User @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+  user1    User      @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2    User      @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+  messages Message[]
 
   @@unique([user1Id, user2Id])
   @@index([user1Id])
@@ -205,4 +207,23 @@ model Match {
   @@index([status])
   @@index([updatedAt])
   @@map("matches")
+}
+
+// Message model - stores chat messages between matched users
+model Message {
+  id        String   @id @default(cuid())
+  matchId   String
+  senderId  String
+  content   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  match  Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  sender User  @relation("UserMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([matchId])
+  @@index([senderId])
+  @@index([createdAt])
+  @@map("messages")
 }
