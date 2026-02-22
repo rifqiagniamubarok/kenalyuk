@@ -61,11 +61,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-background-secondary px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Kenalyuk!</h1>
-          <p className="text-gray-600">Syariah-Compliant Matchmaking</p>
+          <h1 className="text-4xl font-bold text-primary mb-2">Kenalyuk</h1>
+          <p className="text-text-secondary">Syariah-Compliant Matchmaking</p>
         </div>
 
         <Card className="w-full">
@@ -104,7 +104,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
               />
 
-              <Button type="submit" color="secondary" size="lg" isLoading={loading} className="w-full font-semibold">
+              <Button type="submit" size="lg" isLoading={loading} className="w-full font-semibold bg-primary hover:bg-primary-dark text-white transition-colors duration-200">
                 Sign In
               </Button>
             </form>
@@ -114,14 +114,14 @@ export default function LoginPage() {
 
           <CardFooter className="flex flex-col gap-2 px-6 pb-6">
             <div className="flex items-center justify-center gap-1 text-sm">
-              <span className="text-gray-600">Don't have an account?</span>
-              <Link href="/register" size="sm" color="secondary">
+              <span className="text-text-secondary">Don't have an account?</span>
+              <Link href="/register" size="sm" className="text-primary hover:text-primary-dark">
                 Sign up
               </Link>
             </div>
             <div className="flex items-center justify-center gap-1 text-sm">
-              <span className="text-gray-600">Need to verify your email?</span>
-              <Link href="/verify-email" size="sm" color="secondary">
+              <span className="text-text-secondary">Need to verify your email?</span>
+              <Link href="/verify-email" size="sm" className="text-primary hover:text-primary-dark">
                 Resend verification
               </Link>
             </div>

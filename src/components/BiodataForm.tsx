@@ -217,7 +217,7 @@ export default function BiodataForm() {
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
             maxLength={100}
           />
@@ -231,7 +231,7 @@ export default function BiodataForm() {
             id="gender"
             value={formData.gender}
             onChange={(e) => setFormData({ ...formData, gender: e.target.value as any })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="">Select gender</option>
@@ -250,7 +250,7 @@ export default function BiodataForm() {
               id="age"
               value={formData.age}
               onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               required
               min="18"
               max="100"
@@ -266,7 +266,7 @@ export default function BiodataForm() {
               id="height"
               value={formData.height}
               onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               required
               min="100"
               max="250"
@@ -283,7 +283,7 @@ export default function BiodataForm() {
             id="city"
             value={formData.city}
             onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
             maxLength={100}
             placeholder="e.g., Jakarta, Bandung, Surabaya"
@@ -298,7 +298,7 @@ export default function BiodataForm() {
             id="regionId"
             value={formData.regionId}
             onChange={(e) => setFormData({ ...formData, regionId: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="">Select region</option>
@@ -323,7 +323,7 @@ export default function BiodataForm() {
             id="education"
             value={formData.education}
             onChange={(e) => setFormData({ ...formData, education: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="">Select education level</option>
@@ -344,7 +344,7 @@ export default function BiodataForm() {
             id="occupation"
             value={formData.occupation}
             onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="">Select occupation</option>
@@ -373,7 +373,7 @@ export default function BiodataForm() {
             id="religionLevel"
             value={formData.religionLevel}
             onChange={(e) => setFormData({ ...formData, religionLevel: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="">Select practice level</option>
@@ -397,7 +397,7 @@ export default function BiodataForm() {
             id="aboutMe"
             value={formData.aboutMe}
             onChange={(e) => setFormData({ ...formData, aboutMe: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             rows={4}
             required
             minLength={50}
@@ -415,7 +415,7 @@ export default function BiodataForm() {
             id="lookingFor"
             value={formData.lookingFor}
             onChange={(e) => setFormData({ ...formData, lookingFor: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             rows={4}
             required
             minLength={30}
@@ -427,7 +427,7 @@ export default function BiodataForm() {
       </div>
 
       <div className="flex justify-end gap-4">
-        <button type="submit" disabled={loading} className="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        <button type="submit" disabled={loading} className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-soft">
           {loading ? 'Saving...' : 'Save & Continue'}
         </button>
       </div>

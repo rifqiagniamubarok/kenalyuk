@@ -37,10 +37,10 @@ export default function SidebarNavigation({ user, menuItems, role }: SidebarNavi
   return (
     <>
       {/* Mobile menu button */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-4 py-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Kenalyuk!</h1>
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-gray-100">
+          <h1 className="text-xl font-bold text-primary">Kenalyuk</h1>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-background-secondary transition-colors">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -56,13 +56,13 @@ export default function SidebarNavigation({ user, menuItems, role }: SidebarNavi
       <aside
         className={`fixed top-0 left-0 z-40 h-screen transition-transform ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 w-64 bg-white border-r border-gray-200`}
+        } lg:translate-x-0 w-64 bg-white border-r border-gray-100`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-gray-200">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Kenalyuk!</h1>
-            <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">{role === 'superadmin' ? 'Superadmin' : 'Supervisor'} Panel</p>
+          <div className="p-6 border-b border-gray-100">
+            <h1 className="text-2xl font-bold text-primary">Kenalyuk</h1>
+            <p className="text-xs text-text-secondary mt-1 uppercase tracking-wide">{role === 'superadmin' ? 'Superadmin' : 'Supervisor'} Panel</p>
           </div>
 
           {/* Navigation Menu */}
@@ -74,8 +74,8 @@ export default function SidebarNavigation({ user, menuItems, role }: SidebarNavi
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    isActive ? 'bg-purple-50 text-purple-700 font-semibold' : 'text-gray-700 hover:bg-gray-50'
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+                    isActive ? 'bg-primary/10 text-primary font-semibold' : 'text-text-secondary hover:bg-background-secondary'
                   }`}
                 >
                   <span className="text-xl">{item.icon}</span>

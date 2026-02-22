@@ -106,8 +106,8 @@ export default function PendingUsersPage() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-        <p className="mt-4 text-gray-600">Loading pending users...</p>
+        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <p className="mt-4 text-text-secondary">Loading pending users...</p>
       </div>
     );
   }
@@ -116,7 +116,7 @@ export default function PendingUsersPage() {
     return (
       <div className="text-center py-12">
         <div className="text-red-600 font-semibold mb-4">Error: {error}</div>
-        <button onClick={fetchPendingUsers} className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+        <button onClick={fetchPendingUsers} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors duration-200 shadow-soft">
           Retry
         </button>
       </div>

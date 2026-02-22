@@ -226,7 +226,7 @@ export default function DiscoveryPage() {
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1 text-center">
             <div className="text-6xl mb-2">🎉</div>
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">It&apos;s a Match!</h2>
+            <h2 className="text-2xl font-bold text-primary">It&apos;s a Match!</h2>
           </ModalHeader>
           <ModalBody className="text-center pb-6">
             {matchedProfile && (
@@ -234,7 +234,7 @@ export default function DiscoveryPage() {
                 <p className="text-lg mb-2">
                   You and <span className="font-semibold">{matchedProfile.name}</span> liked each other!
                 </p>
-                <p className="text-gray-600 text-sm">Start a conversation now and get to know each other better.</p>
+                <p className="text-text-secondary text-sm">Start a conversation now and get to know each other better.</p>
               </>
             )}
           </ModalBody>

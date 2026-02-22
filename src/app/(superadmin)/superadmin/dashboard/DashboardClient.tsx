@@ -70,7 +70,7 @@ export default function DashboardClient({
                 <p className="text-3xl font-bold mt-2">{totalUsers}</p>
                 <p className="text-xs text-default-400 mt-3">+{recentRegistrations} in last 30 days</p>
               </div>
-              <div className="h-12 w-12 bg-purple-100 rounded-xl flex items-center justify-center">
+              <div className="h-12 w-12 bg-primary/10 rounded-xl flex items-center justify-center">
                 <span className="text-2xl">👥</span>
               </div>
             </div>

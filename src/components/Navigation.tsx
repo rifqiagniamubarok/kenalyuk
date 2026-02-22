@@ -107,7 +107,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold text-purple-600">{user.email}</p>
+              <p className="font-semibold text-primary">{user.email}</p>
             </DropdownItem>
             <DropdownItem key="logout" color="danger" onPress={handleLogout} textValue="Logout">
               Log Out
@@ -120,7 +120,9 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.href}-${index}`}>
-            <Link className={`w-full ${pathname === item.href ? 'text-purple-600 font-semibold' : 'text-gray-600'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
+            <Link className={`w-full ${
+              pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'
+            }`} href={item.href} onClick={() => setIsMenuOpen(false)}>
               <div className="flex items-center gap-2 py-2">
                 {item.icon}
                 {item.label}

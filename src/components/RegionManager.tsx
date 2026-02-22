@@ -155,7 +155,7 @@ export default function RegionManager() {
         </div>
         <button
           onClick={handleCreate}
-          className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-md font-medium hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition"
+          className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 shadow-soft"
         >
           + Create Region
         </button>
@@ -165,8 +165,8 @@ export default function RegionManager() {
       <div className="grid gap-4">
         {regions.length === 0 ? (
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-            <p className="text-gray-600">No regions configured yet</p>
-            <button onClick={handleCreate} className="mt-4 text-purple-600 hover:text-purple-700 font-medium">
+            <p className="text-text-secondary">No regions configured yet</p>
+            <button onClick={handleCreate} className="mt-4 text-primary hover:text-primary-dark font-medium transition-colors duration-200">
               Create your first region
             </button>
           </div>
@@ -184,10 +184,10 @@ export default function RegionManager() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
-                  <button onClick={() => handleEdit(region)} className="px-4 py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-md transition">
+                  <button onClick={() => handleEdit(region)} className="px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors duration-200">
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(region)} className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition">
+                  <button onClick={() => handleDelete(region)} className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200">
                     Delete
                   </button>
                 </div>
@@ -219,7 +219,7 @@ export default function RegionManager() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-gray-900"
                   placeholder="e.g., Jakarta, Bandung"
                   required
                   minLength={3}
@@ -236,7 +236,7 @@ export default function RegionManager() {
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-gray-900"
                   placeholder="Optional description"
                   rows={3}
                 />
@@ -246,7 +246,7 @@ export default function RegionManager() {
                 <button
                   type="submit"
                   disabled={formLoading}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-md font-medium hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-soft"
                 >
                   {formLoading ? 'Saving...' : editingRegion ? 'Update Region' : 'Create Region'}
                 </button>

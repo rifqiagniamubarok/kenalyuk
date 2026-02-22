@@ -173,7 +173,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
       {canUploadMore && (
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-            isDragging ? 'border-pink-500 bg-pink-50' : 'border-gray-300 hover:border-pink-400'
+            isDragging ? 'border-primary bg-primary/10' : 'border-gray-300 hover:border-primary'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -191,11 +191,11 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
             />
           </svg>
 
-          <p className="mt-2 text-sm text-gray-600">
-            <span className="font-medium text-pink-600">Click to upload</span> or drag and drop
+          <p className="mt-2 text-sm text-text-secondary">
+            <span className="font-medium text-primary">Click to upload</span> or drag and drop
           </p>
-          <p className="text-xs text-gray-500 mt-1">PNG or JPEG only, up to 10MB per file</p>
-          <p className="text-xs text-gray-500 mt-1">Upload 5-9 photos ({photos.length}/9 uploaded)</p>
+          <p className="text-xs text-text-secondary mt-1">PNG or JPEG only, up to 10MB per file</p>
+          <p className="text-xs text-text-secondary mt-1">Upload 5-9 photos ({photos.length}/9 uploaded)</p>
         </div>
       )}
 
@@ -279,7 +279,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
           <button
             onClick={handleUploadAll}
             disabled={!hasMinimumPhotos || photos.some((p) => p.uploading)}
-            className="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-soft"
           >
             {photos.some((p) => p.uploading) ? 'Uploading...' : 'Save Photos'}
           </button>

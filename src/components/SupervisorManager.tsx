@@ -203,7 +203,7 @@ export default function SupervisorManager() {
         <button
           onClick={() => setShowAssignModal(true)}
           disabled={users.length === 0 || regions.length === 0}
-          className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-md font-medium hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-soft"
         >
           + Assign Supervisor
         </button>
@@ -231,7 +231,7 @@ export default function SupervisorManager() {
                       <select
                         value={supervisor.supervisorRegion?.id || ''}
                         onChange={(e) => handleUpdateRegion(supervisor.id, e.target.value)}
-                        className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                        className="px-3 py-1 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
                       >
                         <option value={supervisor.supervisorRegion?.id || ''}>{supervisor.supervisorRegion?.name}</option>
                         {regions
@@ -296,13 +296,13 @@ export default function SupervisorManager() {
                   placeholder="Search by name or email..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+                  className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-gray-900"
                 />
                 <select
                   id="user"
                   value={selectedUser}
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-gray-900"
                   required
                   size={5}
                 >
@@ -324,7 +324,7 @@ export default function SupervisorManager() {
                   id="region"
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-gray-900"
                   required
                 >
                   <option value="">-- Select a region --</option>
@@ -341,7 +341,7 @@ export default function SupervisorManager() {
                 <button
                   type="submit"
                   disabled={formLoading}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-md font-medium hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-soft"
                 >
                   {formLoading ? 'Assigning...' : 'Assign Supervisor'}
                 </button>

@@ -59,7 +59,7 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 px-4 py-12">
+      <div className="min-h-screen flex items-center justify-center bg-background-secondary px-4 py-12">
         <Card className="max-w-md w-full text-center">
           <CardBody className="py-8">
             <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -68,16 +68,16 @@ export default function RegisterPage() {
               </svg>
             </div>
             <h2 className="text-2xl font-bold mb-2">Registration Successful!</h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-text-secondary mb-4">
               We've sent a verification email to <strong>{formData.email}</strong>
             </p>
-            <p className="text-sm text-gray-500">Please check your inbox and click the verification link to activate your account.</p>
+            <p className="text-sm text-text-secondary">Please check your inbox and click the verification link to activate your account.</p>
             {error && (
               <div className="mt-4 p-3 bg-warning-50 border border-warning-200 rounded-lg">
                 <p className="text-sm text-warning-800">{error}</p>
               </div>
             )}
-            <div className="mt-6 text-sm text-gray-500">Redirecting to verification page...</div>
+            <div className="mt-6 text-sm text-text-secondary">Redirecting to verification page...</div>
           </CardBody>
         </Card>
       </div>
@@ -85,11 +85,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-background-secondary px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Kenalyuk!</h1>
-          <p className="text-gray-600">Syariah-Compliant Matchmaking</p>
+          <h1 className="text-4xl font-bold text-primary mb-2">Kenalyuk</h1>
+          <p className="text-text-secondary">Syariah-Compliant Matchmaking</p>
         </div>
 
         <Card className="w-full">
@@ -140,7 +140,7 @@ export default function RegisterPage() {
                 autoComplete="new-password"
               />
 
-              <Button type="submit" color="secondary" size="lg" isLoading={loading} className="w-full font-semibold">
+              <Button type="submit" size="lg" isLoading={loading} className="w-full font-semibold bg-primary hover:bg-primary-dark text-white transition-colors duration-200">
                 Create Account
               </Button>
             </form>
