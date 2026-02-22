@@ -28,9 +28,10 @@ interface ProfileCardProps {
   onLike?: () => void;
   onPass?: () => void;
   showActions?: boolean;
+  actionsDisabled?: boolean;
 }
 
-export default function ProfileCard({ profile, onLike, onPass, showActions = true }: ProfileCardProps) {
+export default function ProfileCard({ profile, onLike, onPass, showActions = true, actionsDisabled = false }: ProfileCardProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const photos = profile.photos.length > 0 ? profile.photos : ['/placeholder-avatar.png'];
 
@@ -140,6 +141,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
             color="danger"
             variant="flat"
             onPress={onPass}
+            isDisabled={actionsDisabled}
             className="w-14 h-14"
           >
             <span className="text-2xl">✕</span>
@@ -150,6 +152,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
             color="success"
             variant="flat"
             onPress={onLike}
+            isDisabled={actionsDisabled}
             className="w-14 h-14"
           >
             <span className="text-2xl">♥</span>
