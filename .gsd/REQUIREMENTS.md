@@ -89,39 +89,39 @@
 
 ### Phase Mapping
 
-| Requirement ID | Phase | Plan | Status      |
-| -------------- | ----- | ---- | ----------- |
-| AUTH-01        | 01    | TBD  | Not Planned |
-| AUTH-02        | 01    | TBD  | Not Planned |
-| AUTH-03        | 01    | TBD  | Not Planned |
-| AUTH-04        | 01    | TBD  | Not Planned |
-| AUTH-05        | 01    | TBD  | Not Planned |
-| AUTH-06        | 01    | TBD  | Not Planned |
-| AUTH-07        | 01    | TBD  | Not Planned |
-| SUP-01         | 01    | TBD  | Not Planned |
-| SUP-02         | 01    | TBD  | Not Planned |
-| SUP-03         | 01    | TBD  | Not Planned |
-| SUP-04         | 01    | TBD  | Not Planned |
-| SUP-05         | 01    | TBD  | Not Planned |
-| SUP-06         | 01    | TBD  | Not Planned |
-| ROLE-01        | 01    | TBD  | Not Planned |
-| ROLE-02        | 01    | TBD  | Not Planned |
-| ROLE-03        | 01    | TBD  | Not Planned |
-| ROLE-04        | 01    | TBD  | Not Planned |
-| ROLE-05        | 01    | TBD  | Not Planned |
-| ROLE-06        | 01    | TBD  | Not Planned |
-| DISC-01        | 02    | 02-02 | Complete   |
-| DISC-02        | 02    | 02-03 | Complete   |
-| DISC-03        | 02    | 02-03 | Complete   |
-| DISC-04        | 02    | 02-04 | Complete   |
-| DISC-05        | 02    | 02-04 | Complete   |
-| DISC-06        | 02    | 02-02 | Complete   |
-| CHAT-01        | 03    | TBD  | Not Planned |
-| CHAT-02        | 03    | TBD  | Not Planned |
-| CHAT-03        | 03    | TBD  | Not Planned |
-| CHAT-04        | 03    | TBD  | Not Planned |
-| CHAT-05        | 03    | TBD  | Not Planned |
-| CHAT-06        | 03    | TBD  | Not Planned |
+| Requirement ID | Phase | Plan  | Status      |
+| -------------- | ----- | ----- | ----------- |
+| AUTH-01        | 01    | TBD   | Not Planned |
+| AUTH-02        | 01    | TBD   | Not Planned |
+| AUTH-03        | 01    | TBD   | Not Planned |
+| AUTH-04        | 01    | TBD   | Not Planned |
+| AUTH-05        | 01    | TBD   | Not Planned |
+| AUTH-06        | 01    | TBD   | Not Planned |
+| AUTH-07        | 01    | TBD   | Not Planned |
+| SUP-01         | 01    | TBD   | Not Planned |
+| SUP-02         | 01    | TBD   | Not Planned |
+| SUP-03         | 01    | TBD   | Not Planned |
+| SUP-04         | 01    | TBD   | Not Planned |
+| SUP-05         | 01    | TBD   | Not Planned |
+| SUP-06         | 01    | TBD   | Not Planned |
+| ROLE-01        | 01    | TBD   | Not Planned |
+| ROLE-02        | 01    | TBD   | Not Planned |
+| ROLE-03        | 01    | TBD   | Not Planned |
+| ROLE-04        | 01    | TBD   | Not Planned |
+| ROLE-05        | 01    | TBD   | Not Planned |
+| ROLE-06        | 01    | TBD   | Not Planned |
+| DISC-01        | 02    | 02-02 | Complete    |
+| DISC-02        | 02    | 02-03 | Complete    |
+| DISC-03        | 02    | 02-03 | Complete    |
+| DISC-04        | 02    | 02-04 | Complete    |
+| DISC-05        | 02    | 02-04 | Complete    |
+| DISC-06        | 02    | 02-02 | Complete    |
+| CHAT-01        | 03    | TBD   | Not Planned |
+| CHAT-02        | 03    | TBD   | Not Planned |
+| CHAT-03        | 03    | TBD   | Not Planned |
+| CHAT-04        | 03    | TBD   | Not Planned |
+| CHAT-05        | 03    | TBD   | Not Planned |
+| CHAT-06        | 03    | TBD   | Not Planned |
 
 ### Success Criteria Links
 
