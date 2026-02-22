@@ -32,12 +32,12 @@
 
 ### Moderated Chat
 
-- [ ] **CHAT-01**: Matched users can send real-time text messages in dedicated chatrooms
-- [ ] **CHAT-02**: Supervisor can read all conversations involving users in their region
-- [ ] **CHAT-03**: Supervisor can close chatroom to permanently end conversation
-- [ ] **CHAT-04**: Cross-region matches are visible to supervisors from both regions
-- [ ] **CHAT-05**: Chat messages are persisted and load conversation history
-- [ ] **CHAT-06**: Real-time typing indicators show when other user is typing
+- [x] **CHAT-01**: Matched users can send real-time text messages in dedicated chatrooms
+- [x] **CHAT-02**: Supervisor can read all conversations involving users in their region
+- [x] **CHAT-03**: Supervisor can close chatroom to permanently end conversation
+- [x] **CHAT-04**: Cross-region matches are visible to supervisors from both regions
+- [x] **CHAT-05**: Chat messages are persisted and load conversation history
+- [x] **CHAT-06**: Real-time typing indicators show when other user is typing
 
 ### Role Management & Administration
 
@@ -116,12 +116,12 @@
 | DISC-04        | 02    | 02-04 | Complete    |
 | DISC-05        | 02    | 02-04 | Complete    |
 | DISC-06        | 02    | 02-02 | Complete    |
-| CHAT-01        | 03    | TBD   | Not Planned |
-| CHAT-02        | 03    | TBD   | Not Planned |
-| CHAT-03        | 03    | TBD   | Not Planned |
-| CHAT-04        | 03    | TBD   | Not Planned |
-| CHAT-05        | 03    | TBD   | Not Planned |
-| CHAT-06        | 03    | TBD   | Not Planned |
+| CHAT-01        | 03    | 03-02, 03-03 | Complete |
+| CHAT-02        | 03    | 03-04 | Complete |
+| CHAT-03        | 03    | 03-04 | Complete |
+| CHAT-04        | 03    | 03-04 | Complete |
+| CHAT-05        | 03    | 03-01, 03-02 | Complete |
+| CHAT-06        | 03    | 03-03 | Complete |
 
 ### Success Criteria Links
 
