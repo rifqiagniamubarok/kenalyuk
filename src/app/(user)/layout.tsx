@@ -7,6 +7,9 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import Navigation from '@/components/Navigation';
 
+// User navigation menu items
+// Note: Chat rooms are accessed via /matches page (no separate Chat menu item)
+// Each match card has a "Chat" button linking to /chat/[matchId]
 const userMenuItems = [
   { label: 'Dashboard', href: '/dashboard', icon: '🏠' },
   { label: 'Discovery', href: '/discovery', icon: '💕' },
