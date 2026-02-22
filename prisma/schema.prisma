@@ -2,12 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider   = "prisma-client-js"
-  engineType = "library"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // User roles enum
@@ -32,6 +32,12 @@ enum Gender {
   FEMALE
 }
 
+// Match status enum
+enum MatchStatus {
+  ACTIVE
+  UNMATCHED
+}
+
 // Region model - geographical areas for supervision
 model Region {
   id          String   @id @default(cuid())
@@ -41,7 +47,7 @@ model Region {
   updatedAt   DateTime @updatedAt
 
   users       User[]
-  supervisors User[]   @relation("SupervisorRegion")
+  supervisors User[] @relation("SupervisorRegion")
 
   @@map("regions")
 }
@@ -58,28 +64,36 @@ model User {
   updatedAt     DateTime   @updatedAt
 
   // Profile information
-  name             String?
-  gender           Gender?
-  age              Int?
-  height           Int?
-  city             String?
-  education        String?
-  occupation       String?
-  religionLevel    String?
-  aboutMe          String?
-  photoUrls        String[] // Array of photo URLs
+  name          String?
+  gender        Gender?
+  age           Int?
+  height        Int?
+  city          String?
+  education     String?
+  occupation    String?
+  religionLevel String?
+  aboutMe       String?
+  photoUrls     String[] // Array of photo URLs
 
   // Region relationship
-  regionId         String?
-  region           Region?  @relation(fields: [regionId], references: [id])
+  regionId String?
+  region   Region? @relation(fields: [regionId], references: [id])
 
   // Supervisor relationship (for supervisors only)
   supervisorRegionId String?
-  supervisorRegion   Region?  @relation("SupervisorRegion", fields: [supervisorRegionId], references: [id])
+  supervisorRegion   Region? @relation("SupervisorRegion", fields: [supervisorRegionId], references: [id])
 
   // Auth.js relations
   accounts Account[]
   sessions Session[]
+
+  // Discovery and matching relations
+  likes          Like[]  @relation("UserLikes")
+  likedBy        Like[]  @relation("UserLikedBy")
+  passes         Pass[]  @relation("UserPasses")
+  passedBy       Pass[]  @relation("UserPassedBy")
+  matchesAsUser1 Match[] @relation("MatchUser1")
+  matchesAsUser2 Match[] @relation("MatchUser2")
 
   @@map("users")
 }
@@ -130,12 +144,65 @@ model VerificationToken {
 model AuditLog {
   id        String   @id @default(cuid())
   userId    String
-  action    String   // e.g., "APPROVE_USER", "REJECT_USER", "ASSIGN_SUPERVISOR", etc.
-  target    String?  // target user ID or resource ID
+  action    String // e.g., "APPROVE_USER", "REJECT_USER", "ASSIGN_SUPERVISOR", etc.
+  target    String? // target user ID or resource ID
   details   String?  @db.Text // JSON string with action details
   createdAt DateTime @default(now())
 
   @@index([userId])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+// Like model - tracks when users like each other
+model Like {
+  id          String   @id @default(cuid())
+  userId      String // User who liked
+  likedUserId String // User who was liked
+  createdAt   DateTime @default(now())
+
+  user      User @relation("UserLikes", fields: [userId], references: [id], onDelete: Cascade)
+  likedUser User @relation("UserLikedBy", fields: [likedUserId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, likedUserId])
+  @@index([userId])
+  @@index([likedUserId])
+  @@index([createdAt])
+  @@map("likes")
+}
+
+// Pass model - tracks when users pass on each other
+model Pass {
+  id           String   @id @default(cuid())
+  userId       String // User who passed
+  passedUserId String // User who was passed
+  createdAt    DateTime @default(now())
+
+  user       User @relation("UserPasses", fields: [userId], references: [id], onDelete: Cascade)
+  passedUser User @relation("UserPassedBy", fields: [passedUserId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, passedUserId])
+  @@index([userId])
+  @@index([passedUserId])
+  @@map("passes")
+}
+
+// Match model - tracks mutual likes between users
+model Match {
+  id        String      @id @default(cuid())
+  user1Id   String // First user in the match
+  user2Id   String // Second user in the match
+  status    MatchStatus @default(ACTIVE)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  user1 User @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 User @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  @@unique([user1Id, user2Id])
+  @@index([user1Id])
+  @@index([user2Id])
+  @@index([status])
+  @@index([updatedAt])
+  @@map("matches")
 }
