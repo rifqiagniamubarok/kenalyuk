@@ -36,6 +36,7 @@ enum Gender {
 enum MatchStatus {
   ACTIVE
   UNMATCHED
+  CLOSED
 }
 
 // Region model - geographical areas for supervision
@@ -94,6 +95,7 @@ model User {
   passedBy       Pass[]  @relation("UserPassedBy")
   matchesAsUser1 Match[] @relation("MatchUser1")
   matchesAsUser2 Match[] @relation("MatchUser2")
+  closedMatches  Match[] @relation("MatchClosedBy")
   messages       Message[] @relation("UserMessages")
 
   @@map("users")
@@ -197,8 +199,14 @@ model Match {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
+  // Closure tracking
+  closedBy     String?   // ID of supervisor who closed it
+  closedAt     DateTime?
+  closedReason String?   @db.Text // Reason for closure
+
   user1    User      @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
   user2    User      @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+  closedBySupervisor User? @relation("MatchClosedBy", fields: [closedBy], references: [id])
   messages Message[]
 
   @@unique([user1Id, user2Id])
