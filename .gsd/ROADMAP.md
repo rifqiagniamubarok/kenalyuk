@@ -48,6 +48,7 @@ Plans:
 ## Phase 02 - Discovery & Matching Core
 
 **Duration**: Weeks 3-5  
+**Status**: In Progress 🔄  
 **Goal**: Active users can discover and create matches through swipe interface
 
 ### Success Criteria
@@ -68,8 +69,8 @@ Plans:
 
 Plans:
 
-- [ ] 02-01-PLAN.md — Database schema for discovery & matching (Like, Pass, Match models + preferences)
-- [ ] 02-02-PLAN.md — Discovery feed system with filtering and swipe interface
+- [x] 02-01-PLAN.md — Database schema for discovery & matching (Like, Pass, Match models + preferences)
+- [x] 02-02-PLAN.md — Discovery feed system with filtering and swipe interface
 - [ ] 02-03-PLAN.md — Like/pass actions with automatic match creation
 - [ ] 02-04-PLAN.md — Matches and likes history views
 
