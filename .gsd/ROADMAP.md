@@ -67,6 +67,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
+
 - [ ] 02-01-PLAN.md — Database schema for discovery & matching (Like, Pass, Match models + preferences)
 - [ ] 02-02-PLAN.md — Discovery feed system with filtering and swipe interface
 - [ ] 02-03-PLAN.md — Like/pass actions with automatic match creation
