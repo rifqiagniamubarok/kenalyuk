@@ -9,7 +9,7 @@ import { prisma } from '@/lib/db';
 import { UserRole, MatchStatus } from '@/types/auth';
 import { createAuditLog, AuditAction } from '@/lib/audit';
 
-export async function POST(request: Request, { params }: { params: { matchId: string } }) {
+export async function POST(request: Request, { params }: { params: Promise<{ matchId: string }> }) {
   try {
     const session = await getServerSession();
 
@@ -25,7 +25,7 @@ export async function POST(request: Request, { params }: { params: { matchId: st
       return NextResponse.json({ error: 'No region assigned to supervisor' }, { status: 400 });
     }
 
-    const { matchId } = params;
+    const { matchId } = await params;
     const supervisorRegionId = session.user.supervisorRegionId;
 
     const body = await request.json();

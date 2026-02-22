@@ -11,7 +11,7 @@ import { UserStatus } from '@prisma/client';
 /**
  * GET /api/messages/[matchId] - Get message history for a match
  */
-export async function GET(request: Request, { params }: { params: { matchId: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ matchId: string }> }) {
   try {
     const session = await auth();
 
@@ -24,7 +24,7 @@ export async function GET(request: Request, { params }: { params: { matchId: str
       return NextResponse.json({ error: 'Account must be active to view messages' }, { status: 403 });
     }
 
-    const { matchId } = params;
+    const { matchId } = await params;
     const userId = session.user.id;
 
     // Validate match exists and user is a participant
