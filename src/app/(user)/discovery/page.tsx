@@ -6,19 +6,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Card,
-  CardBody,
-  Spinner,
-  Button,
-  Progress,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from '@nextui-org/react';
+import { Card, CardBody, Spinner, Button, Progress, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
 import { toast } from 'sonner';
 import ProfileCard, { ProfileData } from '@/components/ProfileCard';
 
@@ -107,9 +95,12 @@ export default function DiscoveryPage() {
       }
 
       // Move to next profile after a brief delay
-      setTimeout(() => {
-        advanceToNext();
-      }, data.matched ? 0 : 200);
+      setTimeout(
+        () => {
+          advanceToNext();
+        },
+        data.matched ? 0 : 200,
+      );
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Failed to like profile');
     } finally {
@@ -197,9 +188,7 @@ export default function DiscoveryPage() {
             <div className="text-6xl mb-4">🔍</div>
             <h2 className="text-xl font-bold mb-2">No profiles available</h2>
             <p className="text-gray-600 mb-4">
-              {profiles.length === 0
-                ? "We couldn't find any matches for you at the moment. Check back later!"
-                : "You've seen all available profiles. Check back later for more!"}
+              {profiles.length === 0 ? "We couldn't find any matches for you at the moment. Check back later!" : "You've seen all available profiles. Check back later for more!"}
             </p>
             <Button color="primary" onPress={fetchProfiles}>
               Refresh
@@ -224,20 +213,12 @@ export default function DiscoveryPage() {
             {currentIndex + 1} / {profiles.length}
           </span>
         </div>
-        <p className="text-sm text-gray-500 mt-2">
-          Use arrow keys: ← Pass | → Like
-        </p>
+        <p className="text-sm text-gray-500 mt-2">Use arrow keys: ← Pass | → Like</p>
       </div>
 
       {/* Profile Card */}
       <div className="flex justify-center">
-        <ProfileCard
-          profile={currentProfile}
-          onLike={handleLike}
-          onPass={handlePass}
-          showActions
-          actionsDisabled={actionLoading}
-        />
+        <ProfileCard profile={currentProfile} onLike={handleLike} onPass={handlePass} showActions actionsDisabled={actionLoading} />
       </div>
 
       {/* Match Celebration Modal */}
@@ -245,20 +226,15 @@ export default function DiscoveryPage() {
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1 text-center">
             <div className="text-6xl mb-2">🎉</div>
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              It&apos;s a Match!
-            </h2>
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">It&apos;s a Match!</h2>
           </ModalHeader>
           <ModalBody className="text-center pb-6">
             {matchedProfile && (
               <>
                 <p className="text-lg mb-2">
-                  You and <span className="font-semibold">{matchedProfile.name}</span> liked each
-                  other!
+                  You and <span className="font-semibold">{matchedProfile.name}</span> liked each other!
                 </p>
-                <p className="text-gray-600 text-sm">
-                  Start a conversation now and get to know each other better.
-                </p>
+                <p className="text-gray-600 text-sm">Start a conversation now and get to know each other better.</p>
               </>
             )}
           </ModalBody>

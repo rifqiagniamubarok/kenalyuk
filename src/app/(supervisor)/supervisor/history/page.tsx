@@ -22,7 +22,7 @@ export default async function HistoryPage() {
   // Fetch approval/rejection history
   const history = await prisma.auditLog.findMany({
     where: {
-      userId: session.user.id,
+      userId: session.user?.id || '',
       action: {
         in: [AuditAction.APPROVE_USER, AuditAction.REJECT_USER],
       },
@@ -69,7 +69,9 @@ export default async function HistoryPage() {
                   <tr key={log.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{new Date(log.createdAt).toLocaleString()}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${log.action === AuditAction.APPROVE_USER ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${log.action === AuditAction.APPROVE_USER ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}
+                      >
                         {log.action === AuditAction.APPROVE_USER ? 'Approved' : 'Rejected'}
                       </span>
                     </td>

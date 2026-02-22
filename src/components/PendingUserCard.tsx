@@ -76,10 +76,16 @@ export default function PendingUserCard({ user, onApprove, onReject }: PendingUs
             <Image src={user.photoUrls[currentPhotoIndex]} alt={user.name || 'User photo'} fill className="object-cover" />
             {user.photoUrls.length > 1 && (
               <>
-                <button onClick={prevPhoto} className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70">
+                <button
+                  onClick={prevPhoto}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70"
+                >
                   ←
                 </button>
-                <button onClick={nextPhoto} className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70">
+                <button
+                  onClick={nextPhoto}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70"
+                >
                   →
                 </button>
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white px-2 py-1 rounded text-sm">
@@ -133,7 +139,11 @@ export default function PendingUserCard({ user, onApprove, onReject }: PendingUs
 
           {/* Action Buttons */}
           <div className="flex gap-2">
-            <button onClick={handleApprove} disabled={loading} className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium">
+            <button
+              onClick={handleApprove}
+              disabled={loading}
+              className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium"
+            >
               {loading ? 'Processing...' : 'Approve'}
             </button>
             <button
@@ -161,10 +171,18 @@ export default function PendingUserCard({ user, onApprove, onReject }: PendingUs
             />
             <div className="text-sm text-gray-500 mb-4">{rejectReason.length} / 20 characters minimum</div>
             <div className="flex gap-2">
-              <button onClick={handleReject} disabled={loading || rejectReason.length < 20} className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              <button
+                onClick={handleReject}
+                disabled={loading || rejectReason.length < 20}
+                className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
                 {loading ? 'Rejecting...' : 'Confirm Rejection'}
               </button>
-              <button onClick={() => setShowRejectModal(false)} disabled={loading} className="flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 disabled:cursor-not-allowed">
+              <button
+                onClick={() => setShowRejectModal(false)}
+                disabled={loading}
+                className="flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 disabled:cursor-not-allowed"
+              >
                 Cancel
               </button>
             </div>

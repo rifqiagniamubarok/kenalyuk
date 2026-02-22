@@ -37,14 +37,14 @@ key-files:
 
 key-decisions:
   - "Used age field directly instead of calculating from dateOfBirth (field doesn't exist in schema)"
-  - "Simplified preferences to same region + age range (+/- 10 years) - no explicit preference fields in schema"
-  - "Like/Pass actions in UI are placeholders - will be implemented in 02-03"
-  - "Photo carousel uses framer-motion for smooth transitions between images"
+  - 'Simplified preferences to same region + age range (+/- 10 years) - no explicit preference fields in schema'
+  - 'Like/Pass actions in UI are placeholders - will be implemented in 02-03'
+  - 'Photo carousel uses framer-motion for smooth transitions between images'
 
 patterns-established:
-  - "Discovery filtering pattern: opposite gender + ACTIVE status + region + age range + exclusions"
-  - "Profile exclusion pattern: query Like and Pass tables, exclude those user IDs"
-  - "Card-based profile display with overlay info and expandable details"
+  - 'Discovery filtering pattern: opposite gender + ACTIVE status + region + age range + exclusions'
+  - 'Profile exclusion pattern: query Like and Pass tables, exclude those user IDs'
+  - 'Card-based profile display with overlay info and expandable details'
 
 duration: 25min
 completed: 2026-02-22

@@ -22,10 +22,7 @@ export async function GET() {
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active to view discovery feed' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active to view discovery feed' }, { status: 403 });
     }
 
     // Get current user's profile data
@@ -39,18 +36,11 @@ export async function GET() {
     });
 
     if (!currentUser || !currentUser.gender || !currentUser.age || !currentUser.regionId) {
-      return NextResponse.json(
-        { error: 'Please complete your biodata first' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Please complete your biodata first' }, { status: 400 });
     }
 
     // Build filters based on user preferences
-    const filters = buildDiscoveryFilters(
-      currentUser.gender,
-      currentUser.age,
-      currentUser.regionId
-    );
+    const filters = buildDiscoveryFilters(currentUser.gender, currentUser.age, currentUser.regionId);
 
     // Get excluded user IDs (already liked/passed)
     const excludedIds = await getExcludedUserIds(session.user.id);
@@ -110,9 +100,6 @@ export async function GET() {
     return NextResponse.json({ profiles: formattedProfiles });
   } catch (error) {
     console.error('Error fetching discovery profiles:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch discovery profiles' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch discovery profiles' }, { status: 500 });
   }
 }

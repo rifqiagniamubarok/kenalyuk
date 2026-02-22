@@ -42,7 +42,11 @@ export default function ApprovalModal({ type, userName, onConfirm, onCancel }: A
               Are you sure you want to approve <span className="font-semibold">{userName}</span>? This will change their status to ACTIVE and allow them to use the platform.
             </p>
             <div className="flex gap-2">
-              <button onClick={handleConfirm} disabled={loading} className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              <button
+                onClick={handleConfirm}
+                disabled={loading}
+                className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
                 {loading ? 'Approving...' : 'Confirm Approval'}
               </button>
               <button onClick={onCancel} disabled={loading} className="flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 disabled:cursor-not-allowed">
@@ -65,7 +69,11 @@ export default function ApprovalModal({ type, userName, onConfirm, onCancel }: A
             />
             <div className="text-sm text-gray-500 mb-4">{reason.length} / 20 characters minimum</div>
             <div className="flex gap-2">
-              <button onClick={handleConfirm} disabled={loading || reason.length < 20} className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              <button
+                onClick={handleConfirm}
+                disabled={loading || reason.length < 20}
+                className="flex-1 bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
                 {loading ? 'Rejecting...' : 'Confirm Rejection'}
               </button>
               <button onClick={onCancel} disabled={loading} className="flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 disabled:cursor-not-allowed">

@@ -2,33 +2,33 @@
  * Authentication type definitions for next-auth
  */
 
-import { DefaultSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import { DefaultSession } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 
 /**
  * User role enum - defines access levels in the system
  */
 export enum UserRole {
-  USER = "USER",
-  SUPERVISOR = "SUPERVISOR",
-  SUPERADMIN = "SUPERADMIN",
+  USER = 'USER',
+  SUPERVISOR = 'SUPERVISOR',
+  SUPERADMIN = 'SUPERADMIN',
 }
 
 /**
  * User status enum - lifecycle states for user accounts
  */
 export enum UserStatus {
-  PENDING_VERIFICATION = "PENDING_VERIFICATION",
-  PENDING_APPROVAL = "PENDING_APPROVAL",
-  ACTIVE = "ACTIVE",
-  REJECTED = "REJECTED",
-  SUSPENDED = "SUSPENDED",
+  PENDING_VERIFICATION = 'PENDING_VERIFICATION',
+  PENDING_APPROVAL = 'PENDING_APPROVAL',
+  ACTIVE = 'ACTIVE',
+  REJECTED = 'REJECTED',
+  SUSPENDED = 'SUSPENDED',
 }
 
 /**
  * Extended session user type with role and region
  */
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
@@ -37,7 +37,7 @@ declare module "next-auth" {
       status: UserStatus;
       regionId?: string | null;
       supervisorRegionId?: string | null;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 
   interface User {
@@ -54,7 +54,7 @@ declare module "next-auth" {
 /**
  * Extended JWT token type
  */
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   interface JWT {
     id: string;
     role: UserRole;

@@ -15,6 +15,7 @@ import { prisma } from './db';
  */
 export const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma) as any,
+  secret: process.env.AUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -61,8 +62,8 @@ export const authOptions: NextAuthConfig = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: '/auth/login',
-    error: '/auth/error',
+    signIn: '/login',
+    error: '/error',
   },
   callbacks: {
     /**
@@ -110,9 +111,26 @@ export const authOptions: NextAuthConfig = {
 /**
  * Auth.js handlers
  */
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+const nextAuth = NextAuth(authOptions);
+
+export const handlers = nextAuth.handlers;
+export const signIn = nextAuth.signIn;
+export const signOut = nextAuth.signOut;
+
+/**
+ * Safe auth function that handles errors gracefully
+ */
+export const auth = async () => {
+  try {
+    return await nextAuth.auth();
+  } catch (error) {
+    // Return null on auth errors to prevent crashes
+    console.error('Auth error:', error);
+    return null;
+  }
+};
 
 /**
  * Get server session helper - use in server components and API routes
  */
-export { auth as getServerSession };
+export const getServerSession = auth;

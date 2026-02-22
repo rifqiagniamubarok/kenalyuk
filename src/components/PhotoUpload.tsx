@@ -29,7 +29,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
       url,
       uploading: false,
       uploaded: true,
-    }))
+    })),
   );
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState('');
@@ -117,9 +117,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
 
     // Upload each photo
     const uploadPromises = photosToUpload.map(async (photo) => {
-      setPhotos((prev) =>
-        prev.map((p) => (p.id === photo.id ? { ...p, uploading: true } : p))
-      );
+      setPhotos((prev) => prev.map((p) => (p.id === photo.id ? { ...p, uploading: true } : p)));
 
       try {
         // Compress image before upload
@@ -140,23 +138,11 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
 
         const data = await res.json();
 
-        setPhotos((prev) =>
-          prev.map((p) =>
-            p.id === photo.id
-              ? { ...p, url: data.url, uploading: false, uploaded: true }
-              : p
-          )
-        );
+        setPhotos((prev) => prev.map((p) => (p.id === photo.id ? { ...p, url: data.url, uploading: false, uploaded: true } : p)));
 
         return data.url;
       } catch (err) {
-        setPhotos((prev) =>
-          prev.map((p) =>
-            p.id === photo.id
-              ? { ...p, uploading: false, error: 'Upload failed' }
-              : p
-          )
-        );
+        setPhotos((prev) => prev.map((p) => (p.id === photo.id ? { ...p, uploading: false, error: 'Upload failed' } : p)));
         throw err;
       }
     });
@@ -181,41 +167,22 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
 
   return (
     <div className="space-y-6">
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">{error}</div>}
 
       {/* Upload area */}
       {canUploadMore && (
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-            isDragging
-              ? 'border-pink-500 bg-pink-50'
-              : 'border-gray-300 hover:border-pink-400'
+            isDragging ? 'border-pink-500 bg-pink-50' : 'border-gray-300 hover:border-pink-400'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
         >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/jpeg,image/jpg,image/png"
-            multiple
-            onChange={(e) => handleFileSelect(e.target.files)}
-            className="hidden"
-          />
+          <input ref={fileInputRef} type="file" accept="image/jpeg,image/jpg,image/png" multiple onChange={(e) => handleFileSelect(e.target.files)} className="hidden" />
 
-          <svg
-            className="mx-auto h-12 w-12 text-gray-400"
-            stroke="currentColor"
-            fill="none"
-            viewBox="0 0 48 48"
-            aria-hidden="true"
-          >
+          <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
             <path
               d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
               strokeWidth={2}
@@ -227,12 +194,8 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
           <p className="mt-2 text-sm text-gray-600">
             <span className="font-medium text-pink-600">Click to upload</span> or drag and drop
           </p>
-          <p className="text-xs text-gray-500 mt-1">
-            PNG or JPEG only, up to 10MB per file
-          </p>
-          <p className="text-xs text-gray-500 mt-1">
-            Upload 5-9 photos ({photos.length}/9 uploaded)
-          </p>
+          <p className="text-xs text-gray-500 mt-1">PNG or JPEG only, up to 10MB per file</p>
+          <p className="text-xs text-gray-500 mt-1">Upload 5-9 photos ({photos.length}/9 uploaded)</p>
         </div>
       )}
 
@@ -242,11 +205,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
           {photos.map((photo, index) => (
             <div key={photo.id} className="relative group">
               <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 border-2 border-gray-200">
-                <img
-                  src={photo.url}
-                  alt={`Photo ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                <img src={photo.url} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
               </div>
 
               {/* Upload status */}
@@ -289,9 +248,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
               </button>
 
               {/* Photo number */}
-              <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-                #{index + 1}
-              </div>
+              <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">#{index + 1}</div>
             </div>
           ))}
         </div>
@@ -316,9 +273,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
             {hasMinimumPhotos ? (
               <span className="text-green-600">✓ Minimum photos uploaded</span>
             ) : (
-              <span className="text-orange-600">
-                Upload at least {5 - photos.length} more photo(s)
-              </span>
+              <span className="text-orange-600">Upload at least {5 - photos.length} more photo(s)</span>
             )}
           </div>
           <button

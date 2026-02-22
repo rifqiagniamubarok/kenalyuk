@@ -202,11 +202,7 @@ export default function BiodataForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
-      )}
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">{error}</div>}
 
       {/* Basic Information */}
       <div className="bg-white shadow rounded-lg p-6 space-y-4">
@@ -408,9 +404,7 @@ export default function BiodataForm() {
             maxLength={500}
             placeholder="Tell us about yourself, your personality, hobbies, and what makes you unique..."
           />
-          <p className="text-xs text-gray-500 mt-1">
-            {formData.aboutMe.length}/500 characters
-          </p>
+          <p className="text-xs text-gray-500 mt-1">{formData.aboutMe.length}/500 characters</p>
         </div>
 
         <div>
@@ -428,18 +422,12 @@ export default function BiodataForm() {
             maxLength={500}
             placeholder="Describe your ideal partner, qualities you value, and what you're seeking in a relationship..."
           />
-          <p className="text-xs text-gray-500 mt-1">
-            {formData.lookingFor.length}/500 characters
-          </p>
+          <p className="text-xs text-gray-500 mt-1">{formData.lookingFor.length}/500 characters</p>
         </div>
       </div>
 
       <div className="flex justify-end gap-4">
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
+        <button type="submit" disabled={loading} className="px-6 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed">
           {loading ? 'Saving...' : 'Save & Continue'}
         </button>
       </div>

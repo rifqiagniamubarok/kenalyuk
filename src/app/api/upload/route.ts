@@ -29,18 +29,12 @@ export async function POST(req: NextRequest) {
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      return NextResponse.json(
-        { error: 'Only image files are allowed' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Only image files are allowed' }, { status: 400 });
     }
 
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     if (!validTypes.includes(file.type)) {
-      return NextResponse.json(
-        { error: 'Only JPEG and PNG images are allowed' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Only JPEG and PNG images are allowed' }, { status: 400 });
     }
 
     // Convert file to buffer
@@ -66,10 +60,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error('Error uploading file:', error);
-    return NextResponse.json(
-      { error: 'Failed to upload file' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
   }
 }
 
@@ -88,26 +79,20 @@ export async function PUT(req: NextRequest) {
     const { photoUrls } = body;
 
     if (!Array.isArray(photoUrls)) {
-      return NextResponse.json(
-        { error: 'photoUrls must be an array' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'photoUrls must be an array' }, { status: 400 });
     }
 
     if (photoUrls.length < 5 || photoUrls.length > 9) {
-      return NextResponse.json(
-        { error: 'Must provide 5-9 photos' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Must provide 5-9 photos' }, { status: 400 });
     }
 
     // Get current user to check biodata completion
     const currentUser = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { 
-        name: true, 
-        gender: true, 
-        age: true, 
+      select: {
+        name: true,
+        gender: true,
+        age: true,
         height: true,
         city: true,
         regionId: true,
@@ -172,9 +157,6 @@ export async function PUT(req: NextRequest) {
     });
   } catch (error) {
     console.error('Error updating photos:', error);
-    return NextResponse.json(
-      { error: 'Failed to update photos' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to update photos' }, { status: 500 });
   }
 }

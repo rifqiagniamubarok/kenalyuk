@@ -12,8 +12,7 @@ import { MatchStatus } from '@prisma/client';
  */
 export async function createMatch(userAId: string, userBId: string) {
   // Ensure consistent ordering (smaller ID first)
-  const [user1Id, user2Id] =
-    userAId < userBId ? [userAId, userBId] : [userBId, userAId];
+  const [user1Id, user2Id] = userAId < userBId ? [userAId, userBId] : [userBId, userAId];
 
   // Check if match already exists
   const existingMatch = await prisma.match.findUnique({

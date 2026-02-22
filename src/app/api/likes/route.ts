@@ -22,10 +22,7 @@ export async function POST(request: Request) {
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active to like profiles' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active to like profiles' }, { status: 403 });
     }
 
     const body = await request.json();
@@ -53,10 +50,7 @@ export async function POST(request: Request) {
     }
 
     if (likedUser.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Cannot like inactive user' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Cannot like inactive user' }, { status: 400 });
     }
 
     // Check if already liked
@@ -70,10 +64,7 @@ export async function POST(request: Request) {
     });
 
     if (existingLike) {
-      return NextResponse.json(
-        { error: 'You have already liked this user' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'You have already liked this user' }, { status: 400 });
     }
 
     // Create like record
@@ -111,9 +102,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Like API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process like' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process like' }, { status: 500 });
   }
 }

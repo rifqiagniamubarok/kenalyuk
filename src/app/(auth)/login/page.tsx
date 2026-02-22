@@ -1,114 +1,133 @@
 /**
- * User login page
- * /auth/login
+ * Login page with Hero UI components
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
-import AuthForm, { AuthInput } from "@/components/AuthForm";
+import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { Card, CardHeader, CardBody, CardFooter, Input, Button, Link, Divider } from '@nextui-org/react';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const verified = searchParams.get("verified");
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const verified = searchParams.get('verified');
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Show success message if just verified email
-  const successMessage = verified
-    ? "Email verified successfully! You can now log in."
-    : "";
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-    setError(""); // Clear error when user types
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setLoading(true);
 
     try {
-      const result = await signIn("credentials", {
+      const result = await signIn('credentials', {
         email: formData.email.toLowerCase(),
         password: formData.password,
         redirect: false,
       });
 
       if (result?.error) {
-        setError("Invalid email or password. Please try again.");
+        setError('Invalid email or password. Please try again.');
         setLoading(false);
         return;
       }
 
       if (result?.ok) {
-        // Successful login - redirect to callback URL or home
-        router.push(callbackUrl);
+        // Fetch session to get user role
+        const response = await fetch('/api/auth/session');
+        const session = await response.json();
+
+        // Redirect based on role
+        if (session?.user?.role === 'SUPERADMIN') {
+          router.push('/superadmin/dashboard');
+        } else if (session?.user?.role === 'SUPERVISOR') {
+          router.push('/supervisor/dashboard');
+        } else {
+          router.push('/dashboard');
+        }
         router.refresh();
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again.");
+      setError('An unexpected error occurred. Please try again.');
       setLoading(false);
     }
   };
 
   return (
-    <AuthForm
-      title="Welcome Back"
-      subtitle={successMessage || "Sign in to your account"}
-      onSubmit={handleSubmit}
-      submitText="Sign In"
-      loading={loading}
-      error={error}
-      footerLinks={[
-        {
-          text: "Don't have an account?",
-          linkText: "Sign up",
-          href: "/auth/register",
-        },
-        {
-          text: "Need to verify your email?",
-          linkText: "Resend verification",
-          href: "/auth/verify-email",
-        },
-      ]}
-    >
-      <AuthInput
-        id="email"
-        name="email"
-        type="email"
-        label="Email Address"
-        value={formData.email}
-        onChange={handleChange}
-        required
-        autoComplete="email"
-        placeholder="you@example.com"
-      />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 px-4 py-12">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Kenalyuk!</h1>
+          <p className="text-gray-600">Syariah-Compliant Matchmaking</p>
+        </div>
 
-      <AuthInput
-        id="password"
-        name="password"
-        type="password"
-        label="Password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-        autoComplete="current-password"
-        placeholder="••••••••"
-      />
-    </AuthForm>
+        <Card className="w-full">
+          <CardHeader className="flex flex-col gap-1 px-6 pt-6">
+            <h2 className="text-2xl font-bold">Welcome Back</h2>
+            {verified ? <p className="text-sm text-success">Email verified successfully! You can now log in.</p> : <p className="text-sm text-gray-600">Sign in to your account</p>}
+          </CardHeader>
+
+          <CardBody className="px-6 py-4">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {error && (
+                <div className="px-4 py-3 rounded-lg bg-danger-50 border border-danger-200">
+                  <p className="text-sm text-danger">{error}</p>
+                </div>
+              )}
+
+              <Input
+                label="Email Address"
+                type="email"
+                variant="bordered"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="you@example.com"
+                isRequired
+                autoComplete="email"
+              />
+
+              <Input
+                label="Password"
+                type="password"
+                variant="bordered"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                placeholder="Enter your password"
+                isRequired
+                autoComplete="current-password"
+              />
+
+              <Button type="submit" color="secondary" size="lg" isLoading={loading} className="w-full font-semibold">
+                Sign In
+              </Button>
+            </form>
+          </CardBody>
+
+          <Divider />
+
+          <CardFooter className="flex flex-col gap-2 px-6 pb-6">
+            <div className="flex items-center justify-center gap-1 text-sm">
+              <span className="text-gray-600">Don't have an account?</span>
+              <Link href="/register" size="sm" color="secondary">
+                Sign up
+              </Link>
+            </div>
+            <div className="flex items-center justify-center gap-1 text-sm">
+              <span className="text-gray-600">Need to verify your email?</span>
+              <Link href="/verify-email" size="sm" color="secondary">
+                Resend verification
+              </Link>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
   );
 }

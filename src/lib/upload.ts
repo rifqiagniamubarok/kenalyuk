@@ -40,17 +40,14 @@ export function generateUniqueFilename(originalName: string): string {
  * @param filename Target filename
  * @returns Public URL path to the file
  */
-export async function saveUploadedFile(
-  file: Buffer,
-  filename: string
-): Promise<string> {
+export async function saveUploadedFile(file: Buffer, filename: string): Promise<string> {
   await ensureUploadDirectory();
-  
+
   const uploadDir = getUploadDirectory();
   const filePath = path.join(uploadDir, filename);
-  
+
   await writeFile(filePath, file);
-  
+
   // Return public URL path
   return `/uploads/${filename}`;
 }
@@ -60,10 +57,10 @@ export async function saveUploadedFile(
  */
 export function validateFileBuffer(buffer: Buffer, maxSizeMB: number = 10): string | null {
   const maxSizeBytes = maxSizeMB * 1024 * 1024;
-  
+
   if (buffer.length > maxSizeBytes) {
     return `File size must be less than ${maxSizeMB}MB`;
   }
-  
+
   return null;
 }

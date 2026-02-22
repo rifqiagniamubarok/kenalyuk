@@ -11,23 +11,41 @@ import { createAuditLog, AuditAction } from '@/lib/audit';
 
 /**
  * GET /api/regions - List all regions
+ * Public endpoint (authenticated users only) - for biodata form
+ * SUPERADMIN gets additional stats
  */
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession();
 
-    if (!session || session.user.role !== UserRole.SUPERADMIN) {
+    if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const regions = await prisma.region.findMany({
-      include: {
-        _count: {
-          select: {
-            users: true,
-            supervisors: true,
+    // SUPERADMIN gets detailed info with counts
+    if (session.user.role === UserRole.SUPERADMIN) {
+      const regions = await prisma.region.findMany({
+        include: {
+          _count: {
+            select: {
+              users: true,
+              supervisors: true,
+            },
           },
         },
+        orderBy: {
+          name: 'asc',
+        },
+      });
+
+      return NextResponse.json({ regions });
+    }
+
+    // Regular users just get basic region list for form selection
+    const regions = await prisma.region.findMany({
+      select: {
+        id: true,
+        name: true,
       },
       orderBy: {
         name: 'asc',
@@ -199,7 +217,7 @@ export async function DELETE(request: NextRequest) {
             supervisors: region._count.supervisors,
           },
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

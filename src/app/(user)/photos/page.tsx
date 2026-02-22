@@ -67,10 +67,7 @@ export default function PhotosPage() {
     <div className="py-8">
       <div className="max-w-4xl mx-auto mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload Your Photos</h1>
-        <p className="text-gray-600">
-          Upload 5-9 recent photos of yourself. Your photos will be reviewed by a supervisor
-          before you can start using the platform.
-        </p>
+        <p className="text-gray-600">Upload 5-9 recent photos of yourself. Your photos will be reviewed by a supervisor before you can start using the platform.</p>
       </div>
 
       <div className="max-w-4xl mx-auto">

@@ -2,8 +2,8 @@
  * Validation utilities for authentication and authorization
  */
 
-import { UserRole, UserStatus } from "@/types/auth";
-import { Session } from "next-auth";
+import { UserRole, UserStatus } from '@/types/auth';
+import { Session } from 'next-auth';
 
 /**
  * Check if user has required role
@@ -12,7 +12,7 @@ export function hasRole(session: Session | null, requiredRole: UserRole): boolea
   if (!session?.user) return false;
 
   const userRole = session.user.role;
-  
+
   // Role hierarchy: SUPERADMIN > SUPERVISOR > USER
   const roleHierarchy = {
     [UserRole.SUPERADMIN]: 3,
@@ -50,10 +50,7 @@ export function isActive(session: Session | null): boolean {
  * Supervisors can access their supervised region
  * Superadmins can access all regions
  */
-export function hasRegionAccess(
-  session: Session | null,
-  regionId: string
-): boolean {
+export function hasRegionAccess(session: Session | null, regionId: string): boolean {
   if (!session?.user) return false;
 
   const user = session.user;
@@ -75,10 +72,9 @@ export function hasRegionAccess(
  */
 export function needsProfileCompletion(session: Session | null): boolean {
   if (!session?.user) return false;
-  
+
   const status = session.user.status;
-  return status === UserStatus.PENDING_VERIFICATION || 
-         status === UserStatus.PENDING_APPROVAL;
+  return status === UserStatus.PENDING_VERIFICATION || status === UserStatus.PENDING_APPROVAL;
 }
 
 /**

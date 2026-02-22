@@ -49,14 +49,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
         {/* Photo carousel */}
         <div className="relative aspect-[3/4] bg-gray-100">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPhotoIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0"
-            >
+            <motion.div key={currentPhotoIndex} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
               <Image
                 src={photos[currentPhotoIndex]}
                 alt={`${profile.name} - Photo ${currentPhotoIndex + 1}`}
@@ -72,20 +65,10 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
           {/* Photo navigation buttons */}
           {photos.length > 1 && (
             <>
-              <Button
-                isIconOnly
-                size="sm"
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                onPress={prevPhoto}
-              >
+              <Button isIconOnly size="sm" className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" onPress={prevPhoto}>
                 ‹
               </Button>
-              <Button
-                isIconOnly
-                size="sm"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                onPress={nextPhoto}
-              >
+              <Button isIconOnly size="sm" className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" onPress={nextPhoto}>
                 ›
               </Button>
             </>
@@ -95,12 +78,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
           {photos.length > 1 && (
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1">
               {photos.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    idx === currentPhotoIndex ? 'bg-white' : 'bg-white/50'
-                  }`}
-                />
+                <div key={idx} className={`w-2 h-2 rounded-full transition-colors ${idx === currentPhotoIndex ? 'bg-white' : 'bg-white/50'}`} />
               ))}
             </div>
           )}
@@ -135,26 +113,10 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
       {/* Action buttons */}
       {showActions && (
         <CardFooter className="gap-4 justify-center py-4">
-          <Button
-            isIconOnly
-            size="lg"
-            color="danger"
-            variant="flat"
-            onPress={onPass}
-            isDisabled={actionsDisabled}
-            className="w-14 h-14"
-          >
+          <Button isIconOnly size="lg" color="danger" variant="flat" onPress={onPass} isDisabled={actionsDisabled} className="w-14 h-14">
             <span className="text-2xl">✕</span>
           </Button>
-          <Button
-            isIconOnly
-            size="lg"
-            color="success"
-            variant="flat"
-            onPress={onLike}
-            isDisabled={actionsDisabled}
-            className="w-14 h-14"
-          >
+          <Button isIconOnly size="lg" color="success" variant="flat" onPress={onLike} isDisabled={actionsDisabled} className="w-14 h-14">
             <span className="text-2xl">♥</span>
           </Button>
         </CardFooter>

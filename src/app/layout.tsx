@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: 'Kenalyuk! - Syariah-Compliant Matchmaking',
@@ -19,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
-      <body className="antialiased min-h-screen">{children}</body>
+    <html lang="id" suppressHydrationWarning>
+      <body className="antialiased min-h-screen">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

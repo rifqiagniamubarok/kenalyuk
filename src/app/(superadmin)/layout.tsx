@@ -1,55 +1,38 @@
 /**
- * Superadmin layout - navigation and structure for superadmin pages
+ * Superadmin layout - sidebar navigation and structure for superadmin pages
  */
 
 import { ReactNode } from 'react';
-import Link from 'next/link';
-import LogoutButton from '@/components/LogoutButton';
+import { redirect } from 'next/navigation';
+import { getServerSession } from '@/lib/auth';
+import { UserRole } from '@/types/auth';
+import SidebarNavigation from '@/components/SidebarNavigation';
 
-export default function SuperadminLayout({ children }: { children: ReactNode }) {
+const superadminMenuItems = [
+  { label: 'Dashboard', href: '/superadmin/dashboard', icon: '📊' },
+  { label: 'Regions', href: '/superadmin/regions', icon: '🌍' },
+  { label: 'Supervisors', href: '/superadmin/supervisors', icon: '👮' },
+];
+
+export default async function SuperadminLayout({ children }: { children: ReactNode }) {
+  const session = await getServerSession();
+
+  // Redirect to login if not authenticated
+  if (!session?.user) {
+    redirect('/login');
+  }
+
+  // Redirect to dashboard if not superadmin
+  if (session.user?.role !== UserRole.SUPERADMIN) {
+    redirect('/dashboard');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-8">
-              <Link href="/superadmin/dashboard" className="flex items-center gap-2">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Kenalyuk!
-                </h1>
-                <span className="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded">SUPERADMIN</span>
-              </Link>
-
-              <nav className="hidden md:flex items-center gap-1">
-                <Link
-                  href="/superadmin/dashboard"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/superadmin/regions"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition"
-                >
-                  Regions
-                </Link>
-                <Link
-                  href="/superadmin/supervisors"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition"
-                >
-                  Supervisors
-                </Link>
-              </nav>
-            </div>
-
-            <LogoutButton />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
+      <SidebarNavigation user={{ name: session.user.name, email: session.user.email }} menuItems={superadminMenuItems} role="superadmin" />
+      <main className="lg:ml-64 pt-16 lg:pt-0 min-h-screen">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</div>
+      </main>
     </div>
   );
 }

@@ -184,16 +184,10 @@ export default function RegionManager() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
-                  <button
-                    onClick={() => handleEdit(region)}
-                    className="px-4 py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-md transition"
-                  >
+                  <button onClick={() => handleEdit(region)} className="px-4 py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-md transition">
                     Edit
                   </button>
-                  <button
-                    onClick={() => handleDelete(region)}
-                    className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition"
-                  >
+                  <button onClick={() => handleDelete(region)} className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition">
                     Delete
                   </button>
                 </div>

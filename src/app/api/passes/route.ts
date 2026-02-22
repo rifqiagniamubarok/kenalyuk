@@ -21,10 +21,7 @@ export async function POST(request: Request) {
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active to pass on profiles' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active to pass on profiles' }, { status: 403 });
     }
 
     const body = await request.json();
@@ -62,10 +59,7 @@ export async function POST(request: Request) {
     });
 
     if (existingPass) {
-      return NextResponse.json(
-        { error: 'You have already passed this user' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'You have already passed this user' }, { status: 400 });
     }
 
     // Create pass record
@@ -79,9 +73,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ passed: true });
   } catch (error) {
     console.error('Pass API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process pass' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process pass' }, { status: 500 });
   }
 }

@@ -111,7 +111,7 @@ export default function SupervisorManager() {
   };
 
   const handleUpdateRegion = async (supervisorId: string, newRegionId: string) => {
-    if (!confirm('Are you sure you want to change this supervisor\'s region assignment?')) {
+    if (!confirm("Are you sure you want to change this supervisor's region assignment?")) {
       return;
     }
 
@@ -163,10 +163,7 @@ export default function SupervisorManager() {
   };
 
   // Filter users by search term
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name?.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredUsers = users.filter((user) => user.name?.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // Group supervisors by region
   const supervisorsByRegion = regions.map((region) => ({
@@ -245,10 +242,7 @@ export default function SupervisorManager() {
                             </option>
                           ))}
                       </select>
-                      <button
-                        onClick={() => handleRevokeSupervisor(supervisor)}
-                        className="px-4 py-1 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition"
-                      >
+                      <button onClick={() => handleRevokeSupervisor(supervisor)} className="px-4 py-1 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition">
                         Revoke
                       </button>
                     </div>
