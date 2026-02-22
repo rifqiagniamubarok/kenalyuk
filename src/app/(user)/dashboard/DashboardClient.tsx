@@ -97,18 +97,21 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
               <span className="text-sm text-text-secondary">Overall Progress</span>
               <span className="text-sm font-semibold text-primary">{completionSteps}/3 Complete</span>
             </div>
-            <Progress value={completionPercentage} color="success" className="mb-4" classNames={{
-              indicator: 'bg-primary'
-            }} />
+            <Progress
+              value={completionPercentage}
+              color="success"
+              className="mb-4"
+              classNames={{
+                indicator: 'bg-primary',
+              }}
+            />
           </div>
         </CardHeader>
         <CardBody className="pt-4">
           <div className="space-y-4">
             {/* Email Verification */}
             <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                emailVerified ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${emailVerified ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'}`}>
                 {emailVerified ? '✓' : '1'}
               </div>
               <div className="flex-1">
@@ -129,9 +132,7 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
 
             {/* Biodata Completion */}
             <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                biodataComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${biodataComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'}`}>
                 {biodataComplete ? '✓' : '2'}
               </div>
               <div className="flex-1">
@@ -145,9 +146,7 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
 
             {/* Photo Upload */}
             <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                photosComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
-              }`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${photosComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'}`}>
                 {photosComplete ? '✓' : '3'}
               </div>
               <div className="flex-1">
@@ -155,7 +154,7 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
                 <p className="text-sm text-text-secondary">{photosComplete ? `${user.photoUrls?.length || 0} photos uploaded ✓` : 'Upload 5-9 photos of yourself'}</p>
               </div>
               <Button as={Link} href="/photos" className="bg-primary hover:bg-primary-dark text-white" size="sm">
-                {photosComplete ? 'Edit' : 'Upload'}}
+                {photosComplete ? 'Edit' : 'Upload'}
               </Button>
             </div>
           </div>

@@ -120,9 +120,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.href}-${index}`}>
-            <Link className={`w-full ${
-              pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'
-            }`} href={item.href} onClick={() => setIsMenuOpen(false)}>
+            <Link className={`w-full ${pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
               <div className="flex items-center gap-2 py-2">
                 {item.icon}
                 {item.label}

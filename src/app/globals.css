@@ -7,55 +7,55 @@
 @layer base {
   :root {
     /* Colors */
-    --primary: #7FB77E;
-    --primary-dark: #5C9361;
-    --primary-light: #A8D5A2;
-    --bg-main: #FFFFFF;
-    --bg-secondary: #F5F7F6;
-    --text-primary: #1F2933;
-    --text-secondary: #6B7280;
-    
+    --primary: #7fb77e;
+    --primary-dark: #5c9361;
+    --primary-light: #a8d5a2;
+    --bg-main: #ffffff;
+    --bg-secondary: #f5f7f6;
+    --text-primary: #1f2933;
+    --text-secondary: #6b7280;
+
     /* Spacing - 8px grid system */
-    --spacing-xs: 0.5rem;   /* 8px */
-    --spacing-sm: 1rem;      /* 16px */
-    --spacing-md: 1.5rem;    /* 24px */
-    --spacing-lg: 2rem;      /* 32px */
-    --spacing-xl: 3rem;      /* 48px */
-    --spacing-2xl: 4rem;     /* 64px */
-    
+    --spacing-xs: 0.5rem; /* 8px */
+    --spacing-sm: 1rem; /* 16px */
+    --spacing-md: 1.5rem; /* 24px */
+    --spacing-lg: 2rem; /* 32px */
+    --spacing-xl: 3rem; /* 48px */
+    --spacing-2xl: 4rem; /* 64px */
+
     /* Border radius */
     --radius-sm: 12px;
     --radius-md: 12px;
     --radius-lg: 16px;
-    
+
     /* Shadows */
     --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
     --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
-  
+
   body {
     @apply bg-background text-text-primary;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   h1 {
     @apply text-4xl font-bold text-text-primary;
   }
-  
+
   h2 {
     @apply text-3xl font-semibold text-text-primary;
   }
-  
+
   h3 {
     @apply text-2xl font-semibold text-text-primary;
   }
-  
+
   h4 {
     @apply text-xl font-semibold text-text-primary;
   }
-  
+
   p {
     @apply text-base text-text-secondary;
   }
@@ -66,25 +66,25 @@
   .btn-primary {
     @apply bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-md transition-colors duration-200;
   }
-  
+
   .btn-secondary {
     @apply border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-3 px-6 rounded-md transition-all duration-200;
   }
-  
+
   /* Input styles */
   .input-primary {
     @apply border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-md px-4 py-3 transition-all duration-200 outline-none;
   }
-  
+
   /* Card styles */
   .card {
     @apply bg-white rounded-lg shadow-soft p-6 transition-shadow duration-200;
   }
-  
+
   .card-hover {
     @apply hover:shadow-medium;
   }
-  
+
   /* Section styles */
   .section-alt {
     @apply bg-background-secondary;
