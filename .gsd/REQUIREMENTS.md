@@ -23,12 +23,12 @@
 
 ### Discovery & Matching
 
-- [ ] **DISC-01**: Active users can view discovery feed filtered by gender, region preference, and age range
-- [ ] **DISC-02**: User can like/pass on profiles using swipe interface or buttons
-- [ ] **DISC-03**: Mutual likes automatically create active match and chatroom
-- [ ] **DISC-04**: User can view list of their current matches
-- [ ] **DISC-05**: User can view their like history (sent likes)
-- [ ] **DISC-06**: System prevents viewing already liked/passed profiles in discovery
+- [x] **DISC-01**: Active users can view discovery feed filtered by gender, region preference, and age range
+- [x] **DISC-02**: User can like/pass on profiles using swipe interface or buttons
+- [x] **DISC-03**: Mutual likes automatically create active match and chatroom
+- [x] **DISC-04**: User can view list of their current matches
+- [x] **DISC-05**: User can view their like history (sent likes)
+- [x] **DISC-06**: System prevents viewing already liked/passed profiles in discovery
 
 ### Moderated Chat
 
@@ -110,12 +110,12 @@
 | ROLE-04        | 01    | TBD  | Not Planned |
 | ROLE-05        | 01    | TBD  | Not Planned |
 | ROLE-06        | 01    | TBD  | Not Planned |
-| DISC-01        | 02    | TBD  | Not Planned |
-| DISC-02        | 02    | TBD  | Not Planned |
-| DISC-03        | 02    | TBD  | Not Planned |
-| DISC-04        | 02    | TBD  | Not Planned |
-| DISC-05        | 02    | TBD  | Not Planned |
-| DISC-06        | 02    | TBD  | Not Planned |
+| DISC-01        | 02    | 02-02 | Complete   |
+| DISC-02        | 02    | 02-03 | Complete   |
+| DISC-03        | 02    | 02-03 | Complete   |
+| DISC-04        | 02    | 02-04 | Complete   |
+| DISC-05        | 02    | 02-04 | Complete   |
+| DISC-06        | 02    | 02-02 | Complete   |
 | CHAT-01        | 03    | TBD  | Not Planned |
 | CHAT-02        | 03    | TBD  | Not Planned |
 | CHAT-03        | 03    | TBD  | Not Planned |
