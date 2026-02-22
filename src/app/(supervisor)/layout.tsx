@@ -11,6 +11,7 @@ import SidebarNavigation from '@/components/SidebarNavigation';
 const supervisorMenuItems = [
   { label: 'Dashboard', href: '/supervisor/dashboard', icon: '📊' },
   { label: 'Pending Users', href: '/supervisor/pending', icon: '⏳' },
+  { label: 'Conversations', href: '/supervisor/conversations', icon: '💬' },
   { label: 'History', href: '/supervisor/history', icon: '📜' },
 ];
 
