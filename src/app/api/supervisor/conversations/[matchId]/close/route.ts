@@ -59,9 +59,7 @@ export async function POST(request: Request, { params }: { params: { matchId: st
       return NextResponse.json({ error: 'Match not found' }, { status: 404 });
     }
 
-    const hasAccess = 
-      match.user1.regionId === supervisorRegionId || 
-      match.user2.regionId === supervisorRegionId;
+    const hasAccess = match.user1.regionId === supervisorRegionId || match.user2.regionId === supervisorRegionId;
 
     if (!hasAccess) {
       return NextResponse.json({ error: 'You do not have access to this conversation' }, { status: 403 });
@@ -90,8 +88,8 @@ export async function POST(request: Request, { params }: { params: { matchId: st
       timestamp: new Date().toISOString(),
     });
 
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       message: 'Conversation closed successfully',
       match: updatedMatch,
     });

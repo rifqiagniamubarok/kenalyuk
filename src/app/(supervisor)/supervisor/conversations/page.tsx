@@ -138,10 +138,7 @@ export default function ConversationsPage() {
         <h1 className="text-3xl font-bold">Conversation Monitoring</h1>
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           Error: {error}
-          <button
-            onClick={fetchConversations}
-            className="ml-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-          >
+          <button onClick={fetchConversations} className="ml-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
             Retry
           </button>
         </div>
@@ -172,12 +169,7 @@ export default function ConversationsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {conversations.map((conversation) => (
-            <ConversationMonitor
-              key={conversation.matchId}
-              conversation={conversation}
-              onClose={handleClose}
-              onView={fetchMessages}
-            />
+            <ConversationMonitor key={conversation.matchId} conversation={conversation} onClose={handleClose} onView={fetchMessages} />
           ))}
         </div>
       )}
@@ -188,10 +180,7 @@ export default function ConversationsPage() {
           <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] flex flex-col">
             <div className="p-4 border-b flex items-center justify-between">
               <h2 className="text-xl font-bold">Message History</h2>
-              <button
-                onClick={() => setViewingMatch(null)}
-                className="text-gray-500 hover:text-gray-700"
-              >
+              <button onClick={() => setViewingMatch(null)} className="text-gray-500 hover:text-gray-700">
                 ✕
               </button>
             </div>
@@ -207,9 +196,7 @@ export default function ConversationsPage() {
                     <div className="flex-1">
                       <div className="flex items-baseline gap-2">
                         <span className="font-semibold">{message.sender.name}</span>
-                        <span className="text-xs text-gray-500">
-                          {new Date(message.createdAt).toLocaleString()}
-                        </span>
+                        <span className="text-xs text-gray-500">{new Date(message.createdAt).toLocaleString()}</span>
                       </div>
                       <p className="text-gray-700 mt-1">{message.content}</p>
                     </div>

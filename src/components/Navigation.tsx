@@ -1,0 +1,127 @@
+'use client';
+
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Avatar,
+} from '@nextui-org/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { useState } from 'react';
+
+interface NavigationProps {
+  user: {
+    name?: string | null;
+    email?: string | null;
+  };
+  menuItems: {
+    label: string;
+    href: string;
+    icon?: React.ReactNode;
+  }[];
+}
+
+export default function Navigation({ user, menuItems }: NavigationProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
+
+  return (
+    <Navbar
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      classNames={{
+        wrapper: 'max-w-full px-4 sm:px-6',
+      }}
+    >
+      {/* Mobile menu toggle */}
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
+      </NavbarContent>
+
+      {/* Brand */}
+      <NavbarContent className="sm:hidden pr-3" justify="center">
+        <NavbarBrand>
+          <Link href="/dashboard" className="font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Kenalyuk!
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="start">
+        <NavbarBrand>
+          <Link href="/dashboard" className="font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Kenalyuk!
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
+
+      {/* Desktop menu items */}
+      <NavbarContent className="hidden sm:flex gap-6" justify="center">
+        {menuItems.map((item) => (
+          <NavbarItem key={item.href} isActive={pathname === item.href}>
+            <Link
+              href={item.href}
+              className={`${pathname === item.href ? 'text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600'} transition-colors flex items-center gap-2`}
+            >
+              {item.icon}
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
+
+      {/* User menu */}
+      <NavbarContent justify="end">
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar isBordered as="button" className="transition-transform" color="secondary" name={user.name || user.email || 'User'} size="sm" showFallback />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold text-purple-600">{user.email}</p>
+            </DropdownItem>
+            <DropdownItem key="logout" color="danger" onPress={handleLogout} textValue="Logout">
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </NavbarContent>
+
+      {/* Mobile menu */}
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.href}-${index}`}>
+            <Link className={`w-full ${pathname === item.href ? 'text-purple-600 font-semibold' : 'text-gray-600'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
+              <div className="flex items-center gap-2 py-2">
+                {item.icon}
+                {item.label}
+              </div>
+            </Link>
+          </NavbarMenuItem>
+        ))}
+        <NavbarMenuItem>
+          <Button color="danger" variant="flat" onPress={handleLogout} className="w-full">
+            Log Out
+          </Button>
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </Navbar>
+  );
+}

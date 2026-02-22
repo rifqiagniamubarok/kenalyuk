@@ -11,10 +11,7 @@ import { UserStatus } from '@prisma/client';
 /**
  * GET /api/messages/[matchId] - Get message history for a match
  */
-export async function GET(
-  request: Request,
-  { params }: { params: { matchId: string } }
-) {
+export async function GET(request: Request, { params }: { params: { matchId: string } }) {
   try {
     const session = await auth();
 
@@ -24,10 +21,7 @@ export async function GET(
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active to view messages' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active to view messages' }, { status: 403 });
     }
 
     const { matchId } = params;
@@ -50,10 +44,7 @@ export async function GET(
     const isParticipant = match.user1Id === userId || match.user2Id === userId;
 
     if (!isParticipant) {
-      return NextResponse.json(
-        { error: 'You are not a participant in this match' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'You are not a participant in this match' }, { status: 403 });
     }
 
     // Fetch messages for this match
@@ -78,9 +69,6 @@ export async function GET(
     return NextResponse.json({ messages });
   } catch (error) {
     console.error('Error fetching messages:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch messages' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
   }
 }

@@ -69,9 +69,7 @@ export async function GET(request: Request, { params }: { params: { matchId: str
       return NextResponse.json({ error: 'Match not found' }, { status: 404 });
     }
 
-    const hasAccess = 
-      match.user1.region?.id === supervisorRegionId || 
-      match.user2.region?.id === supervisorRegionId;
+    const hasAccess = match.user1.region?.id === supervisorRegionId || match.user2.region?.id === supervisorRegionId;
 
     if (!hasAccess) {
       return NextResponse.json({ error: 'You do not have access to this conversation' }, { status: 403 });

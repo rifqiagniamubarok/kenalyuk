@@ -21,10 +21,7 @@ export async function GET(request: Request) {
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active' }, { status: 403 });
     }
 
     const userId = session.user.id;
@@ -35,9 +32,7 @@ export async function GET(request: Request) {
     const stream = new ReadableStream({
       async start(controller) {
         // Send initial connection message
-        controller.enqueue(
-          encoder.encode(`data: ${JSON.stringify({ type: 'connected' })}\n\n`)
-        );
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'connected' })}\n\n`));
 
         // Polling interval for new messages
         const interval = setInterval(async () => {
@@ -82,9 +77,7 @@ export async function GET(request: Request) {
                 matchId: message.matchId,
                 message,
               };
-              controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify(data)}\n\n`)
-              );
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
             }
 
             // Update last checked timestamp
@@ -93,9 +86,7 @@ export async function GET(request: Request) {
             }
 
             // Send heartbeat ping every cycle
-            controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ type: 'ping' })}\n\n`)
-            );
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'ping' })}\n\n`));
           } catch (error) {
             console.error('Error in SSE polling:', error);
           }
@@ -119,9 +110,6 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error('Error setting up SSE:', error);
-    return NextResponse.json(
-      { error: 'Failed to establish connection' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to establish connection' }, { status: 500 });
   }
 }

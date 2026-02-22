@@ -95,10 +95,7 @@ export default function ChatRoomPage() {
   }
 
   // Determine other user's name for header
-  const otherUserName =
-    messages.length > 0
-      ? messages.find((msg) => msg.senderId !== session?.user?.id)?.sender.name || 'Chat'
-      : 'Chat';
+  const otherUserName = messages.length > 0 ? messages.find((msg) => msg.senderId !== session?.user?.id)?.sender.name || 'Chat' : 'Chat';
 
   return (
     <div className="space-y-6">
@@ -116,10 +113,7 @@ export default function ChatRoomPage() {
 
         {/* Messages container */}
         <CardBody className="p-0">
-          <div
-            ref={messagesContainerRef}
-            className="h-[500px] overflow-y-auto p-4 flex flex-col"
-          >
+          <div ref={messagesContainerRef} className="h-[500px] overflow-y-auto p-4 flex flex-col">
             {/* Empty state */}
             {messages.length === 0 && (
               <div className="flex-1 flex items-center justify-center text-center">
@@ -133,11 +127,7 @@ export default function ChatRoomPage() {
 
             {/* Messages list */}
             {messages.map((message) => (
-              <ChatMessage
-                key={message.id}
-                message={message}
-                isOwn={message.senderId === session?.user?.id}
-              />
+              <ChatMessage key={message.id} message={message} isOwn={message.senderId === session?.user?.id} />
             ))}
 
             {/* Auto-scroll anchor */}
@@ -162,13 +152,7 @@ export default function ChatRoomPage() {
                 }}
                 fullWidth
               />
-              <Button
-                color="primary"
-                onPress={handleSendMessage}
-                isLoading={sending}
-                disabled={!inputValue.trim() || sending}
-                className="min-w-24"
-              >
+              <Button color="primary" onPress={handleSendMessage} isLoading={sending} disabled={!inputValue.trim() || sending} className="min-w-24">
                 Send
               </Button>
             </div>

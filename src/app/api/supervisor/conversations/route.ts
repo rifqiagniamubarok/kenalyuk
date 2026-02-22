@@ -28,10 +28,7 @@ export async function GET() {
 
     const conversations = await prisma.match.findMany({
       where: {
-        OR: [
-          { user1: { regionId: supervisorRegionId } },
-          { user2: { regionId: supervisorRegionId } },
-        ],
+        OR: [{ user1: { regionId: supervisorRegionId } }, { user2: { regionId: supervisorRegionId } }],
       },
       include: {
         user1: {

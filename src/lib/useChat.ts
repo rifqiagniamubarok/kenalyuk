@@ -129,7 +129,7 @@ export function useChat(matchId: string): UseChatReturn {
         }
 
         const data = await response.json();
-        
+
         // Add message to local state immediately (optimistic update)
         setMessages((prevMessages) => {
           // Check if message already exists (from SSE)
@@ -141,7 +141,7 @@ export function useChat(matchId: string): UseChatReturn {
         throw err; // Let the component handle the error
       }
     },
-    [matchId]
+    [matchId],
   );
 
   // Typing indicator function (placeholder for future implementation)
