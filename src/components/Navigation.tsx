@@ -90,7 +90,16 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       <NavbarContent justify="end">
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
-            <Avatar suppressHydrationWarning isBordered as="button" className="transition-transform" color="secondary" name={user.name || user.email || 'User'} size="sm" showFallback />
+            <Avatar
+              suppressHydrationWarning
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="secondary"
+              name={user.name || user.email || 'User'}
+              size="sm"
+              showFallback
+            />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
