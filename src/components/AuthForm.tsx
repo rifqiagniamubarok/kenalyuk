@@ -25,13 +25,13 @@ interface AuthFormProps {
 
 export default function AuthForm({ title, subtitle, onSubmit, submitText, loading = false, error, children, footerLinks }: AuthFormProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
+    <div className="min-h-screen flex items-center justify-center bg-background-secondary px-4">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-soft p-8">
         {/* Logo and Title */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Kenalyuk!</h1>
-          <h2 className="text-xl font-semibold text-gray-900 mt-4">{title}</h2>
-          {subtitle && <p className="text-gray-600 mt-2">{subtitle}</p>}
+          <h1 className="text-3xl font-bold text-primary">Kenalyuk</h1>
+          <h2 className="text-xl font-semibold text-text-primary mt-4">{title}</h2>
+          {subtitle && <p className="text-text-secondary mt-2">{subtitle}</p>}
         </div>
 
         {/* Error Alert */}
@@ -48,7 +48,7 @@ export default function AuthForm({ title, subtitle, onSubmit, submitText, loadin
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-md font-medium hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-white py-3 px-4 rounded-md font-medium hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Please wait...' : submitText}
           </button>
@@ -58,9 +58,9 @@ export default function AuthForm({ title, subtitle, onSubmit, submitText, loadin
         {footerLinks && footerLinks.length > 0 && (
           <div className="mt-6 space-y-2">
             {footerLinks.map((link, index) => (
-              <div key={index} className="text-center text-sm text-gray-600">
+              <div key={index} className="text-center text-sm text-text-secondary">
                 {link.text}{' '}
-                <Link href={link.href} className="font-medium text-purple-600 hover:text-purple-500">
+                <Link href={link.href} className="font-medium text-primary hover:text-primary-dark transition-colors">
                   {link.linkText}
                 </Link>
               </div>
@@ -69,7 +69,7 @@ export default function AuthForm({ title, subtitle, onSubmit, submitText, loadin
         )}
 
         {/* Terms */}
-        <p className="mt-8 text-xs text-gray-500 text-center">By continuing, you agree to our syariah-compliant guidelines and community standards</p>
+        <p className="mt-8 text-xs text-text-secondary text-center">By continuing, you agree to our syariah-compliant guidelines and community standards</p>
       </div>
     </div>
   );
@@ -94,7 +94,7 @@ interface AuthInputProps {
 export function AuthInput({ id, name, type, label, value, onChange, required = false, autoComplete, placeholder, helperText }: AuthInputProps) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-2">
+      <label htmlFor={id} className="block text-sm font-medium text-text-primary mb-2">
         {label}
       </label>
       <input
@@ -105,10 +105,10 @@ export function AuthInput({ id, name, type, label, value, onChange, required = f
         required={required}
         value={value}
         onChange={onChange}
-        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition text-gray-900"
+        className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200 text-text-primary"
         placeholder={placeholder}
       />
-      {helperText && <p className="mt-1 text-xs text-gray-500">{helperText}</p>}
+      {helperText && <p className="mt-1 text-xs text-text-secondary">{helperText}</p>}
     </div>
   );
 }

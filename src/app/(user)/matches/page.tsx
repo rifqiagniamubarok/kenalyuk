@@ -59,10 +59,10 @@ export default function MatchesPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Your Matches</h1>
+        <h1 className="text-3xl font-bold text-text-primary">Your Matches</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="w-full">
+            <Card key={i} className="w-full shadow-soft">
               <CardBody className="p-4">
                 <Skeleton className="w-full h-48 rounded-lg mb-3" />
                 <Skeleton className="w-3/4 h-4 rounded-lg mb-2" />
@@ -78,15 +78,15 @@ export default function MatchesPage() {
   if (error) {
     return (
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Your Matches</h1>
-        <Card className="border-danger">
+        <h1 className="text-3xl font-bold text-text-primary">Your Matches</h1>
+        <Card className="border-red-200">
           <CardBody>
-            <p className="text-danger">{error}</p>
+            <p className="text-red-600">{error}</p>
             <Button
               color="primary"
               size="sm"
               onPress={fetchMatches}
-              className="mt-4"
+              className="mt-4 bg-primary hover:bg-primary-dark"
             >
               Try Again
             </Button>
@@ -99,16 +99,16 @@ export default function MatchesPage() {
   if (matches.length === 0) {
     return (
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Your Matches</h1>
-        <Card>
+        <h1 className="text-3xl font-bold text-text-primary">Your Matches</h1>
+        <Card className="shadow-soft">
           <CardBody className="text-center py-12">
             <div className="text-6xl mb-4">💫</div>
-            <h2 className="text-xl font-semibold mb-2">No matches yet</h2>
-            <p className="text-gray-600 mb-6">
-              Start swiping to find your perfect match!
+            <h2 className="text-xl font-semibold mb-2 text-text-primary">No matches yet</h2>
+            <p className="text-text-secondary mb-6">
+              Start discovering to find your perfect match!
             </p>
             <Link href="/discovery">
-              <Button color="primary" size="lg">
+              <Button className="bg-primary hover:bg-primary-dark text-white" size="lg">
                 Discover Profiles
               </Button>
             </Link>
@@ -121,8 +121,8 @@ export default function MatchesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Your Matches</h1>
-        <p className="text-gray-600">{matches.length} match{matches.length !== 1 ? 'es' : ''}</p>
+        <h1 className="text-3xl font-bold text-text-primary">Your Matches</h1>
+        <p className="text-text-secondary">{matches.length} match{matches.length !== 1 ? 'es' : ''}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -130,9 +130,9 @@ export default function MatchesPage() {
           const photoUrl = match.user.photos[0] || '/placeholder-avatar.png';
           
           return (
-            <Card key={match.matchId} className="w-full hover:shadow-lg transition-shadow">
+            <Card key={match.matchId} className="w-full shadow-soft hover:shadow-medium transition-shadow duration-200">
               <CardBody className="p-0">
-                <div className="relative aspect-[3/4] bg-gray-100">
+                <div className="relative aspect-[3/4] bg-background-secondary rounded-t-lg overflow-hidden">
                   <Image
                     src={photoUrl}
                     alt={match.user.name}
@@ -146,22 +146,22 @@ export default function MatchesPage() {
 
                 <div className="p-4 space-y-3">
                   <div>
-                    <h3 className="text-xl font-semibold">
+                    <h3 className="text-xl font-semibold text-text-primary">
                       {match.user.name}, {match.user.age}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-text-secondary">
                       {match.user.city}, {match.user.region}
                     </p>
                   </div>
 
                   <Divider />
 
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-text-secondary">
                     Matched {new Date(match.matchedAt).toLocaleDateString()}
                   </div>
 
                   <Link href={`/chat/${match.matchId}`} className="block">
-                    <Button color="primary" className="w-full" size="lg">
+                    <Button className="w-full bg-primary hover:bg-primary-dark text-white" size="lg">
                       💬 Chat
                     </Button>
                   </Link>

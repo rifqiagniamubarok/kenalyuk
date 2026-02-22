@@ -66,53 +66,57 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
     <div className="max-w-5xl mx-auto">
       {/* Welcome Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Welcome{user.name ? `, ${user.name}` : ''}!</h1>
-        <p className="text-gray-600 text-lg">Complete your profile to start your journey.</p>
+        <h1 className="text-4xl font-bold text-primary mb-2">Welcome{user.name ? `, ${user.name}` : ''}!</h1>
+        <p className="text-text-secondary text-lg">Complete your profile to start your journey.</p>
       </div>
 
       {/* Status Card */}
-      <Card className="mb-6 border-2" shadow="sm">
+      <Card className="mb-6 border border-gray-100 shadow-soft">
         <CardBody className="p-6">
           <div className="flex items-start gap-4">
             <div className="text-4xl">{currentStatus.icon}</div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-xl font-semibold">Account Status</h2>
+                <h2 className="text-xl font-semibold text-text-primary">Account Status</h2>
                 <Chip color={currentStatus.color} variant="flat" size="sm">
                   {user.status.replace(/_/g, ' ')}
                 </Chip>
               </div>
-              <p className="text-gray-600">{currentStatus.message}</p>
+              <p className="text-text-secondary">{currentStatus.message}</p>
             </div>
           </div>
         </CardBody>
       </Card>
 
       {/* Profile Completion Checklist */}
-      <Card className="mb-6" shadow="sm">
+      <Card className="mb-6 shadow-soft">
         <CardHeader className="pb-0">
           <div className="flex flex-col w-full">
-            <h2 className="text-2xl font-semibold mb-4">Profile Completion</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-text-primary">Profile Completion</h2>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-600">Overall Progress</span>
-              <span className="text-sm font-semibold text-purple-600">{completionSteps}/3 Complete</span>
+              <span className="text-sm text-text-secondary">Overall Progress</span>
+              <span className="text-sm font-semibold text-primary">{completionSteps}/3 Complete</span>
             </div>
-            <Progress value={completionPercentage} color="secondary" className="mb-4" />
+            <Progress value={completionPercentage} color="success" className="mb-4" classNames={{
+              indicator: 'bg-primary'
+            }} />
           </div>
         </CardHeader>
         <CardBody className="pt-4">
           <div className="space-y-4">
             {/* Email Verification */}
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${emailVerified ? 'bg-success text-white' : 'bg-gray-300 text-gray-600'}`}>
+            <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                emailVerified ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
+              }`}>
                 {emailVerified ? '✓' : '1'}
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold">Email Verification</h3>
-                <p className="text-sm text-gray-600">{emailVerified ? 'Email verified ✓' : 'Please verify your email address'}</p>
+                <h3 className="font-semibold text-text-primary">Email Verification</h3>
+                <p className="text-sm text-text-secondary">{emailVerified ? 'Email verified ✓' : 'Please verify your email address'}</p>
               </div>
               {!emailVerified && (
-                <Button as={Link} href="/verify-email" color="secondary" size="sm">
+                <Button as={Link} href="/verify-email" className="bg-primary hover:bg-primary-dark text-white" size="sm">
                   Verify
                 </Button>
               )}
@@ -124,30 +128,34 @@ export default function DashboardClient({ user, emailVerified, biodataComplete, 
             </div>
 
             {/* Biodata Completion */}
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${biodataComplete ? 'bg-success text-white' : 'bg-gray-300 text-gray-600'}`}>
+            <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                biodataComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
+              }`}>
                 {biodataComplete ? '✓' : '2'}
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold">Complete Biodata</h3>
-                <p className="text-sm text-gray-600">{biodataComplete ? 'Profile information complete ✓' : 'Fill in your profile information'}</p>
+                <h3 className="font-semibold text-text-primary">Complete Biodata</h3>
+                <p className="text-sm text-text-secondary">{biodataComplete ? 'Profile information complete ✓' : 'Fill in your profile information'}</p>
               </div>
-              <Button as={Link} href="/biodata" color="secondary" size="sm">
+              <Button as={Link} href="/biodata" className="bg-primary hover:bg-primary-dark text-white" size="sm">
                 {biodataComplete ? 'Edit' : 'Complete'}
               </Button>
             </div>
 
             {/* Photo Upload */}
-            <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${photosComplete ? 'bg-success text-white' : 'bg-gray-300 text-gray-600'}`}>
+            <div className="flex items-center gap-4 p-4 rounded-lg bg-background-secondary">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                photosComplete ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'
+              }`}>
                 {photosComplete ? '✓' : '3'}
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold">Upload Photos</h3>
-                <p className="text-sm text-gray-600">{photosComplete ? `${user.photoUrls?.length || 0} photos uploaded ✓` : 'Upload 5-9 photos of yourself'}</p>
+                <h3 className="font-semibold text-text-primary">Upload Photos</h3>
+                <p className="text-sm text-text-secondary">{photosComplete ? `${user.photoUrls?.length || 0} photos uploaded ✓` : 'Upload 5-9 photos of yourself'}</p>
               </div>
-              <Button as={Link} href="/photos" color="secondary" size="sm">
-                {photosComplete ? 'Edit' : 'Upload'}
+              <Button as={Link} href="/photos" className="bg-primary hover:bg-primary-dark text-white" size="sm">
+                {photosComplete ? 'Edit' : 'Upload'}}
               </Button>
             </div>
           </div>

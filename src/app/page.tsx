@@ -6,33 +6,33 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-purple-50 to-pink-50">
+    <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-background">
       <div className="max-w-5xl w-full">
         {/* Header with Auth Actions */}
         <div className="flex justify-end mb-8">
           {session?.user ? (
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">Welcome, {session.user.email}</span>
+              <span className="text-sm text-text-secondary">Welcome, {session.user.email}</span>
               <LogoutButton />
             </div>
           ) : (
             <div className="flex gap-4">
-              <Link href="/login" className="px-4 py-2 text-purple-600 border border-purple-600 rounded-md hover:bg-purple-50 transition">
+              <Link href="/login" className="px-6 py-3 text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white transition-all duration-200">
                 Sign In
               </Link>
-              <Link href="/register" className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-md hover:from-purple-700 hover:to-pink-700 transition">
+              <Link href="/register" className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors duration-200">
                 Sign Up
               </Link>
             </div>
           )}
         </div>
 
-        <h1 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Kenalyuk!</h1>
-        <p className="text-center text-gray-600 mb-12 text-lg">Syariah-Compliant Matchmaking Platform</p>
+        <h1 className="text-5xl font-bold text-center mb-4 text-text-primary">Kenalyuk</h1>
+        <p className="text-center text-text-secondary mb-12 text-lg">Calm, Respectful, Syariah-Compliant Matchmaking</p>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="card card-hover">
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -41,12 +41,12 @@ export default async function Home() {
                 />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">Modern UX</h2>
-            <p className="text-sm text-gray-600">Intuitive swipe-based interface for discovering marriage-minded profiles</p>
+            <h2 className="text-xl font-semibold mb-2 text-text-primary">Thoughtful Experience</h2>
+            <p className="text-sm text-text-secondary">Intuitive interface for discovering marriage-minded profiles with care and respect</p>
           </div>
-          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="card card-hover">
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -55,12 +55,12 @@ export default async function Home() {
                 />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">Regional Supervision</h2>
-            <p className="text-sm text-gray-600">Local supervisors ensure syariah-compliant interactions and serious intentions</p>
+            <h2 className="text-xl font-semibold mb-2 text-text-primary">Regional Supervision</h2>
+            <p className="text-sm text-text-secondary">Local supervisors ensure syariah-compliant interactions and serious intentions</p>
           </div>
-          <div className="p-6 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="card card-hover">
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -69,8 +69,8 @@ export default async function Home() {
                 />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">Trust Network</h2>
-            <p className="text-sm text-gray-600">Build meaningful connections with profiles approved by your regional community</p>
+            <h2 className="text-xl font-semibold mb-2 text-text-primary">Trust Network</h2>
+            <p className="text-sm text-text-secondary">Build meaningful connections with profiles approved by your regional community</p>
           </div>
         </div>
 
@@ -78,7 +78,7 @@ export default async function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/auth/register"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-lg font-medium rounded-md hover:from-purple-700 hover:to-pink-700 transition"
+              className="inline-block px-8 py-4 bg-primary text-white text-lg font-medium rounded-md hover:bg-primary-dark transition-colors duration-200"
             >
               Get Started Today
             </Link>

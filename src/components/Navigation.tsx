@@ -46,7 +46,8 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       classNames={{
-        wrapper: 'max-w-full px-4 sm:px-6',
+        wrapper: 'max-w-full px-4 sm:px-6 bg-white border-b border-gray-100',
+        base: 'bg-white',
       }}
     >
       {/* Mobile menu toggle */}
@@ -57,16 +58,16 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       {/* Brand */}
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Link href="/dashboard" className="font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Kenalyuk!
+          <Link href="/dashboard" className="font-bold text-2xl text-primary">
+            Kenalyuk
           </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand>
-          <Link href="/dashboard" className="font-bold text-2xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Kenalyuk!
+          <Link href="/dashboard" className="font-bold text-2xl text-primary">
+            Kenalyuk
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -77,7 +78,9 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
           <NavbarItem key={item.href} isActive={pathname === item.href}>
             <Link
               href={item.href}
-              className={`${pathname === item.href ? 'text-purple-600 font-semibold' : 'text-gray-600 hover:text-purple-600'} transition-colors flex items-center gap-2`}
+              className={`${
+                pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary hover:text-primary'
+              } transition-colors duration-200 flex items-center gap-2`}
             >
               {item.icon}
               {item.label}
@@ -95,7 +98,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
               isBordered
               as="button"
               className="transition-transform"
-              color="secondary"
+              color="success"
               name={user.name || user.email || 'User'}
               size="sm"
               showFallback

@@ -44,10 +44,10 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
   };
 
   return (
-    <Card className="w-full max-w-[400px] mx-auto">
+    <Card className="w-full max-w-[400px] mx-auto shadow-soft">
       <CardBody className="p-0 relative">
         {/* Photo carousel */}
-        <div className="relative aspect-[3/4] bg-gray-100">
+        <div className="relative aspect-[3/4] bg-gray-100 rounded-t-lg overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div key={currentPhotoIndex} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
               <Image
@@ -65,10 +65,10 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
           {/* Photo navigation buttons */}
           {photos.length > 1 && (
             <>
-              <Button isIconOnly size="sm" className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" onPress={prevPhoto}>
+              <Button isIconOnly size="sm" className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-soft" onPress={prevPhoto}>
                 ‹
               </Button>
-              <Button isIconOnly size="sm" className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white" onPress={nextPhoto}>
+              <Button isIconOnly size="sm" className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-soft" onPress={nextPhoto}>
                 ›
               </Button>
             </>
@@ -84,7 +84,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
           )}
 
           {/* Profile info overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-12">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-4 pt-12">
             <h2 className="text-white text-2xl font-bold">
               {profile.name}, {profile.age}
             </h2>
@@ -104,7 +104,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
         {profile.about && (
           <Accordion className="px-4 py-2">
             <AccordionItem key="about" aria-label="About" title="About" className="text-sm">
-              <p className="text-gray-700 whitespace-pre-wrap">{profile.about}</p>
+              <p className="text-text-secondary whitespace-pre-wrap">{profile.about}</p>
             </AccordionItem>
           </Accordion>
         )}
@@ -113,10 +113,25 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
       {/* Action buttons */}
       {showActions && (
         <CardFooter className="gap-4 justify-center py-4">
-          <Button isIconOnly size="lg" color="danger" variant="flat" onPress={onPass} isDisabled={actionsDisabled} className="w-14 h-14">
+          <Button
+            isIconOnly
+            size="lg"
+            variant="flat"
+            onPress={onPass}
+            isDisabled={actionsDisabled}
+            className="w-14 h-14 bg-gray-100 hover:bg-gray-200 text-gray-600"
+          >
             <span className="text-2xl">✕</span>
           </Button>
-          <Button isIconOnly size="lg" color="success" variant="flat" onPress={onLike} isDisabled={actionsDisabled} className="w-14 h-14">
+          <Button
+            isIconOnly
+            size="lg"
+            color="success"
+            variant="flat"
+            onPress={onLike}
+            isDisabled={actionsDisabled}
+            className="w-14 h-14 bg-primary/10 hover:bg-primary/20 text-primary"
+          >
             <span className="text-2xl">♥</span>
           </Button>
         </CardFooter>
