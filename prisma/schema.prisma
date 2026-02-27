@@ -87,6 +87,7 @@ model User {
   // Auth.js relations
   accounts Account[]
   sessions Session[]
+  passwordResetToken PasswordResetToken?
 
   // Discovery and matching relations
   likes          Like[]  @relation("UserLikes")
@@ -99,6 +100,20 @@ model User {
   messages       Message[] @relation("UserMessages")
 
   @@map("users")
+}
+
+// Password reset token model (one active token per user)
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+  @@map("password_reset_tokens")
 }
 
 // Auth.js Account model (for OAuth providers)
