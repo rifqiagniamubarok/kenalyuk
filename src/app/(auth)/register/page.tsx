@@ -19,9 +19,17 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const passwordsMismatch = formData.confirmPassword.length > 0 && formData.password !== formData.confirmPassword;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (passwordsMismatch) {
+      setError('Passwords do not match');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -138,9 +146,17 @@ export default function RegisterPage() {
                 placeholder="Confirm your password"
                 isRequired
                 autoComplete="new-password"
+                isInvalid={passwordsMismatch}
+                errorMessage={passwordsMismatch ? 'Passwords do not match' : undefined}
               />
 
-              <Button type="submit" size="lg" isLoading={loading} className="w-full font-semibold bg-primary hover:bg-primary-dark text-white transition-colors duration-200">
+              <Button
+                type="submit"
+                size="lg"
+                isLoading={loading}
+                isDisabled={passwordsMismatch}
+                className="w-full font-semibold bg-primary hover:bg-primary-dark text-white transition-colors duration-200"
+              >
                 Create Account
               </Button>
             </form>
