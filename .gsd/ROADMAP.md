@@ -191,11 +191,12 @@ Plans:
 
 Plans:
 
-- [ ] 05-01-PLAN.md — SMTP normalization + HTML email template reader + approval notification wiring
+- [x] 05-01-PLAN.md — SMTP normalization + HTML email template reader + approval notification wiring
 - [ ] 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
 - [ ] 05-03-PLAN.md — Auth UI integration (forgot/reset pages) + register password verification + human verification
 
 **Details:**
+
 - Centralize SMTP handling to avoid env key mismatches and delivery failures
 - Move transactional email body source to HTML template files
 - Add secure forgot-password and reset-password token flow

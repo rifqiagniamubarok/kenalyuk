@@ -2,9 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 03 - Communication & Moderation (Complete)  
-**Active Plans**: All Phase 03 plans complete  
-**Completed Requirements**: 31/31 (All v1 requirements complete - Foundation, Discovery & Matching, Communication & Moderation)
+**Phase**: Phase 05 - Email + Password Recovery Enhancements (In Progress)  
+**Active Plans**: 1/3 complete (05-01 complete, 05-02 next)  
+**Completed Requirements**: 31/31 v1 requirements + Phase 05 execution started
+
+**Progress**: ███████░░░ 70% (14/20 plans)
 
 ---
 
@@ -47,6 +49,26 @@
 - ✅ 03-02: Message APIs (Complete)
 - ✅ 03-03: User Chat Interface (Complete)
 - ✅ 03-04: Supervisor Conversation Monitoring (Complete)
+
+### Phase 04 - User Interface Redesign & Simplification
+
+**Status**: Planned  
+**Requirements**: 8 (UI-01 to UI-08)
+
+**Plans**: 3 total
+
+- [ ] 04-01: Navigation Simplification & Icon System (Wave 1)
+- [ ] 04-02: Photo Ordering System (Wave 1)
+- [ ] 04-03: Consolidated Profile Page & Validation Updates (Wave 2)
+
+### Phase 05 - Email + Password Recovery Enhancements
+
+**Status**: In Progress  
+**Plans**: 3 total
+
+- ✅ 05-01: SMTP normalization + HTML templates + approval notification wiring (Complete)
+- [ ] 05-02: Forgot/reset password backend (token model, APIs, reset email template)
+- [ ] 05-03: Auth UI integration + register password verification + human verification
 
 ---
 
@@ -124,6 +146,18 @@
 
 ---
 
-_Last Updated_: 2026-02-22 (Phase 03 - Complete)
+## Accumulated Context
 
-**Next**: All v1 phases complete. Ready for v1.0 milestone completion or deployment.
+### Roadmap Evolution
+
+- Phase 04 added: User Interface Redesign & Simplification
+- Phase 05 added: Adjust send email SMTP .env configuration, add forgot password and verify password for register, send email notification after supervisor approval, and add function to read HTML format
+- Phase 05 Plan 01 completed: SMTP and template-driven transactional email foundation
+
+---
+
+_Last Updated_: 2026-02-27 (Phase 05-01 Complete)
+
+**Next Plan**: 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
+
+Run `/execute-phase.md 05` to continue phase execution.
