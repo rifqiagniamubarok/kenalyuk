@@ -169,11 +169,12 @@
 - Phase 06 Plan 01 completed: backend unread/new-match metadata and read-state transition on chat open
 - Phase 06 Plan 02 completed: simplified `/chat` inbox rows and matches-page chat CTA alignment
 - Phase 06 Plan 03 completed: chat tab aggregate chip and no-refresh unread/new-match updates with human verification approval
+- Phase 07 added: Adjust profile page first view with large profile picture + clickable thumbnails, max 5 photos, read-only biodata text, and edit picture/biodata modal actions
 
 ---
 
 _Last Updated_: 2026-02-28 (Phase 06 Complete)
 
-**Next Phase**: Continue remaining in-progress work or start milestone verification
+**Next Phase**: Phase 07 - Adjust profile page first view with large profile picture, clickable thumbnails, max 5 photos, read-only biodata, and edit modals
 
-Run `/verify-work.md 06` to perform manual acceptance testing.
+Run `/plan-phase.md 7` to break down this phase.

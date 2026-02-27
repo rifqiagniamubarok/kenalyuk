@@ -221,6 +221,19 @@ Plans:
 - Show per-conversation unread chip and new-match indicator in simple chat list
 - Display aggregate chat tab chip including unread messages + new matches without messages
 
+### Phase 7: Adjust profile page: first view displays large profile picture with clickable smaller photo navigation, max 5 photos, read-only biodata text, and edit picture/biodata modals in a simpler tidy UX
+
+**Goal:** [To be planned]
+**Depends on:** Phase 6
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /plan-phase.md 7 to break down)
+
+**Details:**
+[To be added during planning]
+
 ---
 
 ## Validation Targets

@@ -97,7 +97,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
   }, [chatMenuItem]);
 
   const renderMenuLabel = (item: NavigationProps['menuItems'][number]) => {
-    const resolvedBadgeCount = item.href === '/chat' ? chatBadgeCount ?? item.badgeCount ?? 0 : item.badgeCount ?? 0;
+    const resolvedBadgeCount = item.href === '/chat' ? (chatBadgeCount ?? item.badgeCount ?? 0) : (item.badgeCount ?? 0);
 
     if (resolvedBadgeCount <= 0) {
       return item.label;

@@ -21,10 +21,7 @@ export async function GET() {
 
     // Check if user is ACTIVE
     if (session.user.status !== UserStatus.ACTIVE) {
-      return NextResponse.json(
-        { error: 'Account must be active to view matches' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account must be active to view matches' }, { status: 403 });
     }
 
     const userId = session.user.id;
@@ -33,10 +30,7 @@ export async function GET() {
     const matches = await prisma.match.findMany({
       where: {
         status: MatchStatus.ACTIVE,
-        OR: [
-          { user1Id: userId },
-          { user2Id: userId },
-        ],
+        OR: [{ user1Id: userId }, { user2Id: userId }],
       },
       include: {
         user1: {
@@ -141,9 +135,7 @@ export async function GET() {
       }),
     );
 
-    const lastMessageByMatchId = latestMessagesByMatchId.reduce<
-      Record<string, { content: string; createdAt: Date; senderId: string } | null>
-    >((acc, item) => {
+    const lastMessageByMatchId = latestMessagesByMatchId.reduce<Record<string, { content: string; createdAt: Date; senderId: string } | null>>((acc, item) => {
       acc[item.matchId] = item.latestMessage;
       return acc;
     }, {});
@@ -155,7 +147,7 @@ export async function GET() {
       const totalMessageCount = totalMessageCountByMatchId[match.id] ?? 0;
       const hasNoMessages = totalMessageCount === 0;
       const lastMessage = lastMessageByMatchId[match.id] ?? null;
-      
+
       return {
         matchId: match.id,
         matchedAt: match.createdAt,
@@ -187,9 +179,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Error fetching matches:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch matches' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch matches' }, { status: 500 });
   }
 }

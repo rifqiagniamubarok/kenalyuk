@@ -6,16 +6,7 @@
  */
 
 import { useMemo, useRef, useState } from 'react';
-import {
-  DndContext,
-  DragEndEvent,
-  DragOverlay,
-  KeyboardSensor,
-  PointerSensor,
-  closestCenter,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverlay, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { rectSortingStrategy } from '@dnd-kit/sortable';
@@ -51,7 +42,9 @@ function SortablePhoto({ photo, index, onRemove }: SortablePhotoProps) {
 
   return (
     <div ref={setNodeRef} style={style} className={`relative group ${isDragging ? 'z-20 opacity-70' : ''}`}>
-      <div className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${index === 0 ? 'border-primary ring-1 ring-primary/30' : 'border-gray-200 hover:border-gray-300'}`}>
+      <div
+        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${index === 0 ? 'border-primary ring-1 ring-primary/30' : 'border-gray-200 hover:border-gray-300'}`}
+      >
         <img src={photo.url} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
       </div>
 
@@ -70,11 +63,7 @@ function SortablePhoto({ photo, index, onRemove }: SortablePhotoProps) {
       {photo.uploaded && (
         <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full p-1">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
         </div>
       )}
