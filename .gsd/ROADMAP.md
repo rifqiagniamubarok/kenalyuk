@@ -269,11 +269,12 @@ Plans:
 
 Plans:
 
-- [ ] 09-01-PLAN.md — Compact island navbar with title and icon-only Profile/Discovery/Chat, remove right-side profile dropdown
-- [ ] 09-02-PLAN.md — Remove navbar logout and move signout to bottom section of profile page
-- [ ] 09-03-PLAN.md — Final responsive polish and human verification for navbar + signout relocation
+- [x] 09-01-PLAN.md — Compact island navbar with title and icon-only Profile/Discovery/Chat, remove right-side profile dropdown
+- [x] 09-02-PLAN.md — Remove navbar logout and move signout to bottom section of profile page
+- [x] 09-03-PLAN.md — Final responsive polish and human verification for navbar + signout relocation
 
 **Details:**
+
 - Navbar becomes compact/card-like island (not full-width edge-to-edge)
 - Navigation remains simple: app title + icon-only Profile, Discovery, Chat
 - Right-side profile/avatar dropdown is removed

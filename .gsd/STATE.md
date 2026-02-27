@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 08 - Discovery page simplification (in progress)  
-**Active Plans**: 2/3 complete  
-**Completed Requirements**: 31/31 v1 requirements + post-v1 discovery UX refinement in progress
+**Phase**: Phase 09 - Navbar simplification and signout relocation (complete)  
+**Active Plans**: 3/3 complete  
+**Completed Requirements**: 31/31 v1 requirements + post-v1 UX refinements complete for Phase 9
 
-**Progress**: ██████████ 97% (28/29 plans)
+**Progress**: ██████████ 100% (32/32 plans)
 
 ---
 
@@ -96,6 +96,15 @@
 - ✅ 08-01: Remove arrow-key/count indicators + move pass/like to tooltip icon controls below card (Complete)
 - ✅ 08-02: Simplify card surface and add ordered detail modal for full biodata/photos (Complete)
 - [ ] 08-03: Add pass-left/like-right card animation + human verification
+
+### Phase 09 - Navbar Simplification + Profile-Bottom Signout
+
+**Status**: Complete ✅
+**Plans**: 3 total
+
+- ✅ 09-01: Compact island navbar + icon-only Profile/Discovery/Chat, remove right profile dropdown (Complete)
+- ✅ 09-02: Remove navbar logout and move signout to profile bottom section (Complete)
+- ✅ 09-03: Responsive polish + human verification checkpoint (approved) (Complete)
 
 ---
 
@@ -194,11 +203,15 @@
 - Phase 08 added: discovery page simplification with tooltip-based pass/like, hidden available count, modal details, and swipe animations
 - Phase 08 Plan 01 completed: discovery now removes arrow-key shortcuts and count indicators, with pass/like tooltip controls in a dedicated action card below profile card
 - Phase 08 Plan 02 completed: discovery card now shows summary-only content with `Detail` trigger, and full ordered biodata/photos moved into a dedicated modal
+- Phase 09 added: navbar simplification to card-island style with icon-only nav items and signout moved to profile page bottom
+- Phase 09 Plan 01 completed: user navbar converted to compact island layout with title + icon-only profile/discovery/chat and no right-side dropdown
+- Phase 09 Plan 02 completed: navbar logout removed and signout relocated into dedicated profile-bottom account section
+- Phase 09 Plan 03 completed: responsive spacing polish finalized and human verification approved
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 08 in progress)
+_Last Updated_: 2026-02-28 (Phase 09 complete)
 
-**Next Focus**: Execute Phase 08 Plan 03 (pass-left/like-right card animation + human verification)
+**Next Focus**: Resolve remaining Phase 08 Plan 03 checkpoint/finalization to align phase ordering.
 
-Run `/execute-plan.md .gsd/phases/08-discovery-page-remove-arrow-like-pass-add-tooltip-hide-available-count-simplify-card-and-detail-modal-add-card-swipe-animation/08-03-PLAN.md` to continue.
+Run `/execute-phase.md 8` to complete the pending discovery animation checkpoint path.
