@@ -210,11 +210,13 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Backend unread/new-match metadata + read-state update flow
+
+- [x] 06-01-PLAN.md — Backend unread/new-match metadata + read-state update flow
 - [ ] 06-02-PLAN.md — Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
 - [ ] 06-03-PLAN.md — Chat tab aggregate chip (Chat N) + human verification
 
 **Details:**
+
 - Count unread messages per conversation and mark incoming messages as read when chat room opens
 - Show per-conversation unread chip and new-match indicator in simple chat list
 - Display aggregate chat tab chip including unread messages + new matches without messages

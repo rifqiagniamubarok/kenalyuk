@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 05 - Email + Password Recovery Enhancements (In Progress)  
-**Active Plans**: 2/3 complete (05-01 and 05-02 complete, 05-03 next)  
-**Completed Requirements**: 31/31 v1 requirements + UI redesign execution in progress
+**Phase**: Phase 06 - Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications (In Progress)  
+**Active Plans**: 1/3 complete (06-01 complete, 06-02 next)  
+**Completed Requirements**: 31/31 v1 requirements + post-v1 chat notification UX enhancement in progress
 
-**Progress**: █████████░ 90% (18/20 plans)
+**Progress**: █████████░ 91% (21/23 plans)
 
 ---
 
@@ -69,6 +69,15 @@
 - ✅ 05-01: SMTP normalization + HTML templates + approval notification wiring (Complete)
 - ✅ 05-02: Forgot/reset password backend (token model, APIs, reset email template) (Complete)
 - [ ] 05-03: Auth UI integration + register password verification + human verification
+
+### Phase 06 - Chat Notification Chips + Simplified Inbox
+
+**Status**: In Progress  
+**Plans**: 3 total
+
+- ✅ 06-01: Backend unread/new-match metadata + read-state update flow (Complete)
+- [ ] 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
+- [ ] 06-03: Chat tab aggregate chip (Chat N) + human verification
 
 ---
 
@@ -156,11 +165,13 @@
 - Phase 04 Plan 03 completed: unified /profile page, simplified biodata validation, and redirects from legacy profile routes
 - Phase 05 added: Adjust send email SMTP .env configuration, add forgot password and verify password for register, send email notification after supervisor approval, and add function to read HTML format
 - Phase 05 Plan 01 completed: SMTP and template-driven transactional email foundation
+- Phase 06 added: Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications
+- Phase 06 Plan 01 completed: backend unread/new-match metadata and read-state transition on chat open
 
 ---
 
-_Last Updated_: 2026-02-27 (Phase 04-03 Complete)
+_Last Updated_: 2026-02-28 (Phase 06 - Plan 01 Complete)
 
-**Next Plan**: 05-03-PLAN.md — Auth UI integration + register password verification + human verification
+**Next Phase**: Phase 06 - Plan 02 (Simplified /chat inbox UI)
 
-Run `/execute-phase.md 05` to continue phase execution.
+Run `/execute-phase.md 06` to execute the next plan.
