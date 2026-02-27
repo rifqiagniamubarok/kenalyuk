@@ -110,7 +110,7 @@ Plans:
 ## Phase 04 - User Interface Redesign & Simplification
 
 **Duration**: Week 9  
-**Status**: Not started  
+**Status**: In progress  
 **Goal**: Streamline user interface for better usability and efficiency
 
 ### Success Criteria
@@ -139,8 +139,8 @@ Plans:
 
 Plans:
 
-- [ ] 04-01-PLAN.md — Navigation Simplification & Icon System
-- [ ] 04-02-PLAN.md — Photo Ordering System
+- [x] 04-01-PLAN.md — Navigation Simplification & Icon System
+- [x] 04-02-PLAN.md — Photo Ordering System
 - [ ] 04-03-PLAN.md — Consolidated Profile Page & Validation Updates
 
 **Details:**
