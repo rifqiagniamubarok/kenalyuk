@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 05 - Email + Password Recovery Enhancements (In Progress)  
-**Active Plans**: 2/3 complete (05-01 and 05-02 complete, 05-03 next)  
-**Completed Requirements**: 31/31 v1 requirements + Phase 05 execution started
+**Phase**: Phase 04 - User Interface Redesign & Simplification (In Progress)  
+**Active Plans**: 2/3 complete (04-01 and 04-02 complete, 04-03 next)  
+**Completed Requirements**: 31/31 v1 requirements + UI redesign execution in progress
 
-**Progress**: ████████░░ 75% (15/20 plans)
+**Progress**: ████████░░ 85% (17/20 plans)
 
 ---
 
@@ -52,13 +52,13 @@
 
 ### Phase 04 - User Interface Redesign & Simplification
 
-**Status**: Planned  
+**Status**: In Progress  
 **Requirements**: 8 (UI-01 to UI-08)
 
 **Plans**: 3 total
 
-- [ ] 04-01: Navigation Simplification & Icon System (Wave 1)
-- [ ] 04-02: Photo Ordering System (Wave 1)
+- ✅ 04-01: Navigation Simplification & Icon System (Wave 1) (Complete)
+- ✅ 04-02: Photo Ordering System (Wave 1) (Complete)
 - [ ] 04-03: Consolidated Profile Page & Validation Updates (Wave 2)
 
 ### Phase 05 - Email + Password Recovery Enhancements
@@ -151,13 +151,15 @@
 ### Roadmap Evolution
 
 - Phase 04 added: User Interface Redesign & Simplification
+- Phase 04 Plan 01 completed: navigation simplification to core icon menu set
+- Phase 04 Plan 02 completed: drag-and-drop photo ordering + order persistence endpoint
 - Phase 05 added: Adjust send email SMTP .env configuration, add forgot password and verify password for register, send email notification after supervisor approval, and add function to read HTML format
 - Phase 05 Plan 01 completed: SMTP and template-driven transactional email foundation
 
 ---
 
-_Last Updated_: 2026-02-27 (Phase 05-02 Complete)
+_Last Updated_: 2026-02-27 (Phase 04-02 Complete)
 
-**Next Plan**: 05-03-PLAN.md — Auth UI integration + register password verification + human verification
+**Next Plan**: 04-03-PLAN.md — Consolidated profile page and validation updates
 
-Run `/execute-phase.md 05` to continue phase execution.
+Run `/execute-phase.md 04` to continue phase execution.
