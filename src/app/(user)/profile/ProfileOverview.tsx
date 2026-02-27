@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
 import BiodataForm from '@/components/BiodataForm';
 import ProfilePhotoSection from './ProfilePhotoSection';
@@ -54,6 +55,7 @@ function displayValue(value: string | number | null | undefined, suffix = '') {
 }
 
 export default function ProfileOverview({ profile }: ProfileOverviewProps) {
+  const router = useRouter();
   const photos = useMemo(() => profile.photoUrls.slice(0, 5), [profile.photoUrls]);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
@@ -61,6 +63,16 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
 
   const selectedPhoto = photos[selectedPhotoIndex] || null;
   const status = statusConfig[profile.status as keyof typeof statusConfig] || statusConfig.PENDING_VERIFICATION;
+
+  const handlePhotoSaved = () => {
+    setIsPhotoModalOpen(false);
+    router.refresh();
+  };
+
+  const handleBiodataSaved = () => {
+    setIsBiodataModalOpen(false);
+    router.refresh();
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -170,7 +182,7 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
         <ModalContent>
           <ModalHeader className="flex items-center justify-between">Edit Picture</ModalHeader>
           <ModalBody className="pb-6">
-            <ProfilePhotoSection />
+            <ProfilePhotoSection onSaved={handlePhotoSaved} onClose={() => setIsPhotoModalOpen(false)} />
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -179,7 +191,7 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
         <ModalContent>
           <ModalHeader className="flex items-center justify-between">Edit Biodata</ModalHeader>
           <ModalBody className="pb-6">
-            <BiodataForm />
+            <BiodataForm onSaved={handleBiodataSaved} onClose={() => setIsBiodataModalOpen(false)} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -3,7 +3,12 @@
 import { useEffect, useState } from 'react';
 import PhotoUpload from '@/components/PhotoUpload';
 
-export default function ProfilePhotoSection() {
+interface ProfilePhotoSectionProps {
+  onSaved?: () => void;
+  onClose?: () => void;
+}
+
+export default function ProfilePhotoSection({ onSaved, onClose }: ProfilePhotoSectionProps) {
   const [initialPhotos, setInitialPhotos] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -45,6 +50,7 @@ export default function ProfilePhotoSection() {
 
       setInitialPhotos(photoUrls);
       setSuccessMessage('Photos saved successfully');
+      onSaved?.();
     } catch (err: any) {
       setError(err.message || 'Failed to save photos');
     }
@@ -64,6 +70,18 @@ export default function ProfilePhotoSection() {
       {successMessage && <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">{successMessage}</div>}
 
       <PhotoUpload onUploadComplete={handleUploadComplete} initialPhotos={initialPhotos} />
+
+      {onClose && (
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+          >
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 }

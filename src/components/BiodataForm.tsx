@@ -8,6 +8,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+interface BiodataFormProps {
+  onSaved?: () => void;
+  onClose?: () => void;
+}
+
 interface BiodataFormData {
   name: string;
   gender: 'MALE' | 'FEMALE' | '';
@@ -27,7 +32,7 @@ interface Region {
   name: string;
 }
 
-export default function BiodataForm() {
+export default function BiodataForm({ onSaved, onClose }: BiodataFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -183,6 +188,11 @@ export default function BiodataForm() {
 
       if (!res.ok) {
         throw new Error(data.error || 'Failed to save biodata');
+      }
+
+      if (onSaved) {
+        onSaved();
+        return;
       }
 
       // Keep user on unified profile page
@@ -419,12 +429,21 @@ export default function BiodataForm() {
       </div>
 
       <div className="flex justify-end gap-4">
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+          >
+            Close
+          </button>
+        )}
         <button
           type="submit"
           disabled={loading}
           className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-soft"
         >
-          {loading ? 'Saving...' : 'Save & Continue'}
+          {loading ? 'Saving...' : onSaved ? 'Save' : 'Save & Continue'}
         </button>
       </div>
     </form>
