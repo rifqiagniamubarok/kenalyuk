@@ -22,6 +22,11 @@ export interface Message {
   sender: MessageSender;
 }
 
+interface MessagesResponse {
+  messages?: Message[];
+  currentUserId?: string;
+}
+
 interface UseChatReturn {
   messages: Message[];
   loading: boolean;
@@ -59,9 +64,9 @@ export function useChat(matchId: string): UseChatReturn {
           throw new Error(data.error || 'Failed to fetch messages');
         }
 
-        const data = await response.json();
-        setMessages(data.messages);
-        setCurrentUserId(data.currentUserId);
+        const data = (await response.json()) as MessagesResponse;
+        setMessages(Array.isArray(data.messages) ? data.messages : []);
+        setCurrentUserId(data.currentUserId ?? null);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {

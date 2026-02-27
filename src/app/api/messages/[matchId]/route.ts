@@ -47,6 +47,19 @@ export async function GET(request: Request, { params }: { params: Promise<{ matc
       return NextResponse.json({ error: 'You are not a participant in this match' }, { status: 403 });
     }
 
+    await prisma.message.updateMany({
+      where: {
+        matchId,
+        senderId: {
+          not: userId,
+        },
+        isRead: false,
+      },
+      data: {
+        isRead: true,
+      },
+    });
+
     // Fetch messages for this match
     const messages = await prisma.message.findMany({
       where: {
