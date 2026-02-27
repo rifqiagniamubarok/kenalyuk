@@ -5,7 +5,20 @@
  * Supports 5-9 photos with drag-and-drop and preview
  */
 
-import { useState, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { rectSortingStrategy } from '@dnd-kit/sortable';
 import { compressImage, validateImageFile, createImagePreview } from '@/lib/image';
 
 interface PhotoUploadProps {
@@ -22,6 +35,84 @@ interface PhotoPreview {
   error?: string;
 }
 
+interface SortablePhotoProps {
+  photo: PhotoPreview;
+  index: number;
+  onRemove: (id: string) => void;
+}
+
+function SortablePhoto({ photo, index, onRemove }: SortablePhotoProps) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: photo.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className={`relative group ${isDragging ? 'z-20 opacity-70' : ''}`}>
+      <div className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${index === 0 ? 'border-primary ring-1 ring-primary/30' : 'border-gray-200 hover:border-gray-300'}`}>
+        <img src={photo.url} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
+      </div>
+
+      {photo.uploading && (
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg">
+          <div className="text-white text-sm">Uploading...</div>
+        </div>
+      )}
+
+      {photo.error && (
+        <div className="absolute inset-0 bg-red-500/75 flex items-center justify-center rounded-lg">
+          <div className="text-white text-xs text-center px-2">{photo.error}</div>
+        </div>
+      )}
+
+      {photo.uploaded && (
+        <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full p-1">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => onRemove(photo.id)}
+        className="absolute top-2 left-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+        aria-label={`Remove photo ${index + 1}`}
+      >
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fillRule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        className="absolute bottom-2 right-2 bg-black/60 text-white rounded p-1 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity"
+        aria-label={`Drag to reorder photo ${index + 1}`}
+        {...attributes}
+        {...listeners}
+      >
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 9h8M8 15h8" />
+        </svg>
+      </button>
+
+      <div className={`absolute bottom-2 left-2 text-white text-xs px-2 py-1 rounded ${index === 0 ? 'bg-primary' : 'bg-black/50'}`}>
+        {index === 0 ? 'Profile Picture' : `#${index + 1}`}
+      </div>
+    </div>
+  );
+}
+
 export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: PhotoUploadProps) {
   const [photos, setPhotos] = useState<PhotoPreview[]>(
     initialPhotos.map((url, index) => ({
@@ -33,7 +124,19 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
   );
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState('');
+  const [activeId, setActiveId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const photoIds = useMemo(() => photos.map((photo) => photo.id), [photos]);
+
+  const activePhoto = activeId ? photos.find((photo) => photo.id === activeId) : null;
 
   const handleFileSelect = async (files: FileList | null) => {
     if (!files) return;
@@ -97,6 +200,54 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
     setPhotos(photos.filter((p) => p.id !== id));
   };
 
+  const persistPhotoOrder = async (orderedPhotoUrls: string[]) => {
+    const res = await fetch('/api/upload/order', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ photoUrls: orderedPhotoUrls }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({ error: 'Failed to reorder photos' }));
+      throw new Error(data.error || 'Failed to reorder photos');
+    }
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveId(null);
+
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    setError('');
+
+    const previousPhotos = [...photos];
+    const oldIndex = photos.findIndex((photo) => photo.id === active.id);
+    const newIndex = photos.findIndex((photo) => photo.id === over.id);
+
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
+
+    const reorderedPhotos = arrayMove(photos, oldIndex, newIndex);
+    setPhotos(reorderedPhotos);
+
+    const allUploaded = reorderedPhotos.length > 0 && reorderedPhotos.every((photo) => photo.uploaded);
+
+    if (!allUploaded) {
+      return;
+    }
+
+    try {
+      await persistPhotoOrder(reorderedPhotos.map((photo) => photo.url));
+    } catch (err) {
+      setPhotos(previousPhotos);
+      setError(err instanceof Error ? err.message : 'Failed to reorder photos');
+    }
+  };
+
   const handleUploadAll = async () => {
     if (photos.length < 5) {
       setError('Please upload at least 5 photos');
@@ -148,13 +299,9 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
     });
 
     try {
-      await Promise.all(uploadPromises);
-
-      // Get all photo URLs
-      const photoUrls = photos.map((p) => {
-        const uploaded = photosToUpload.find((u) => u.id === p.id);
-        return uploaded ? uploaded.url : p.url;
-      });
+      const uploadedUrls = await Promise.all(uploadPromises);
+      const uploadedUrlMap = new Map(photosToUpload.map((photo, index) => [photo.id, uploadedUrls[index]]));
+      const photoUrls = photos.map((photo) => uploadedUrlMap.get(photo.id) || photo.url);
 
       onUploadComplete?.(photoUrls);
     } catch (err) {
@@ -201,57 +348,29 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
 
       {/* Photo previews */}
       {photos.length > 0 && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {photos.map((photo, index) => (
-            <div key={photo.id} className="relative group">
-              <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 border-2 border-gray-200">
-                <img src={photo.url} alt={`Photo ${index + 1}`} className="w-full h-full object-cover" />
-              </div>
-
-              {/* Upload status */}
-              {photo.uploading && (
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-                  <div className="text-white text-sm">Uploading...</div>
-                </div>
-              )}
-
-              {photo.error && (
-                <div className="absolute inset-0 bg-red-500 bg-opacity-75 flex items-center justify-center rounded-lg">
-                  <div className="text-white text-xs text-center px-2">{photo.error}</div>
-                </div>
-              )}
-
-              {photo.uploaded && (
-                <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full p-1">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              )}
-
-              {/* Remove button */}
-              <button
-                onClick={() => handleRemovePhoto(photo.id)}
-                className="absolute top-2 left-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-
-              {/* Photo number */}
-              <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">#{index + 1}</div>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragStart={(event) => setActiveId(String(event.active.id))}
+          onDragEnd={handleDragEnd}
+          onDragCancel={() => setActiveId(null)}
+        >
+          <SortableContext items={photoIds} strategy={rectSortingStrategy}>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {photos.map((photo, index) => (
+                <SortablePhoto key={photo.id} photo={photo} index={index} onRemove={handleRemovePhoto} />
+              ))}
             </div>
-          ))}
-        </div>
+          </SortableContext>
+
+          <DragOverlay>
+            {activePhoto ? (
+              <div className="relative aspect-square w-36 rounded-lg overflow-hidden border-2 border-primary shadow-soft opacity-90">
+                <img src={activePhoto.url} alt="Dragging photo" className="w-full h-full object-cover" />
+              </div>
+            ) : null}
+          </DragOverlay>
+        </DndContext>
       )}
 
       {/* Requirements info */}
