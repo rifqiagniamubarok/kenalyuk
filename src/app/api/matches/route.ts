@@ -73,9 +73,88 @@ export async function GET() {
       },
     });
 
+    const matchIds = matches.map((match) => match.id);
+
+    const [unreadCounts, totalMessageCounts] = await Promise.all([
+      matchIds.length > 0
+        ? prisma.message.groupBy({
+            by: ['matchId'],
+            where: {
+              matchId: {
+                in: matchIds,
+              },
+              senderId: {
+                not: userId,
+              },
+              isRead: false,
+            },
+            _count: {
+              _all: true,
+            },
+          })
+        : Promise.resolve([]),
+      matchIds.length > 0
+        ? prisma.message.groupBy({
+            by: ['matchId'],
+            where: {
+              matchId: {
+                in: matchIds,
+              },
+            },
+            _count: {
+              _all: true,
+            },
+          })
+        : Promise.resolve([]),
+    ]);
+
+    const unreadCountByMatchId = unreadCounts.reduce<Record<string, number>>((acc, item) => {
+      acc[item.matchId] = item._count._all;
+      return acc;
+    }, {});
+
+    const totalMessageCountByMatchId = totalMessageCounts.reduce<Record<string, number>>((acc, item) => {
+      acc[item.matchId] = item._count._all;
+      return acc;
+    }, {});
+
+    const latestMessagesByMatchId = await Promise.all(
+      matches.map(async (match) => {
+        const latestMessage = await prisma.message.findFirst({
+          where: {
+            matchId: match.id,
+          },
+          select: {
+            content: true,
+            createdAt: true,
+            senderId: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        });
+
+        return {
+          matchId: match.id,
+          latestMessage,
+        };
+      }),
+    );
+
+    const lastMessageByMatchId = latestMessagesByMatchId.reduce<
+      Record<string, { content: string; createdAt: Date; senderId: string } | null>
+    >((acc, item) => {
+      acc[item.matchId] = item.latestMessage;
+      return acc;
+    }, {});
+
     // Transform matches to include the matched user (not current user)
     const formattedMatches = matches.map((match) => {
       const matchedUser = match.user1Id === userId ? match.user2 : match.user1;
+      const unreadCount = unreadCountByMatchId[match.id] ?? 0;
+      const totalMessageCount = totalMessageCountByMatchId[match.id] ?? 0;
+      const hasNoMessages = totalMessageCount === 0;
+      const lastMessage = lastMessageByMatchId[match.id] ?? null;
       
       return {
         matchId: match.id,
@@ -88,6 +167,9 @@ export async function GET() {
           region: matchedUser.region?.name || '',
           photos: matchedUser.photoUrls,
         },
+        unreadCount,
+        hasNoMessages,
+        lastMessage,
       };
     });
 
