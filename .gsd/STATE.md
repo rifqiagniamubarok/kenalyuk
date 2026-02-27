@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 07 - Adjust profile page first view with large profile picture + clickable thumbnails, max 5 photos, read-only biodata text, and edit picture/biodata modals (Complete ✅)  
-**Active Plans**: 3/3 complete  
-**Completed Requirements**: 31/31 v1 requirements + post-v1 profile-first-view enhancement delivered
+**Phase**: Phase 08 - Discovery page simplification (in progress)  
+**Active Plans**: 1/3 complete  
+**Completed Requirements**: 31/31 v1 requirements + post-v1 discovery UX refinement in progress
 
-**Progress**: ██████████ 100% (26/26 plans)
+**Progress**: █████████░ 93% (27/29 plans)
 
 ---
 
@@ -88,6 +88,15 @@
 - ✅ 07-02: Modal edit actions for picture and biodata with refresh back to read-only view (Complete)
 - ✅ 07-03: Enforce strict max-5 photos across UI/API + human verification (Complete)
 
+### Phase 08 - Discovery Page Simplification + Action UX Refinements
+
+**Status**: In Progress
+**Plans**: 3 total
+
+- ✅ 08-01: Remove arrow-key/count indicators + move pass/like to tooltip icon controls below card (Complete)
+- [ ] 08-02: Simplify card surface and add ordered detail modal for full biodata/photos
+- [ ] 08-03: Add pass-left/like-right card animation + human verification
+
 ---
 
 ## Requirements Status
@@ -147,7 +156,7 @@
 - Discovery feed API with intelligent filtering (opposite gender, age range, region, ACTIVE status)
 - Profile exclusion system (already liked/passed users filtered out)
 - ProfileCard component with photo carousel and info overlay (NextUI + framer-motion)
-- Discovery page with swipe interface and keyboard shortcuts
+- Discovery page with swipe interface and click-first pass/like actions
 - Like/pass action APIs with mutual match detection
 - Match creation system with consistent user ordering
 - Match celebration modal with NextUI Modal component
@@ -182,11 +191,13 @@
 - Phase 07 Plan 01 completed: `/profile` now defaults to a photo-first read-only overview with clickable thumbnail preview and visible edit action buttons
 - Phase 07 Plan 02 completed: `Edit Picture` and `Edit Biodata` now open modal editors with optional callback hooks and post-save refresh back to the read-only overview
 - Phase 07 Plan 03 completed: strict max-5 photo enforcement across UI/API with approved human verification and final profile gallery sizing refinements
+- Phase 08 added: discovery page simplification with tooltip-based pass/like, hidden available count, modal details, and swipe animations
+- Phase 08 Plan 01 completed: discovery now removes arrow-key shortcuts and count indicators, with pass/like tooltip controls in a dedicated action card below profile card
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 07 Complete)
+_Last Updated_: 2026-02-28 (Phase 08 in progress)
 
-**Next Focus**: Complete remaining in-progress phase work (Phase 05-03) or run verification
+**Next Focus**: Execute Phase 08 Plan 02 (simplified card surface + ordered detail modal)
 
-Run `/execute-phase.md 5` to finish pending Phase 05 plan.
+Run `/execute-plan.md .gsd/phases/08-discovery-page-remove-arrow-like-pass-add-tooltip-hide-available-count-simplify-card-and-detail-modal-add-card-swipe-animation/08-02-PLAN.md` to continue.
