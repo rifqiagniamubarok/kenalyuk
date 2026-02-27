@@ -10,6 +10,8 @@ import { Card, CardBody, Spinner, Button, Modal, ModalContent, ModalHeader, Moda
 import { toast } from 'sonner';
 import ProfileCard, { ProfileData } from '@/components/ProfileCard';
 
+const SWIPE_ANIMATION_MS = 280;
+
 export default function DiscoveryPage() {
   const [profiles, setProfiles] = useState<ProfileData[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,6 +21,7 @@ export default function DiscoveryPage() {
   const [noMoreProfiles, setNoMoreProfiles] = useState(false);
   const [matchedProfile, setMatchedProfile] = useState<ProfileData | null>(null);
   const [detailProfile, setDetailProfile] = useState<ProfileData | null>(null);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDetailOpen, onOpen: onDetailOpen, onClose: onDetailClose } = useDisclosure();
@@ -75,22 +78,14 @@ export default function DiscoveryPage() {
 
       const data = await response.json();
 
-      // Check if it's a match
-      if (data.matched) {
-        setMatchedProfile(profile);
-        onOpen(); // Show match celebration modal
-      }
-
-      // Move to next profile after a brief delay
-      setTimeout(
-        () => {
-          advanceToNext();
-        },
-        data.matched ? 0 : 200,
-      );
+      runSwipeAnimationAndAdvance('right', () => {
+        if (data.matched) {
+          setMatchedProfile(profile);
+          onOpen();
+        }
+      });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Failed to like profile');
-    } finally {
       setActionLoading(false);
     }
   };
@@ -114,15 +109,22 @@ export default function DiscoveryPage() {
         throw new Error(data.error || 'Failed to pass profile');
       }
 
-      // Move to next profile
-      setTimeout(() => {
-        advanceToNext();
-      }, 200);
+      runSwipeAnimationAndAdvance('left');
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Failed to pass profile');
-    } finally {
       setActionLoading(false);
     }
+  };
+
+  const runSwipeAnimationAndAdvance = (direction: 'left' | 'right', onSwipeStart?: () => void) => {
+    setSwipeDirection(direction);
+    onSwipeStart?.();
+
+    window.setTimeout(() => {
+      advanceToNext();
+      setSwipeDirection(null);
+      setActionLoading(false);
+    }, SWIPE_ANIMATION_MS);
   };
 
   const advanceToNext = () => {
@@ -208,7 +210,7 @@ export default function DiscoveryPage() {
 
       {/* Profile Card */}
       <div className="flex justify-center">
-        <ProfileCard profile={currentProfile} onOpenDetail={handleOpenDetail} showActions={false} />
+        <ProfileCard profile={currentProfile} onOpenDetail={handleOpenDetail} showActions={false} swipeDirection={swipeDirection} />
       </div>
 
       {/* Action Card */}
