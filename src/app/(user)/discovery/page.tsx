@@ -6,7 +6,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, CardBody, Spinner, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { Card, CardBody, Spinner, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Tooltip } from '@nextui-org/react';
 import { toast } from 'sonner';
 import ProfileCard, { ProfileData } from '@/components/ProfileCard';
 
@@ -195,7 +195,35 @@ export default function DiscoveryPage() {
 
       {/* Profile Card */}
       <div className="flex justify-center">
-        <ProfileCard profile={currentProfile} onLike={handleLike} onPass={handlePass} showActions actionsDisabled={actionLoading} />
+        <ProfileCard profile={currentProfile} showActions={false} />
+      </div>
+
+      {/* Action Card */}
+      <div className="flex justify-center mt-4">
+        <Card className="w-full max-w-[400px]">
+          <CardBody className="py-4">
+            <div className="flex items-center justify-center gap-4">
+              <Tooltip content="Pass" placement="top">
+                <Button isIconOnly size="lg" variant="flat" onPress={handlePass} isDisabled={actionLoading} className="w-14 h-14 bg-gray-100 hover:bg-gray-200 text-gray-600">
+                  <span className="text-2xl">✕</span>
+                </Button>
+              </Tooltip>
+              <Tooltip content="Like" placement="top">
+                <Button
+                  isIconOnly
+                  size="lg"
+                  color="success"
+                  variant="flat"
+                  onPress={handleLike}
+                  isDisabled={actionLoading}
+                  className="w-14 h-14 bg-primary/10 hover:bg-primary/20 text-primary"
+                >
+                  <span className="text-2xl">♥</span>
+                </Button>
+              </Tooltip>
+            </div>
+          </CardBody>
+        </Card>
       </div>
 
       {/* Match Celebration Modal */}

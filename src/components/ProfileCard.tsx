@@ -111,7 +111,7 @@ export default function ProfileCard({ profile, onLike, onPass, showActions = tru
       </CardBody>
 
       {/* Action buttons */}
-      {showActions && (
+      {showActions && onPass && onLike && (
         <CardFooter className="gap-4 justify-center py-4">
           <Button isIconOnly size="lg" variant="flat" onPress={onPass} isDisabled={actionsDisabled} className="w-14 h-14 bg-gray-100 hover:bg-gray-200 text-gray-600">
             <span className="text-2xl">✕</span>
