@@ -105,13 +105,13 @@ export default function Navigation({ menuItems }: NavigationProps) {
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 pt-4 sm:px-6">
+    <div className="mx-auto w-full max-w-2xl px-3 pt-3 sm:px-4 sm:pt-4">
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         classNames={{
-          wrapper: 'px-3 sm:px-4 bg-white/95 rounded-2xl border border-gray-200 shadow-sm',
+          wrapper: 'px-2.5 sm:px-3 bg-white/95 rounded-2xl border border-gray-200 shadow-sm',
           base: 'bg-transparent',
         }}
       >
@@ -121,9 +121,9 @@ export default function Navigation({ menuItems }: NavigationProps) {
       </NavbarContent>
 
       {/* Brand */}
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="sm:hidden pr-2" justify="center">
         <NavbarBrand>
-          <Link href="/dashboard" className="font-bold text-2xl text-primary">
+          <Link href="/dashboard" className="font-bold text-xl text-primary">
             Kenalyuk
           </Link>
         </NavbarBrand>
@@ -138,7 +138,7 @@ export default function Navigation({ menuItems }: NavigationProps) {
       </NavbarContent>
 
       {/* Desktop menu items */}
-      <NavbarContent className="hidden sm:flex gap-6" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menuItems.map((item) => (
           <NavbarItem key={item.href} isActive={pathname === item.href}>
             {(() => {
