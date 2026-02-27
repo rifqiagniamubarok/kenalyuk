@@ -231,7 +231,7 @@ Plans:
 Plans:
 
 - [x] 07-01-PLAN.md — Simplified profile first view (large photo + thumbnail navigation + read-only biodata shell)
-- [ ] 07-02-PLAN.md — Modal edit actions for picture and biodata with refresh back to read-only view
+- [x] 07-02-PLAN.md — Modal edit actions for picture and biodata with refresh back to read-only view
 - [ ] 07-03-PLAN.md — Enforce strict max-5 photos across UI/API + human verification
 
 **Details:**
