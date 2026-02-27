@@ -84,34 +84,36 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
         <p className="text-gray-600">Your profile preview is read-only. Use the buttons below to edit your data.</p>
       </div>
 
-      <section className="bg-white shadow rounded-lg p-4 sm:p-6 space-y-4">
-        <div className="aspect-[4/5] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
-          {selectedPhoto ? (
-            <img src={selectedPhoto} alt="Selected profile photo" className="w-full h-full object-cover" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-500 text-sm">No photos uploaded yet</div>
+      <section className="bg-white shadow rounded-lg p-4 sm:p-6">
+        <div className="grid grid-cols-[minmax(0,1fr)_72px] sm:grid-cols-[minmax(0,1fr)_88px] gap-3 sm:gap-4 items-start">
+          <div className="aspect-[4/5] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+            {selectedPhoto ? (
+              <img src={selectedPhoto} alt="Selected profile photo" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-gray-500 text-sm">No photos uploaded yet</div>
+            )}
+          </div>
+
+          {photos.length > 0 && (
+            <div className="flex flex-col gap-2">
+              {photos.map((photoUrl, index) => {
+                const isSelected = index === selectedPhotoIndex;
+
+                return (
+                  <button
+                    key={`${photoUrl}-${index}`}
+                    type="button"
+                    onClick={() => setSelectedPhotoIndex(index)}
+                    className={`aspect-square w-full rounded-md overflow-hidden border ${isSelected ? 'border-primary ring-2 ring-primary/30' : 'border-gray-200'}`}
+                    aria-label={`View photo ${index + 1}`}
+                  >
+                    <img src={photoUrl} alt={`Profile thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                );
+              })}
+            </div>
           )}
         </div>
-
-        {photos.length > 0 && (
-          <div className="grid grid-cols-5 gap-2">
-            {photos.map((photoUrl, index) => {
-              const isSelected = index === selectedPhotoIndex;
-
-              return (
-                <button
-                  key={`${photoUrl}-${index}`}
-                  type="button"
-                  onClick={() => setSelectedPhotoIndex(index)}
-                  className={`aspect-square rounded-md overflow-hidden border ${isSelected ? 'border-primary ring-2 ring-primary/30' : 'border-gray-200'}`}
-                  aria-label={`View photo ${index + 1}`}
-                >
-                  <img src={photoUrl} alt={`Profile thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-                </button>
-              );
-            })}
-          </div>
-        )}
       </section>
 
       <section className="bg-white shadow rounded-lg p-4 sm:p-6 space-y-4">
