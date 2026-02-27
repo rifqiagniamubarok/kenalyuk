@@ -8,11 +8,9 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Button,
 } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 interface MatchesSummaryResponse {
@@ -106,10 +104,6 @@ export default function Navigation({ menuItems }: NavigationProps) {
     );
   };
 
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: '/login' });
-  };
-
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pt-4 sm:px-6">
       <Navbar
@@ -186,11 +180,6 @@ export default function Navigation({ menuItems }: NavigationProps) {
             </Link>
           </NavbarMenuItem>
         ))}
-        <NavbarMenuItem>
-          <Button color="danger" variant="flat" onPress={handleLogout} className="w-full">
-            Log Out
-          </Button>
-        </NavbarMenuItem>
       </NavbarMenu>
       </Navbar>
     </div>
