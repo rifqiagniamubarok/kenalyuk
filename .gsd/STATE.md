@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 06 - Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications (Complete ✅)  
-**Active Plans**: 3/3 complete  
-**Completed Requirements**: 31/31 v1 requirements + post-v1 chat notification UX enhancement delivered
+**Phase**: Phase 07 - Adjust profile page first view with large profile picture + clickable thumbnails, max 5 photos, read-only biodata text, and edit picture/biodata modals (In Progress)  
+**Active Plans**: 1/3 complete  
+**Completed Requirements**: 31/31 v1 requirements + post-v1 profile-first-view enhancement in progress
 
-**Progress**: ██████████ 100% (23/23 plans)
+**Progress**: █████████░ 88% (23/26 plans)
 
 ---
 
@@ -78,6 +78,15 @@
 - ✅ 06-01: Backend unread/new-match metadata + read-state update flow (Complete)
 - ✅ 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips) (Complete)
 - ✅ 06-03: Chat tab aggregate chip (Chat N) + human verification (Complete)
+
+### Phase 07 - Profile First View Simplification + Edit Modals
+
+**Status**: In Progress
+**Plans**: 3 total
+
+- ✅ 07-01: Simplified profile first view (large photo + thumbnail navigation + read-only biodata shell) (Complete)
+- [ ] 07-02: Modal edit actions for picture and biodata with refresh back to read-only view
+- [ ] 07-03: Enforce strict max-5 photos across UI/API + human verification
 
 ---
 
@@ -170,11 +179,12 @@
 - Phase 06 Plan 02 completed: simplified `/chat` inbox rows and matches-page chat CTA alignment
 - Phase 06 Plan 03 completed: chat tab aggregate chip and no-refresh unread/new-match updates with human verification approval
 - Phase 07 added: Adjust profile page first view with large profile picture + clickable thumbnails, max 5 photos, read-only biodata text, and edit picture/biodata modal actions
+- Phase 07 Plan 01 completed: `/profile` now defaults to a photo-first read-only overview with clickable thumbnail preview and visible edit action buttons
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 06 Complete)
+_Last Updated_: 2026-02-28 (Phase 07 Plan 01 Complete)
 
-**Next Phase**: Phase 07 - Adjust profile page first view with large profile picture, clickable thumbnails, max 5 photos, read-only biodata, and edit modals
+**Next Plan**: Phase 07 Plan 02 - Modal edit actions for picture and biodata with refresh back to read-only view
 
-Run `/plan-phase.md 7` to break down this phase.
+Run `/execute-plan.md` to execute the next pending plan.

@@ -223,13 +223,14 @@ Plans:
 
 ### Phase 7: Adjust profile page: first view displays large profile picture with clickable smaller photo navigation, max 5 photos, read-only biodata text, and edit picture/biodata modals in a simpler tidy UX
 
+**Status:** In Progress
 **Goal:** Deliver a simpler photo-first profile page with read-only biodata display, modal-based editing, and strict 5-photo maximum
 **Depends on:** Phase 6
 **Plans:** 3 plans
 
 Plans:
 
-- [ ] 07-01-PLAN.md — Simplified profile first view (large photo + thumbnail navigation + read-only biodata shell)
+- [x] 07-01-PLAN.md — Simplified profile first view (large photo + thumbnail navigation + read-only biodata shell)
 - [ ] 07-02-PLAN.md — Modal edit actions for picture and biodata with refresh back to read-only view
 - [ ] 07-03-PLAN.md — Enforce strict max-5 photos across UI/API + human verification
 
