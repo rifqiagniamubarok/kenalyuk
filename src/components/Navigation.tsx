@@ -9,11 +9,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Avatar,
 } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,10 +22,6 @@ interface MatchesSummaryResponse {
 }
 
 interface NavigationProps {
-  user: {
-    name?: string | null;
-    email?: string | null;
-  };
   menuItems: {
     label: string;
     href: string;
@@ -39,7 +30,7 @@ interface NavigationProps {
   }[];
 }
 
-export default function Navigation({ user, menuItems }: NavigationProps) {
+export default function Navigation({ menuItems }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [chatBadgeCount, setChatBadgeCount] = useState<number | null>(null);
   const pathname = usePathname();
@@ -96,8 +87,12 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
     };
   }, [chatMenuItem]);
 
+  const getResolvedBadgeCount = (item: NavigationProps['menuItems'][number]) => {
+    return item.href === '/chat' ? (chatBadgeCount ?? item.badgeCount ?? 0) : (item.badgeCount ?? 0);
+  };
+
   const renderMenuLabel = (item: NavigationProps['menuItems'][number]) => {
-    const resolvedBadgeCount = item.href === '/chat' ? (chatBadgeCount ?? item.badgeCount ?? 0) : (item.badgeCount ?? 0);
+    const resolvedBadgeCount = getResolvedBadgeCount(item);
 
     if (resolvedBadgeCount <= 0) {
       return item.label;
@@ -152,44 +147,31 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
         {menuItems.map((item) => (
           <NavbarItem key={item.href} isActive={pathname === item.href}>
+            {(() => {
+              const resolvedBadgeCount = getResolvedBadgeCount(item);
+
+              return (
             <Link
               href={item.href}
               className={`${
-                pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary hover:text-primary'
-              } transition-colors duration-200 flex items-center gap-2`}
+                pathname === item.href
+                  ? 'text-primary bg-primary/10'
+                  : 'text-text-secondary hover:text-primary hover:bg-primary/5'
+              } transition-colors duration-200 relative flex h-10 w-10 items-center justify-center rounded-full`}
+              aria-label={item.label}
             >
               {item.icon}
-              {renderMenuLabel(item)}
+              {resolvedBadgeCount > 0 && (
+                <span className="absolute -right-1 -top-1 min-w-[1rem] rounded-full bg-primary px-1 text-center text-[10px] font-semibold leading-4 text-white">
+                  {resolvedBadgeCount}
+                </span>
+              )}
+              <span className="sr-only">{item.label}</span>
             </Link>
+              );
+            })()}
           </NavbarItem>
         ))}
-      </NavbarContent>
-
-      {/* User menu */}
-      <NavbarContent justify="end">
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Avatar
-              suppressHydrationWarning
-              isBordered
-              as="button"
-              className="transition-transform"
-              color="success"
-              name={user.name || user.email || 'User'}
-              size="sm"
-              showFallback
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2" textValue="Profile">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold text-primary">{user.email}</p>
-            </DropdownItem>
-            <DropdownItem key="logout" color="danger" onPress={handleLogout} textValue="Logout">
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
       </NavbarContent>
 
       {/* Mobile menu */}

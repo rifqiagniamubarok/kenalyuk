@@ -98,7 +98,7 @@ export default async function UserLayout({ children }: { children: React.ReactNo
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation user={{ name: session.user.name, email: session.user.email }} menuItems={visibleMenuItems} />
+      <Navigation menuItems={visibleMenuItems} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
     </div>
   );
