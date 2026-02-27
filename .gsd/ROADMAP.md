@@ -212,7 +212,7 @@ Plans:
 Plans:
 
 - [x] 06-01-PLAN.md — Backend unread/new-match metadata + read-state update flow
-- [ ] 06-02-PLAN.md — Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
+- [x] 06-02-PLAN.md — Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
 - [ ] 06-03-PLAN.md — Chat tab aggregate chip (Chat N) + human verification
 
 **Details:**

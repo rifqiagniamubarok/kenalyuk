@@ -3,10 +3,10 @@
 ## Current Status
 
 **Phase**: Phase 06 - Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications (In Progress)  
-**Active Plans**: 1/3 complete (06-01 complete, 06-02 next)  
+**Active Plans**: 2/3 complete (06-01 and 06-02 complete, 06-03 next)  
 **Completed Requirements**: 31/31 v1 requirements + post-v1 chat notification UX enhancement in progress
 
-**Progress**: █████████░ 91% (21/23 plans)
+**Progress**: ██████████ 96% (22/23 plans)
 
 ---
 
@@ -76,7 +76,7 @@
 **Plans**: 3 total
 
 - ✅ 06-01: Backend unread/new-match metadata + read-state update flow (Complete)
-- [ ] 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
+- ✅ 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
 - [ ] 06-03: Chat tab aggregate chip (Chat N) + human verification
 
 ---
@@ -170,8 +170,8 @@
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 06 - Plan 01 Complete)
+_Last Updated_: 2026-02-28 (Phase 06 - Plan 02 Complete)
 
-**Next Phase**: Phase 06 - Plan 02 (Simplified /chat inbox UI)
+**Next Phase**: Phase 06 - Plan 03 (Chat tab aggregate chip + human verification)
 
 Run `/execute-phase.md 06` to execute the next plan.
