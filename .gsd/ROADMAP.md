@@ -261,6 +261,25 @@ Plans:
 - Full biodata and additional photos move to dedicated modal
 - Action controls remain below card and card transitions animate directionally (right on like, left on pass)
 
+### Phase 9: adjust navbar. remove profile button in right side and move signout button in the bottom of profile page. make navbar not fully screen wide, use card-like island style. layout is app title (kenlay yuk), profile logo-only button, discovery logo-only button, and chat logo-only button. keep it simple and elegant
+
+**Goal:** Deliver a compact island-style navbar with title + icon-only Profile/Discovery/Chat and relocate signout to a dedicated bottom section on Profile page
+**Depends on:** Phase 8
+**Plans:** 3 plans
+
+Plans:
+
+- [ ] 09-01-PLAN.md — Compact island navbar with title and icon-only Profile/Discovery/Chat, remove right-side profile dropdown
+- [ ] 09-02-PLAN.md — Remove navbar logout and move signout to bottom section of profile page
+- [ ] 09-03-PLAN.md — Final responsive polish and human verification for navbar + signout relocation
+
+**Details:**
+- Navbar becomes compact/card-like island (not full-width edge-to-edge)
+- Navigation remains simple: app title + icon-only Profile, Discovery, Chat
+- Right-side profile/avatar dropdown is removed
+- Signout is available only at profile page bottom
+- Final phase includes explicit human verification checkpoint for visual/functional confirmation
+
 ---
 
 ## Validation Targets
