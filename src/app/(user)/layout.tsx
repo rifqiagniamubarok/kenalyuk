@@ -28,9 +28,12 @@ export default async function UserLayout({ children }: { children: React.ReactNo
     redirect('/login');
   }
 
+  const isApprovedUser = session.user.status === 'ACTIVE';
+  const visibleMenuItems = isApprovedUser ? userMenuItems : [userMenuItems[0]];
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation user={{ name: session.user.name, email: session.user.email }} menuItems={userMenuItems} />
+      <Navigation user={{ name: session.user.name, email: session.user.email }} menuItems={visibleMenuItems} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
     </div>
   );
