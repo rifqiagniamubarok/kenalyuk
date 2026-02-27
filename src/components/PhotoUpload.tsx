@@ -333,7 +333,9 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
             <span className="font-medium text-primary">Click to upload</span> or drag and drop
           </p>
           <p className="text-xs text-text-secondary mt-1">PNG or JPEG only, up to 10MB per file</p>
-          <p className="text-xs text-text-secondary mt-1">Upload exactly 5 photos ({photos.length}/{REQUIRED_PHOTO_COUNT} uploaded)</p>
+          <p className="text-xs text-text-secondary mt-1">
+            Upload exactly 5 photos ({photos.length}/{REQUIRED_PHOTO_COUNT} uploaded)
+          </p>
         </div>
       )}
 
@@ -381,7 +383,9 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
         <div className="flex justify-between items-center">
           <div className="text-sm text-gray-600">
             {photos.length > REQUIRED_PHOTO_COUNT ? (
-              <span className="text-red-600">Remove {photos.length - REQUIRED_PHOTO_COUNT} photo(s) to continue (max {REQUIRED_PHOTO_COUNT})</span>
+              <span className="text-red-600">
+                Remove {photos.length - REQUIRED_PHOTO_COUNT} photo(s) to continue (max {REQUIRED_PHOTO_COUNT})
+              </span>
             ) : hasRequiredPhotos ? (
               <span className="text-green-600">✓ Required photos uploaded</span>
             ) : (

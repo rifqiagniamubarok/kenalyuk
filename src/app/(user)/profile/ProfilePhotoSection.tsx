@@ -73,11 +73,7 @@ export default function ProfilePhotoSection({ onSaved, onClose }: ProfilePhotoSe
 
       {onClose && (
         <div className="flex justify-end">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-          >
+          <button type="button" onClick={onClose} className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
             Close
           </button>
         </div>
