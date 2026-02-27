@@ -2,11 +2,11 @@
 
 ## Current Status
 
-**Phase**: Phase 06 - Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications (In Progress)  
-**Active Plans**: 2/3 complete (06-01 and 06-02 complete, 06-03 next)  
-**Completed Requirements**: 31/31 v1 requirements + post-v1 chat notification UX enhancement in progress
+**Phase**: Phase 06 - Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications (Complete ✅)  
+**Active Plans**: 3/3 complete  
+**Completed Requirements**: 31/31 v1 requirements + post-v1 chat notification UX enhancement delivered
 
-**Progress**: ██████████ 96% (22/23 plans)
+**Progress**: ██████████ 100% (23/23 plans)
 
 ---
 
@@ -72,12 +72,12 @@
 
 ### Phase 06 - Chat Notification Chips + Simplified Inbox
 
-**Status**: In Progress  
+**Status**: Complete ✅  
 **Plans**: 3 total
 
 - ✅ 06-01: Backend unread/new-match metadata + read-state update flow (Complete)
-- ✅ 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
-- [ ] 06-03: Chat tab aggregate chip (Chat N) + human verification
+- ✅ 06-02: Simplified /chat inbox UI (photo, name, last chat, unread/new chips) (Complete)
+- ✅ 06-03: Chat tab aggregate chip (Chat N) + human verification (Complete)
 
 ---
 
@@ -167,11 +167,13 @@
 - Phase 05 Plan 01 completed: SMTP and template-driven transactional email foundation
 - Phase 06 added: Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications
 - Phase 06 Plan 01 completed: backend unread/new-match metadata and read-state transition on chat open
+- Phase 06 Plan 02 completed: simplified `/chat` inbox rows and matches-page chat CTA alignment
+- Phase 06 Plan 03 completed: chat tab aggregate chip and no-refresh unread/new-match updates with human verification approval
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 06 - Plan 02 Complete)
+_Last Updated_: 2026-02-28 (Phase 06 Complete)
 
-**Next Phase**: Phase 06 - Plan 03 (Chat tab aggregate chip + human verification)
+**Next Phase**: Continue remaining in-progress work or start milestone verification
 
-Run `/execute-phase.md 06` to execute the next plan.
+Run `/verify-work.md 06` to perform manual acceptance testing.
