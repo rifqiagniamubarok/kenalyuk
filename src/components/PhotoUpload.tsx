@@ -2,7 +2,7 @@
 
 /**
  * Multi-photo upload component with client-side compression
- * Supports 5-9 photos with drag-and-drop and preview
+ * Supports exactly 5 photos with drag-and-drop and preview
  */
 
 import { useMemo, useRef, useState } from 'react';
@@ -11,6 +11,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { rectSortingStrategy } from '@dnd-kit/sortable';
 import { compressImage, validateImageFile, createImagePreview } from '@/lib/image';
+
+const REQUIRED_PHOTO_COUNT = 5;
 
 interface PhotoUploadProps {
   onUploadComplete?: (photoUrls: string[]) => void;
@@ -133,9 +135,9 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
     setError('');
 
     // Check if adding these files would exceed the maximum
-    const remainingSlots = 9 - photos.length;
+    const remainingSlots = REQUIRED_PHOTO_COUNT - photos.length;
     if (files.length > remainingSlots) {
-      setError(`You can only upload ${remainingSlots} more photo(s)`);
+      setError(`You can only upload ${remainingSlots} more photo(s) (max ${REQUIRED_PHOTO_COUNT})`);
       return;
     }
 
@@ -238,8 +240,8 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
   };
 
   const handleUploadAll = async () => {
-    if (photos.length < 5) {
-      setError('Please upload at least 5 photos');
+    if (photos.length !== REQUIRED_PHOTO_COUNT) {
+      setError(`Please upload exactly ${REQUIRED_PHOTO_COUNT} photos`);
       return;
     }
 
@@ -298,8 +300,8 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
     }
   };
 
-  const canUploadMore = photos.length < 9;
-  const hasMinimumPhotos = photos.length >= 5;
+  const canUploadMore = photos.length < REQUIRED_PHOTO_COUNT;
+  const hasRequiredPhotos = photos.length === REQUIRED_PHOTO_COUNT;
 
   return (
     <div className="space-y-6">
@@ -331,7 +333,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
             <span className="font-medium text-primary">Click to upload</span> or drag and drop
           </p>
           <p className="text-xs text-text-secondary mt-1">PNG or JPEG only, up to 10MB per file</p>
-          <p className="text-xs text-text-secondary mt-1">Upload 5-9 photos ({photos.length}/9 uploaded)</p>
+          <p className="text-xs text-text-secondary mt-1">Upload exactly 5 photos ({photos.length}/{REQUIRED_PHOTO_COUNT} uploaded)</p>
         </div>
       )}
 
@@ -366,7 +368,7 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
         <h3 className="text-sm font-medium text-blue-900 mb-2">Photo Requirements</h3>
         <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
-          <li>Upload 5-9 recent photos of yourself</li>
+          <li>Upload exactly 5 recent photos of yourself (maximum 5)</li>
           <li>Photos will be compressed automatically for faster loading</li>
           <li>Clear, well-lit photos work best</li>
           <li>At least one photo should show your face clearly</li>
@@ -378,15 +380,17 @@ export default function PhotoUpload({ onUploadComplete, initialPhotos = [] }: Ph
       {photos.length > 0 && (
         <div className="flex justify-between items-center">
           <div className="text-sm text-gray-600">
-            {hasMinimumPhotos ? (
-              <span className="text-green-600">✓ Minimum photos uploaded</span>
+            {photos.length > REQUIRED_PHOTO_COUNT ? (
+              <span className="text-red-600">Remove {photos.length - REQUIRED_PHOTO_COUNT} photo(s) to continue (max {REQUIRED_PHOTO_COUNT})</span>
+            ) : hasRequiredPhotos ? (
+              <span className="text-green-600">✓ Required photos uploaded</span>
             ) : (
-              <span className="text-orange-600">Upload at least {5 - photos.length} more photo(s)</span>
+              <span className="text-orange-600">Upload {REQUIRED_PHOTO_COUNT - photos.length} more photo(s)</span>
             )}
           </div>
           <button
             onClick={handleUploadAll}
-            disabled={!hasMinimumPhotos || photos.some((p) => p.uploading)}
+            disabled={!hasRequiredPhotos || photos.some((p) => p.uploading)}
             className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-soft"
           >
             {photos.some((p) => p.uploading) ? 'Uploading...' : 'Save Photos'}

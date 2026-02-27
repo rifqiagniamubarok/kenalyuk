@@ -75,15 +75,15 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await req.json();
-    const { photoUrls } = body;
+    const body = await req.json().catch(() => null);
+    const photoUrls = body && typeof body === 'object' ? (body as { photoUrls?: unknown }).photoUrls : undefined;
 
     if (!Array.isArray(photoUrls)) {
       return NextResponse.json({ error: 'photoUrls must be an array' }, { status: 400 });
     }
 
-    if (photoUrls.length < 5 || photoUrls.length > 9) {
-      return NextResponse.json({ error: 'Must provide 5-9 photos' }, { status: 400 });
+    if (photoUrls.length !== 5) {
+      return NextResponse.json({ error: 'Must provide exactly 5 photos (maximum 5)' }, { status: 400 });
     }
 
     // Get current user to check biodata completion
@@ -125,7 +125,7 @@ export async function PUT(req: NextRequest) {
     // Determine new status
     // If both biodata AND photos are complete, set to PENDING_APPROVAL
     let newStatus = currentUser.status;
-    if (biodataComplete && photoUrls.length >= 5) {
+    if (biodataComplete && photoUrls.length === 5) {
       newStatus = UserStatus.PENDING_APPROVAL;
     }
 

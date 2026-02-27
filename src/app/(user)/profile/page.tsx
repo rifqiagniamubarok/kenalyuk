@@ -36,5 +36,5 @@ export default async function ProfilePage() {
     redirect('/login');
   }
 
-  return <ProfileOverview profile={{ ...user, regionName: user.region?.name ?? null }} />;
+  return <ProfileOverview profile={{ ...user, photoUrls: user.photoUrls.slice(0, 5), regionName: user.region?.name ?? null }} />;
 }

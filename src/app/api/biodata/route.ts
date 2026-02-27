@@ -110,13 +110,13 @@ export async function POST(req: NextRequest) {
 
     // If editing profile after rejection or as active user, reset to PENDING_APPROVAL
     if (currentUser?.status === UserStatus.REJECTED || currentUser?.status === UserStatus.ACTIVE) {
-      if (currentUser.photoUrls && currentUser.photoUrls.length >= 5) {
+      if (currentUser.photoUrls && currentUser.photoUrls.length === 5) {
         newStatus = UserStatus.PENDING_APPROVAL;
       }
     }
 
-    // If user has completed biodata and has 5+ photos, set to PENDING_APPROVAL
-    if (currentUser?.photoUrls && currentUser.photoUrls.length >= 5) {
+    // If user has completed biodata and has exactly 5 photos, set to PENDING_APPROVAL
+    if (currentUser?.photoUrls && currentUser.photoUrls.length === 5) {
       newStatus = UserStatus.PENDING_APPROVAL;
     }
 
