@@ -6,7 +6,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, CardBody, Spinner, Button, Progress, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
+import { Card, CardBody, Spinner, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@nextui-org/react';
 import { toast } from 'sonner';
 import ProfileCard, { ProfileData } from '@/components/ProfileCard';
 
@@ -25,21 +25,6 @@ export default function DiscoveryPage() {
   useEffect(() => {
     fetchProfiles();
   }, []);
-
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (actionLoading) return; // Disable keyboard shortcuts during loading
-      if (e.key === 'ArrowLeft') {
-        handlePass();
-      } else if (e.key === 'ArrowRight') {
-        handleLike();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentIndex, profiles, actionLoading]);
 
   const fetchProfiles = async () => {
     try {
@@ -200,20 +185,12 @@ export default function DiscoveryPage() {
   }
 
   const currentProfile = profiles[currentIndex];
-  const progress = ((currentIndex + 1) / profiles.length) * 100;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold mb-2">Discover</h1>
-        <div className="flex items-center gap-3">
-          <Progress value={progress} className="flex-1" size="sm" />
-          <span className="text-sm text-gray-600">
-            {currentIndex + 1} / {profiles.length}
-          </span>
-        </div>
-        <p className="text-sm text-gray-500 mt-2">Use arrow keys: ← Pass | → Like</p>
       </div>
 
       {/* Profile Card */}
