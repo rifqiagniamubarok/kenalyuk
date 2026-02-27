@@ -154,14 +154,8 @@ export default function BiodataForm() {
       return;
     }
 
-    if (!formData.aboutMe || formData.aboutMe.length < 50) {
-      setError('About me must be at least 50 characters');
-      setLoading(false);
-      return;
-    }
-
-    if (!formData.lookingFor || formData.lookingFor.length < 30) {
-      setError('Looking for preferences must be at least 30 characters');
+    if (!formData.aboutMe || formData.aboutMe.length < 5) {
+      setError('About me must be at least 5 characters');
       setLoading(false);
       return;
     }
@@ -191,8 +185,8 @@ export default function BiodataForm() {
         throw new Error(data.error || 'Failed to save biodata');
       }
 
-      // Redirect to photos page
-      router.push('/photos');
+      // Keep user on unified profile page
+      router.push('/profile');
     } catch (err: any) {
       setError(err.message || 'Failed to save biodata');
     } finally {
@@ -391,7 +385,7 @@ export default function BiodataForm() {
 
         <div>
           <label htmlFor="aboutMe" className="block text-sm font-medium text-gray-700 mb-1">
-            About Me * (minimum 50 characters)
+            About Me * (minimum 5 characters)
           </label>
           <textarea
             id="aboutMe"
@@ -400,7 +394,7 @@ export default function BiodataForm() {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             rows={4}
             required
-            minLength={50}
+            minLength={5}
             maxLength={500}
             placeholder="Tell us about yourself, your personality, hobbies, and what makes you unique..."
           />
@@ -409,7 +403,7 @@ export default function BiodataForm() {
 
         <div>
           <label htmlFor="lookingFor" className="block text-sm font-medium text-gray-700 mb-1">
-            What I'm Looking For * (minimum 30 characters)
+            What I'm Looking For (optional)
           </label>
           <textarea
             id="lookingFor"
@@ -417,8 +411,6 @@ export default function BiodataForm() {
             onChange={(e) => setFormData({ ...formData, lookingFor: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             rows={4}
-            required
-            minLength={30}
             maxLength={500}
             placeholder="Describe your ideal partner, qualities you value, and what you're seeking in a relationship..."
           />

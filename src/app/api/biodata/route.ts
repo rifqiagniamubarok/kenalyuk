@@ -63,8 +63,12 @@ export async function POST(req: NextRequest) {
     // Validate required fields
     const { name, gender, age, height, city, regionId, education, occupation, religionLevel, aboutMe, lookingFor } = body;
 
-    if (!name || !gender || !age || !height || !city || !regionId || !education || !occupation || !religionLevel || !aboutMe || !lookingFor) {
+    if (!name || !gender || !age || !height || !city || !regionId || !education || !occupation || !religionLevel || !aboutMe) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
+    if (typeof aboutMe !== 'string' || aboutMe.trim().length < 5) {
+      return NextResponse.json({ error: 'About me must be at least 5 characters' }, { status: 400 });
     }
 
     // Validate gender
