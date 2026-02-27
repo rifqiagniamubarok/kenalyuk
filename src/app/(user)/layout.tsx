@@ -6,17 +6,13 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import Navigation from '@/components/Navigation';
+import { Heart, MessageCircle, User } from 'lucide-react';
 
 // User navigation menu items
-// Note: Chat rooms are accessed via /matches page (no separate Chat menu item)
-// Each match card has a "Chat" button linking to /chat/[matchId]
 const userMenuItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: '🏠' },
-  { label: 'Discovery', href: '/discovery', icon: '💕' },
-  { label: 'Matches', href: '/matches', icon: '👥' },
-  { label: 'Likes', href: '/likes', icon: '🕐' },
-  { label: 'My Biodata', href: '/biodata', icon: '📝' },
-  { label: 'Photos', href: '/photos', icon: '📸' },
+  { label: 'Profile', href: '/profile', icon: <User className="w-5 h-5 text-current" /> },
+  { label: 'Discovery', href: '/discovery', icon: <Heart className="w-5 h-5 text-current" /> },
+  { label: 'Chat', href: '/chat', icon: <MessageCircle className="w-5 h-5 text-current" /> },
 ];
 
 export default async function UserLayout({ children }: { children: React.ReactNode }) {
