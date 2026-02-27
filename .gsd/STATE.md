@@ -3,10 +3,10 @@
 ## Current Status
 
 **Phase**: Phase 05 - Email + Password Recovery Enhancements (In Progress)  
-**Active Plans**: 1/3 complete (05-01 complete, 05-02 next)  
+**Active Plans**: 2/3 complete (05-01 and 05-02 complete, 05-03 next)  
 **Completed Requirements**: 31/31 v1 requirements + Phase 05 execution started
 
-**Progress**: ███████░░░ 70% (14/20 plans)
+**Progress**: ████████░░ 75% (15/20 plans)
 
 ---
 
@@ -67,7 +67,7 @@
 **Plans**: 3 total
 
 - ✅ 05-01: SMTP normalization + HTML templates + approval notification wiring (Complete)
-- [ ] 05-02: Forgot/reset password backend (token model, APIs, reset email template)
+- ✅ 05-02: Forgot/reset password backend (token model, APIs, reset email template) (Complete)
 - [ ] 05-03: Auth UI integration + register password verification + human verification
 
 ---
@@ -156,8 +156,8 @@
 
 ---
 
-_Last Updated_: 2026-02-27 (Phase 05-01 Complete)
+_Last Updated_: 2026-02-27 (Phase 05-02 Complete)
 
-**Next Plan**: 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
+**Next Plan**: 05-03-PLAN.md — Auth UI integration + register password verification + human verification
 
 Run `/execute-phase.md 05` to continue phase execution.

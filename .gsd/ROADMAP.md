@@ -192,7 +192,7 @@ Plans:
 Plans:
 
 - [x] 05-01-PLAN.md — SMTP normalization + HTML email template reader + approval notification wiring
-- [ ] 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
+- [x] 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
 - [ ] 05-03-PLAN.md — Auth UI integration (forgot/reset pages) + register password verification + human verification
 
 **Details:**
