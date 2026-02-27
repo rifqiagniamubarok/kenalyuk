@@ -116,15 +116,16 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
   };
 
   return (
-    <Navbar
-      isBordered
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-      classNames={{
-        wrapper: 'max-w-full px-4 sm:px-6 bg-white border-b border-gray-100',
-        base: 'bg-white',
-      }}
-    >
+    <div className="mx-auto w-full max-w-3xl px-4 pt-4 sm:px-6">
+      <Navbar
+        isBordered
+        isMenuOpen={isMenuOpen}
+        onMenuOpenChange={setIsMenuOpen}
+        classNames={{
+          wrapper: 'px-3 sm:px-4 bg-white/95 rounded-2xl border border-gray-200 shadow-sm',
+          base: 'bg-transparent',
+        }}
+      >
       {/* Mobile menu toggle */}
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
@@ -209,6 +210,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
           </Button>
         </NavbarMenuItem>
       </NavbarMenu>
-    </Navbar>
+      </Navbar>
+    </div>
   );
 }
