@@ -85,7 +85,7 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
       </div>
 
       <section className="bg-white shadow rounded-lg p-4 sm:p-6">
-        <div className="grid grid-cols-[minmax(0,1fr)_72px] sm:grid-cols-[minmax(0,1fr)_88px] gap-3 sm:gap-4 items-start">
+        <div className="mx-auto w-full max-w-2xl grid grid-cols-[minmax(0,1fr)_92px] sm:grid-cols-[minmax(0,1fr)_128px] gap-3 sm:gap-5 items-start">
           <div className="aspect-[4/5] w-full rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
             {selectedPhoto ? (
               <img src={selectedPhoto} alt="Selected profile photo" className="w-full h-full object-cover" />
