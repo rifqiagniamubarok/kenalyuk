@@ -203,6 +203,22 @@ Plans:
 - Keep registration password confirmation enforced on both client and API
 - Preserve supervisor approval notification after user acceptance
 
+### Phase 6: Add like chip notif in chat tab with unread count per chat bubble, simplify chat page display, and include new match chip notifications
+
+**Goal:** Add unread/new-match chat notification chips and simplified chat inbox UI with conversation-level unread visibility
+**Depends on:** Phase 5
+**Plans:** 3 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Backend unread/new-match metadata + read-state update flow
+- [ ] 06-02-PLAN.md — Simplified /chat inbox UI (photo, name, last chat, unread/new chips)
+- [ ] 06-03-PLAN.md — Chat tab aggregate chip (Chat N) + human verification
+
+**Details:**
+- Count unread messages per conversation and mark incoming messages as read when chat room opens
+- Show per-conversation unread chip and new-match indicator in simple chat list
+- Display aggregate chat tab chip including unread messages + new matches without messages
+
 ---
 
 ## Validation Targets
