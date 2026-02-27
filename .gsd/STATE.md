@@ -3,10 +3,10 @@
 ## Current Status
 
 **Phase**: Phase 08 - Discovery page simplification (in progress)  
-**Active Plans**: 1/3 complete  
+**Active Plans**: 2/3 complete  
 **Completed Requirements**: 31/31 v1 requirements + post-v1 discovery UX refinement in progress
 
-**Progress**: █████████░ 93% (27/29 plans)
+**Progress**: ██████████ 97% (28/29 plans)
 
 ---
 
@@ -94,7 +94,7 @@
 **Plans**: 3 total
 
 - ✅ 08-01: Remove arrow-key/count indicators + move pass/like to tooltip icon controls below card (Complete)
-- [ ] 08-02: Simplify card surface and add ordered detail modal for full biodata/photos
+- ✅ 08-02: Simplify card surface and add ordered detail modal for full biodata/photos (Complete)
 - [ ] 08-03: Add pass-left/like-right card animation + human verification
 
 ---
@@ -193,11 +193,12 @@
 - Phase 07 Plan 03 completed: strict max-5 photo enforcement across UI/API with approved human verification and final profile gallery sizing refinements
 - Phase 08 added: discovery page simplification with tooltip-based pass/like, hidden available count, modal details, and swipe animations
 - Phase 08 Plan 01 completed: discovery now removes arrow-key shortcuts and count indicators, with pass/like tooltip controls in a dedicated action card below profile card
+- Phase 08 Plan 02 completed: discovery card now shows summary-only content with `Detail` trigger, and full ordered biodata/photos moved into a dedicated modal
 
 ---
 
 _Last Updated_: 2026-02-28 (Phase 08 in progress)
 
-**Next Focus**: Execute Phase 08 Plan 02 (simplified card surface + ordered detail modal)
+**Next Focus**: Execute Phase 08 Plan 03 (pass-left/like-right card animation + human verification)
 
-Run `/execute-plan.md .gsd/phases/08-discovery-page-remove-arrow-like-pass-add-tooltip-hide-available-count-simplify-card-and-detail-modal-add-card-swipe-animation/08-02-PLAN.md` to continue.
+Run `/execute-plan.md .gsd/phases/08-discovery-page-remove-arrow-like-pass-add-tooltip-hide-available-count-simplify-card-and-detail-modal-add-card-swipe-animation/08-03-PLAN.md` to continue.

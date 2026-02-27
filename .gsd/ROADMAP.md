@@ -250,7 +250,7 @@ Plans:
 Plans:
 
 - [x] 08-01-PLAN.md — Remove arrow-key/count indicators + move pass/like to tooltip icon controls below card
-- [ ] 08-02-PLAN.md — Simplify card surface and add ordered detail modal for full biodata/photos
+- [x] 08-02-PLAN.md — Simplify card surface and add ordered detail modal for full biodata/photos
 - [ ] 08-03-PLAN.md — Add pass-left/like-right card animation + human verification
 
 **Details:**
