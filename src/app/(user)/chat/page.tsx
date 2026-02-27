@@ -28,15 +28,34 @@ export default function ChatPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchMatches();
+    void fetchMatches();
+
+    const intervalId = window.setInterval(() => {
+      void fetchMatches({ silent: true });
+    }, 3000);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void fetchMatches({ silent: true });
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
-  const fetchMatches = async () => {
+  const fetchMatches = async ({ silent = false }: { silent?: boolean } = {}) => {
     try {
-      setLoading(true);
-      setError(null);
+      if (!silent) {
+        setLoading(true);
+        setError(null);
+      }
 
-      const response = await fetch('/api/matches');
+      const response = await fetch('/api/matches', { cache: 'no-store' });
 
       if (!response.ok) {
         const data = await response.json();
@@ -47,10 +66,14 @@ export default function ChatPage() {
       setMatches(data.matches || []);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to fetch chats';
-      setError(message);
-      toast.error('Failed to load chats');
+      if (!silent) {
+        setError(message);
+        toast.error('Failed to load chats');
+      }
     } finally {
-      setLoading(false);
+      if (!silent) {
+        setLoading(false);
+      }
     }
   };
 
@@ -81,7 +104,7 @@ export default function ChatPage() {
         <Card className="border-red-200 shadow-soft">
           <CardBody className="p-4">
             <p className="text-red-600">{error}</p>
-            <button onClick={fetchMatches} className="mt-3 text-sm font-medium text-primary hover:text-primary-dark">
+            <button onClick={() => void fetchMatches()} className="mt-3 text-sm font-medium text-primary hover:text-primary-dark">
               Try again
             </button>
           </CardBody>

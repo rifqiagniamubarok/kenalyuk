@@ -18,7 +18,13 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+interface MatchesSummaryResponse {
+  summary?: {
+    chatTabCount?: number;
+  };
+}
 
 interface NavigationProps {
   user: {
@@ -35,17 +41,72 @@ interface NavigationProps {
 
 export default function Navigation({ user, menuItems }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [chatBadgeCount, setChatBadgeCount] = useState<number | null>(null);
   const pathname = usePathname();
 
+  const chatMenuItem = menuItems.find((item) => item.href === '/chat');
+
+  useEffect(() => {
+    setChatBadgeCount(chatMenuItem?.badgeCount ?? null);
+  }, [chatMenuItem?.badgeCount]);
+
+  useEffect(() => {
+    if (!chatMenuItem) {
+      setChatBadgeCount(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    const refreshChatBadge = async () => {
+      try {
+        const response = await fetch('/api/matches', { cache: 'no-store' });
+        if (!response.ok) {
+          return;
+        }
+
+        const data = (await response.json()) as MatchesSummaryResponse;
+        const nextCount = data.summary?.chatTabCount;
+
+        if (!cancelled && typeof nextCount === 'number') {
+          setChatBadgeCount(nextCount);
+        }
+      } catch {
+        return;
+      }
+    };
+
+    void refreshChatBadge();
+    const intervalId = window.setInterval(() => {
+      void refreshChatBadge();
+    }, 3000);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void refreshChatBadge();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [chatMenuItem]);
+
   const renderMenuLabel = (item: NavigationProps['menuItems'][number]) => {
-    if (!item.badgeCount || item.badgeCount <= 0) {
+    const resolvedBadgeCount = item.href === '/chat' ? chatBadgeCount ?? item.badgeCount ?? 0 : item.badgeCount ?? 0;
+
+    if (resolvedBadgeCount <= 0) {
       return item.label;
     }
 
     return (
       <>
         {item.label}
-        <span className="text-xs font-semibold rounded-full bg-primary/10 text-primary px-2 py-0.5">{item.badgeCount}</span>
+        <span className="text-xs font-semibold rounded-full bg-primary/10 text-primary px-2 py-0.5">{resolvedBadgeCount}</span>
       </>
     );
   };
