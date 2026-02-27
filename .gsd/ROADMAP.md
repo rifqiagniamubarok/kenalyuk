@@ -254,6 +254,7 @@ Plans:
 - [ ] 08-03-PLAN.md — Add pass-left/like-right card animation + human verification
 
 **Details:**
+
 - Discovery no longer exposes candidate availability counts
 - Pass/Like no longer rely on keyboard arrow shortcuts
 - Card surface is simplified to main photo + name + about + detail trigger
