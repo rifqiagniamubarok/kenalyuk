@@ -23,6 +23,8 @@ interface Match {
   matchId: string;
   matchedAt: string;
   user: MatchUser;
+  unreadCount?: number;
+  hasNoMessages?: boolean;
 }
 
 export default function MatchesPage() {
@@ -153,9 +155,17 @@ export default function MatchesPage() {
 
                   <div className="text-xs text-text-secondary">Matched {new Date(match.matchedAt).toLocaleDateString()}</div>
 
+                  <p className="text-sm text-text-secondary">
+                    {match.hasNoMessages
+                      ? 'New match - start chatting'
+                      : match.unreadCount && match.unreadCount > 0
+                        ? `${match.unreadCount} unread message${match.unreadCount > 1 ? 's' : ''}`
+                        : 'Open chat'}
+                  </p>
+
                   <Link href={`/chat/${match.matchId}`} className="block">
                     <Button className="w-full bg-primary hover:bg-primary-dark text-white" size="lg">
-                      💬 Chat
+                      Open Chat
                     </Button>
                   </Link>
                 </div>
