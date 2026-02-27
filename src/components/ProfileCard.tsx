@@ -5,9 +5,7 @@
 
 'use client';
 
-import { useState } from 'react';
-import { Card, CardBody, CardFooter, Image, Button, Accordion, AccordionItem } from '@nextui-org/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Card, CardBody, CardFooter, Image, Button } from '@nextui-org/react';
 
 export interface ProfileData {
   id: string;
@@ -27,87 +25,40 @@ interface ProfileCardProps {
   profile: ProfileData;
   onLike?: () => void;
   onPass?: () => void;
+  onOpenDetail?: () => void;
   showActions?: boolean;
   actionsDisabled?: boolean;
 }
 
-export default function ProfileCard({ profile, onLike, onPass, showActions = true, actionsDisabled = false }: ProfileCardProps) {
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const photos = profile.photos.length > 0 ? profile.photos : ['/placeholder-avatar.png'];
-
-  const nextPhoto = () => {
-    setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
-  };
-
-  const prevPhoto = () => {
-    setCurrentPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
-  };
+export default function ProfileCard({ profile, onLike, onPass, onOpenDetail, showActions = true, actionsDisabled = false }: ProfileCardProps) {
+  const mainPhoto = profile.photos.length > 0 ? profile.photos[0] : '/placeholder-avatar.png';
 
   return (
     <Card className="w-full max-w-[400px] mx-auto shadow-soft">
-      <CardBody className="p-0 relative">
-        {/* Photo carousel */}
-        <div className="relative aspect-[3/4] bg-gray-100 rounded-t-lg overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div key={currentPhotoIndex} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="absolute inset-0">
-              <Image
-                src={photos[currentPhotoIndex]}
-                alt={`${profile.name} - Photo ${currentPhotoIndex + 1}`}
-                className="w-full h-full object-cover"
-                classNames={{
-                  wrapper: 'w-full h-full',
-                  img: 'w-full h-full object-cover',
-                }}
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Photo navigation buttons */}
-          {photos.length > 1 && (
-            <>
-              <Button isIconOnly size="sm" className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-soft" onPress={prevPhoto}>
-                ‹
-              </Button>
-              <Button isIconOnly size="sm" className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-soft" onPress={nextPhoto}>
-                ›
-              </Button>
-            </>
-          )}
-
-          {/* Photo indicators */}
-          {photos.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1">
-              {photos.map((_, idx) => (
-                <div key={idx} className={`w-2 h-2 rounded-full transition-colors ${idx === currentPhotoIndex ? 'bg-white' : 'bg-white/50'}`} />
-              ))}
-            </div>
-          )}
-
-          {/* Profile info overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-4 pt-12">
-            <h2 className="text-white text-2xl font-bold">
-              {profile.name}, {profile.age}
-            </h2>
-            <div className="text-white/90 text-sm mt-1 space-y-0.5">
-              <p>
-                📍 {profile.city}, {profile.region}
-              </p>
-              {profile.height && <p>📏 {profile.height} cm</p>}
-              {profile.education && <p>🎓 {profile.education}</p>}
-              {profile.occupation && <p>💼 {profile.occupation}</p>}
-              {profile.religionLevel && <p>🕌 {profile.religionLevel}</p>}
-            </div>
-          </div>
+      <CardBody className="p-0">
+        <div className="aspect-[3/4] bg-gray-100 rounded-t-lg overflow-hidden">
+          <Image
+            src={mainPhoto}
+            alt={`${profile.name} main photo`}
+            className="w-full h-full object-cover"
+            classNames={{
+              wrapper: 'w-full h-full',
+              img: 'w-full h-full object-cover',
+            }}
+          />
         </div>
 
-        {/* Expandable About section */}
-        {profile.about && (
-          <Accordion className="px-4 py-2">
-            <AccordionItem key="about" aria-label="About" title="About" className="text-sm">
-              <p className="text-text-secondary whitespace-pre-wrap">{profile.about}</p>
-            </AccordionItem>
-          </Accordion>
-        )}
+        <div className="px-4 py-4 space-y-3">
+          <h2 className="text-xl font-semibold">
+            {profile.name}, {profile.age}
+          </h2>
+          <p className="text-sm text-text-secondary line-clamp-3 whitespace-pre-wrap">{profile.about || 'No about information yet.'}</p>
+          {onOpenDetail && (
+            <Button variant="flat" color="primary" onPress={onOpenDetail} className="w-full">
+              Detail
+            </Button>
+          )}
+        </div>
       </CardBody>
 
       {/* Action buttons */}
