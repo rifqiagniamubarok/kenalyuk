@@ -18,8 +18,10 @@ export default function DiscoveryPage() {
   const [error, setError] = useState<string | null>(null);
   const [noMoreProfiles, setNoMoreProfiles] = useState(false);
   const [matchedProfile, setMatchedProfile] = useState<ProfileData | null>(null);
+  const [detailProfile, setDetailProfile] = useState<ProfileData | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isDetailOpen, onOpen: onDetailOpen, onClose: onDetailClose } = useDisclosure();
 
   // Fetch profiles on mount
   useEffect(() => {
@@ -138,6 +140,17 @@ export default function DiscoveryPage() {
     onClose();
   };
 
+  const handleOpenDetail = () => {
+    if (currentIndex >= profiles.length) return;
+    setDetailProfile(profiles[currentIndex]);
+    onDetailOpen();
+  };
+
+  const handleDetailModalClose = () => {
+    setDetailProfile(null);
+    onDetailClose();
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -195,7 +208,7 @@ export default function DiscoveryPage() {
 
       {/* Profile Card */}
       <div className="flex justify-center">
-        <ProfileCard profile={currentProfile} showActions={false} />
+        <ProfileCard profile={currentProfile} onOpenDetail={handleOpenDetail} showActions={false} />
       </div>
 
       {/* Action Card */}
@@ -246,6 +259,79 @@ export default function DiscoveryPage() {
           <ModalFooter className="justify-center">
             <Button color="primary" onPress={handleMatchModalClose} size="lg" className="px-8">
               Continue Browsing
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isDetailOpen} onClose={handleDetailModalClose} size="2xl" scrollBehavior="inside" backdrop="blur">
+        <ModalContent>
+          <ModalHeader className="text-xl font-semibold">Profile Detail</ModalHeader>
+          <ModalBody>
+            {detailProfile && (
+              <div className="space-y-5">
+                <div className="rounded-lg overflow-hidden bg-gray-100">
+                  <img src={detailProfile.photos[0] || '/placeholder-avatar.png'} alt={`${detailProfile.name} main photo`} className="w-full h-auto object-cover" />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold">
+                    {detailProfile.name}, {detailProfile.age}
+                  </h3>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-default-600 mb-1">About</h4>
+                  <p className="text-sm text-text-secondary whitespace-pre-wrap">{detailProfile.about || 'No about information yet.'}</p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-default-600 mb-2">Biodata</h4>
+                  <div className="space-y-1 text-sm text-default-700">
+                    <p>
+                      <span className="font-medium">Age:</span> {detailProfile.age}
+                    </p>
+                    <p>
+                      <span className="font-medium">City:</span> {detailProfile.city}
+                    </p>
+                    <p>
+                      <span className="font-medium">Region:</span> {detailProfile.region}
+                    </p>
+                    <p>
+                      <span className="font-medium">Height:</span> {detailProfile.height ? `${detailProfile.height} cm` : '-'}
+                    </p>
+                    <p>
+                      <span className="font-medium">Education:</span> {detailProfile.education || '-'}
+                    </p>
+                    <p>
+                      <span className="font-medium">Occupation:</span> {detailProfile.occupation || '-'}
+                    </p>
+                    <p>
+                      <span className="font-medium">Religion Level:</span> {detailProfile.religionLevel || '-'}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-default-600 mb-2">Other Photos</h4>
+                  {detailProfile.photos.slice(1).length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {detailProfile.photos.slice(1).map((photo, index) => (
+                        <div key={photo} className="rounded-md overflow-hidden bg-gray-100">
+                          <img src={photo} alt={`${detailProfile.name} photo ${index + 2}`} className="w-full h-32 object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-text-secondary">No additional photos.</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="flat" onPress={handleDetailModalClose} className="w-full">
+              Close
             </Button>
           </ModalFooter>
         </ModalContent>
