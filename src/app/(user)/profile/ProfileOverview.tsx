@@ -1,6 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
+import BiodataForm from '@/components/BiodataForm';
+import ProfilePhotoSection from './ProfilePhotoSection';
 
 interface ProfileOverviewProps {
   profile: {
@@ -53,6 +56,8 @@ function displayValue(value: string | number | null | undefined, suffix = '') {
 export default function ProfileOverview({ profile }: ProfileOverviewProps) {
   const photos = useMemo(() => profile.photoUrls.slice(0, 5), [profile.photoUrls]);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+  const [isBiodataModalOpen, setIsBiodataModalOpen] = useState(false);
 
   const selectedPhoto = photos[selectedPhotoIndex] || null;
   const status = statusConfig[profile.status as keyof typeof statusConfig] || statusConfig.PENDING_VERIFICATION;
@@ -144,14 +149,40 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
         </div>
 
         <div className="flex flex-wrap gap-3 pt-2">
-          <button type="button" className="inline-flex items-center justify-center rounded-md bg-primary text-white text-sm font-medium px-4 py-2 hover:bg-primary-dark transition-colors">
+          <button
+            type="button"
+            onClick={() => setIsPhotoModalOpen(true)}
+            className="inline-flex items-center justify-center rounded-md bg-primary text-white text-sm font-medium px-4 py-2 hover:bg-primary-dark transition-colors"
+          >
             Edit Picture
           </button>
-          <button type="button" className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 text-sm font-medium px-4 py-2 hover:bg-gray-50 transition-colors">
+          <button
+            type="button"
+            onClick={() => setIsBiodataModalOpen(true)}
+            className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white text-gray-700 text-sm font-medium px-4 py-2 hover:bg-gray-50 transition-colors"
+          >
             Edit Biodata
           </button>
         </div>
       </section>
+
+      <Modal isOpen={isPhotoModalOpen} onClose={() => setIsPhotoModalOpen(false)} size="2xl" scrollBehavior="inside">
+        <ModalContent>
+          <ModalHeader className="flex items-center justify-between">Edit Picture</ModalHeader>
+          <ModalBody className="pb-6">
+            <ProfilePhotoSection />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isBiodataModalOpen} onClose={() => setIsBiodataModalOpen(false)} size="3xl" scrollBehavior="inside">
+        <ModalContent>
+          <ModalHeader className="flex items-center justify-between">Edit Biodata</ModalHeader>
+          <ModalBody className="pb-6">
+            <BiodataForm />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
