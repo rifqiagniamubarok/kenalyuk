@@ -241,6 +241,25 @@ Plans:
 - Edit actions are moved into modals (`Edit Picture`, `Edit Biodata`)
 - Photo limit is standardized to max 5 across UI and backend rules
 
+### Phase 8: in discovery page, remove arrow function for pass and like, add tooltip in icon pass and like, hide available user count, simplify card layout with main picture then name/about plus details modal, move like/pass buttons below card, and add card swipe animation (like right, pass left)
+
+**Goal:** Simplify discovery interactions and card layout with tooltip actions, hidden availability count, modal detail flow, and directional swipe animation feedback
+**Depends on:** Phase 7
+**Plans:** 3 plans
+
+Plans:
+
+- [ ] 08-01-PLAN.md — Remove arrow-key/count indicators + move pass/like to tooltip icon controls below card
+- [ ] 08-02-PLAN.md — Simplify card surface and add ordered detail modal for full biodata/photos
+- [ ] 08-03-PLAN.md — Add pass-left/like-right card animation + human verification
+
+**Details:**
+- Discovery no longer exposes candidate availability counts
+- Pass/Like no longer rely on keyboard arrow shortcuts
+- Card surface is simplified to main photo + name + about + detail trigger
+- Full biodata and additional photos move to dedicated modal
+- Action controls remain below card and card transitions animate directionally (right on like, left on pass)
+
 ---
 
 ## Validation Targets
