@@ -205,7 +205,7 @@ export default function BiodataForm({ onSaved, onClose }: BiodataFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+    <form onSubmit={handleSubmit} className="w-full space-y-6">
       {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">{error}</div>}
 
       {/* Basic Information */}
@@ -430,11 +430,7 @@ export default function BiodataForm({ onSaved, onClose }: BiodataFormProps) {
 
       <div className="flex justify-end gap-4">
         {onClose && (
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-          >
+          <button type="button" onClick={onClose} className="px-6 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
             Close
           </button>
         )}
