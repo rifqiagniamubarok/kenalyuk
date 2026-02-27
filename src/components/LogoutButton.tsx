@@ -6,20 +6,15 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 interface LogoutButtonProps {
-  variant?: 'default' | 'icon' | 'text';
+  variant?: 'default' | 'icon' | 'text' | 'profileBottom';
   className?: string;
 }
 
 export default function LogoutButton({ variant = 'default', className = '' }: LogoutButtonProps) {
-  const router = useRouter();
-
   const handleLogout = async () => {
-    await signOut({ redirect: false });
-    router.push('/');
-    router.refresh();
+    await signOut({ callbackUrl: '/login' });
   };
 
   if (variant === 'icon') {
@@ -35,6 +30,17 @@ export default function LogoutButton({ variant = 'default', className = '' }: Lo
   if (variant === 'text') {
     return (
       <button onClick={handleLogout} className={`text-sm text-text-secondary hover:text-primary transition-colors duration-200 ${className}`}>
+        Sign out
+      </button>
+    );
+  }
+
+  if (variant === 'profileBottom') {
+    return (
+      <button
+        onClick={handleLogout}
+        className={`inline-flex items-center justify-center rounded-md border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors duration-200 hover:bg-red-100 ${className}`}
+      >
         Sign out
       </button>
     );

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
 import BiodataForm from '@/components/BiodataForm';
+import LogoutButton from '@/components/LogoutButton';
 import ProfilePhotoSection from './ProfilePhotoSection';
 
 interface ProfileOverviewProps {
@@ -177,6 +178,16 @@ export default function ProfileOverview({ profile }: ProfileOverviewProps) {
           >
             Edit Biodata
           </button>
+        </div>
+      </section>
+
+      <section className="bg-white shadow rounded-lg p-4 sm:p-6">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-base font-semibold text-gray-900">Account</h2>
+          <p className="text-sm text-gray-600">Sign out from your account on this device.</p>
+          <div className="pt-1">
+            <LogoutButton variant="profileBottom" />
+          </div>
         </div>
       </section>
 
