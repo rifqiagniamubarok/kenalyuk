@@ -29,12 +29,26 @@ interface NavigationProps {
     label: string;
     href: string;
     icon?: React.ReactNode;
+    badgeCount?: number;
   }[];
 }
 
 export default function Navigation({ user, menuItems }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const renderMenuLabel = (item: NavigationProps['menuItems'][number]) => {
+    if (!item.badgeCount || item.badgeCount <= 0) {
+      return item.label;
+    }
+
+    return (
+      <>
+        {item.label}
+        <span className="text-xs font-semibold rounded-full bg-primary/10 text-primary px-2 py-0.5">{item.badgeCount}</span>
+      </>
+    );
+  };
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/login' });
@@ -83,7 +97,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
               } transition-colors duration-200 flex items-center gap-2`}
             >
               {item.icon}
-              {item.label}
+              {renderMenuLabel(item)}
             </Link>
           </NavbarItem>
         ))}
@@ -123,7 +137,7 @@ export default function Navigation({ user, menuItems }: NavigationProps) {
             <Link className={`w-full ${pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
               <div className="flex items-center gap-2 py-2">
                 {item.icon}
-                {item.label}
+                {renderMenuLabel(item)}
               </div>
             </Link>
           </NavbarMenuItem>

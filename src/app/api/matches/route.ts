@@ -173,7 +173,18 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ matches: formattedMatches });
+    const totalUnreadCount = unreadCounts.reduce((sum, item) => sum + item._count._all, 0);
+    const newMatchesWithoutMessages = matches.length - totalMessageCounts.length;
+    const chatTabCount = totalUnreadCount + newMatchesWithoutMessages;
+
+    return NextResponse.json({
+      matches: formattedMatches,
+      summary: {
+        totalUnreadCount,
+        newMatchesWithoutMessages,
+        chatTabCount,
+      },
+    });
   } catch (error) {
     console.error('Error fetching matches:', error);
     return NextResponse.json(
