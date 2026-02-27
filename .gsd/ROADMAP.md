@@ -107,6 +107,103 @@ Plans:
 
 ---
 
+## Phase 04 - User Interface Redesign & Simplification
+
+**Duration**: Week 9  
+**Status**: Not started  
+**Goal**: Streamline user interface for better usability and efficiency
+
+### Success Criteria
+
+- Simplified navigation with only 3 main menus: Profile, Discovery, Chat
+- Profile consolidates Dashboard, Biodata, and Photos into single unified view
+- Photo ordering system allows users to customize photo display order
+- First photo automatically becomes profile picture across the platform
+- Reduced form validation requirements for better user experience
+- Progressive disclosure: unapproved users see only Profile menu
+
+### Requirements Coverage
+
+- **UI-01**: Consolidated profile page with dashboard, biodata, and photos
+- **UI-02**: Simplified navigation structure (Profile, Discovery, Chat only)
+- **UI-03**: Photo ordering system with drag-and-drop reordering
+- **UI-04**: Profile picture auto-assignment from first photo
+- **UI-05**: Reduced biodata validation (About Me: 5+ chars, Looking For: optional)
+- **UI-06**: Remove Likes menu from navigation
+- **UI-07**: Replace emoji icons with Lucide icons throughout
+- **UI-08**: Conditional navigation based on approval status
+
+**Total Requirements**: 8 new requirements
+
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 04-01-PLAN.md — Navigation Simplification & Icon System
+- [ ] 04-02-PLAN.md — Photo Ordering System
+- [ ] 04-03-PLAN.md — Consolidated Profile Page & Validation Updates
+
+**Details:**
+
+**Navigation Changes:**
+
+- Simplify from 6 menu items to 3 core actions: Profile, Discovery, Chat
+- Remove standalone Dashboard, Biodata, Photos, Likes pages
+- Consolidate all profile management into single Profile view
+
+**Profile Consolidation:**
+
+- Single page contains: completion status, biodata form, photo management
+- Vertical layout for mobile-first design
+- Progressive sections: Status → Basic Info → Photos → About
+- Real-time validation feedback
+
+**Photo Management:**
+
+- Drag-and-drop reordering interface
+- First photo displays as profile picture everywhere
+- Visual preview of how profile appears to others
+- Upload/edit/reorder in single unified interface
+
+**Form Simplification:**
+
+- About Me: Minimum 5 characters (reduced from 50)
+- What I'm Looking For: Optional field (removed required validation)
+- Keep all other required fields unchanged
+
+**Icon System:**
+
+- Replace all emoji icons with Lucide React icons
+- Consistent icon sizing and styling
+- Better accessibility and visual harmony
+
+**Conditional UI:**
+
+- Unapproved users: Only Profile menu visible
+- Approved users: All 3 menus accessible
+- Clear messaging about approval status
+
+### Phase 5: Adjust send email SMTP .env configuration, add forgot password and verify password for register, send email notification after supervisor approval, and add function to read HTML format
+
+**Goal:** Deliver reliable HTML-based transactional emails and complete password recovery flow (forgot/reset) with strong register password verification
+**Depends on:** Phase 4
+**Plans:** 3 plans
+
+Plans:
+
+- [ ] 05-01-PLAN.md — SMTP normalization + HTML email template reader + approval notification wiring
+- [ ] 05-02-PLAN.md — Forgot/reset password backend (token model, APIs, reset email template)
+- [ ] 05-03-PLAN.md — Auth UI integration (forgot/reset pages) + register password verification + human verification
+
+**Details:**
+- Centralize SMTP handling to avoid env key mismatches and delivery failures
+- Move transactional email body source to HTML template files
+- Add secure forgot-password and reset-password token flow
+- Keep registration password confirmation enforced on both client and API
+- Preserve supervisor approval notification after user acceptance
+
+---
+
 ## Validation Targets
 
 ### Behavioral Metrics
