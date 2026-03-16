@@ -9,6 +9,10 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Give Next.js build enough heap during image build on low-memory hosts.
+ARG BUILD_NODE_OPTIONS=--max-old-space-size=2048
+ENV NODE_OPTIONS=${BUILD_NODE_OPTIONS}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
