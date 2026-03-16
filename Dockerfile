@@ -29,10 +29,7 @@ COPY --from=builder /app/.next/static ./.next/static
 
 # Prisma artifacts are needed for migration deploy during container startup.
 COPY --from=builder /app/prisma ./prisma
-COPY --from=deps /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=deps /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=deps /app/node_modules/prisma ./node_modules/prisma
-COPY --from=deps /app/node_modules/.bin/prisma ./node_modules/.bin/prisma
+COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 
