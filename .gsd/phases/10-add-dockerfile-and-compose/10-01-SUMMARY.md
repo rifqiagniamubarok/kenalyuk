@@ -1,8 +1,7 @@
 ---
 phase: 10-add-dockerfile-and-compose
 plan: 01
-subsystem:
-  infra
+subsystem: infra
 tags: [docker, nextjs, prisma, container]
 requires:
   - phase: 09-navbar-simplification
@@ -19,12 +18,12 @@ key-files:
   created: [Dockerfile, .dockerignore]
   modified: [next.config.mjs, src/app/(auth)/login/page.tsx, src/app/(auth)/reset-password/page.tsx, src/app/(auth)/verify-email/page.tsx]
 key-decisions:
-  - "Use Next.js standalone output to minimize runtime image payload."
-  - "Run prisma migrate deploy in container startup command for environment-safe schema sync."
-  - "Generate Prisma client during Docker builder stage to avoid missing enum/type artifacts in container builds."
+  - 'Use Next.js standalone output to minimize runtime image payload.'
+  - 'Run prisma migrate deploy in container startup command for environment-safe schema sync.'
+  - 'Generate Prisma client during Docker builder stage to avoid missing enum/type artifacts in container builds.'
 patterns-established:
-  - "Container pattern: deps -> builder -> runner stages with lockfile-aware dependency install."
-  - "Runtime safety pattern: include Prisma schema/migrations and Prisma engine artifacts in runner stage."
+  - 'Container pattern: deps -> builder -> runner stages with lockfile-aware dependency install.'
+  - 'Runtime safety pattern: include Prisma schema/migrations and Prisma engine artifacts in runner stage.'
 duration: 6m
 completed: 2026-03-16
 ---

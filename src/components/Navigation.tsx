@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from '@nextui-org/react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -115,72 +107,70 @@ export default function Navigation({ menuItems }: NavigationProps) {
           base: 'bg-transparent',
         }}
       >
-      {/* Mobile menu toggle */}
-      <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
-      </NavbarContent>
+        {/* Mobile menu toggle */}
+        <NavbarContent className="sm:hidden" justify="start">
+          <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
+        </NavbarContent>
 
-      {/* Brand */}
-      <NavbarContent className="sm:hidden pr-2" justify="center">
-        <NavbarBrand>
-          <Link href="/dashboard" className="font-bold text-xl text-primary">
-            Kenalyuk
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-4" justify="start">
-        <NavbarBrand>
-          <Link href="/dashboard" className="font-bold text-2xl text-primary">
-            Kenalyuk
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
-      {/* Desktop menu items */}
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {menuItems.map((item) => (
-          <NavbarItem key={item.href} isActive={pathname === item.href}>
-            {(() => {
-              const resolvedBadgeCount = getResolvedBadgeCount(item);
-
-              return (
-            <Link
-              href={item.href}
-              className={`${
-                pathname === item.href
-                  ? 'text-primary bg-primary/10'
-                  : 'text-text-secondary hover:text-primary hover:bg-primary/5'
-              } transition-colors duration-200 relative flex h-10 w-10 items-center justify-center rounded-full`}
-              aria-label={item.label}
-            >
-              {item.icon}
-              {resolvedBadgeCount > 0 && (
-                <span className="absolute -right-1 -top-1 min-w-[1rem] rounded-full bg-primary px-1 text-center text-[10px] font-semibold leading-4 text-white">
-                  {resolvedBadgeCount}
-                </span>
-              )}
-              <span className="sr-only">{item.label}</span>
+        {/* Brand */}
+        <NavbarContent className="sm:hidden pr-2" justify="center">
+          <NavbarBrand>
+            <Link href="/dashboard" className="font-bold text-xl text-primary">
+              Kenalyuk
             </Link>
-              );
-            })()}
-          </NavbarItem>
-        ))}
-      </NavbarContent>
+          </NavbarBrand>
+        </NavbarContent>
 
-      {/* Mobile menu */}
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.href}-${index}`}>
-            <Link className={`w-full ${pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
-              <div className="flex items-center gap-2 py-2">
-                {item.icon}
-                {renderMenuLabel(item)}
-              </div>
+        <NavbarContent className="hidden sm:flex gap-4" justify="start">
+          <NavbarBrand>
+            <Link href="/dashboard" className="font-bold text-2xl text-primary">
+              Kenalyuk
             </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+          </NavbarBrand>
+        </NavbarContent>
+
+        {/* Desktop menu items */}
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.href} isActive={pathname === item.href}>
+              {(() => {
+                const resolvedBadgeCount = getResolvedBadgeCount(item);
+
+                return (
+                  <Link
+                    href={item.href}
+                    className={`${
+                      pathname === item.href ? 'text-primary bg-primary/10' : 'text-text-secondary hover:text-primary hover:bg-primary/5'
+                    } transition-colors duration-200 relative flex h-10 w-10 items-center justify-center rounded-full`}
+                    aria-label={item.label}
+                  >
+                    {item.icon}
+                    {resolvedBadgeCount > 0 && (
+                      <span className="absolute -right-1 -top-1 min-w-[1rem] rounded-full bg-primary px-1 text-center text-[10px] font-semibold leading-4 text-white">
+                        {resolvedBadgeCount}
+                      </span>
+                    )}
+                    <span className="sr-only">{item.label}</span>
+                  </Link>
+                );
+              })()}
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+
+        {/* Mobile menu */}
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.href}-${index}`}>
+              <Link className={`w-full ${pathname === item.href ? 'text-primary font-semibold' : 'text-text-secondary'}`} href={item.href} onClick={() => setIsMenuOpen(false)}>
+                <div className="flex items-center gap-2 py-2">
+                  {item.icon}
+                  {renderMenuLabel(item)}
+                </div>
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
       </Navbar>
     </div>
   );

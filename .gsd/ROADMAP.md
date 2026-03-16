@@ -281,6 +281,24 @@ Plans:
 - Signout is available only at profile page bottom
 - Final phase includes explicit human verification checkpoint for visual/functional confirmation
 
+### Phase 10: Add dockerfile and compose
+
+**Goal:** Deliver a production-ready Docker image and compose-based local runtime for Next.js + PostgreSQL with reproducible startup
+**Depends on:** Phase 9
+**Plans:** 2 plans
+
+Plans:
+
+- [ ] 10-01-PLAN.md — Multi-stage Dockerfile + standalone Next.js output + Docker build context rules
+- [ ] 10-02-PLAN.md — Compose stack (app + PostgreSQL) + env template + docker lifecycle scripts
+
+**Details:**
+
+- Add production-oriented multi-stage Docker image definition for current Next.js + Prisma app
+- Enable standalone output to reduce runtime image payload
+- Provide compose orchestration for app + PostgreSQL with health-aware startup order and persistent volumes
+- Keep scope infra-only for containerization; no feature changes to pending Phase 05/08 application tasks
+
 ---
 
 ## Validation Targets

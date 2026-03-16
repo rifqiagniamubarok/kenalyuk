@@ -1,8 +1,7 @@
 ---
 phase: 10-add-dockerfile-and-compose
 plan: 02
-subsystem:
-  infra
+subsystem: infra
 tags: [docker-compose, docker, postgres, nextjs, prisma]
 requires:
   - phase: 10-add-dockerfile-and-compose
@@ -19,12 +18,12 @@ key-files:
   created: [docker-compose.yml, .env.docker.example]
   modified: [package.json, Dockerfile]
 key-decisions:
-  - "Compose scripts use --env-file .env.docker to prevent host .env DATABASE_URL leakage into containers."
-  - "App service startup is gated by db healthcheck to avoid race conditions during Prisma migrate deploy."
-  - "Runner image copies node_modules from builder so generated Prisma client is present at runtime."
+  - 'Compose scripts use --env-file .env.docker to prevent host .env DATABASE_URL leakage into containers.'
+  - 'App service startup is gated by db healthcheck to avoid race conditions during Prisma migrate deploy.'
+  - 'Runner image copies node_modules from builder so generated Prisma client is present at runtime.'
 patterns-established:
-  - "Compose local stack pattern: db healthcheck + app depends_on condition service_healthy."
-  - "Container runtime pattern: .env.docker template + npm scripts for repeatable local operations."
+  - 'Compose local stack pattern: db healthcheck + app depends_on condition service_healthy.'
+  - 'Container runtime pattern: .env.docker template + npm scripts for repeatable local operations.'
 duration: 36m
 completed: 2026-03-16
 ---
