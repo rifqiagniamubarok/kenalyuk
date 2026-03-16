@@ -2,11 +2,12 @@
 
 ## Current Status
 
-**Phase**: Phase 09 - Navbar simplification and signout relocation (complete)  
-**Active Plans**: 3/3 complete  
-**Completed Requirements**: 31/31 v1 requirements + post-v1 UX refinements complete for Phase 9
+**Phase**: Phase 10 - Add dockerfile and compose (in progress)  
+**Active Plans**: 1/2 complete  
+**Completed Requirements**: 31/31 v1 requirements complete + infrastructure planning in progress
+**Next Phase**: Phase 10 Plan 02 - Compose stack and docker lifecycle scripts
 
-**Progress**: ██████████ 100% (32/32 plans)
+**Progress**: █████████░ 91% (31/34 plans)
 
 ---
 
@@ -105,6 +106,14 @@
 - ✅ 09-01: Compact island navbar + icon-only Profile/Discovery/Chat, remove right profile dropdown (Complete)
 - ✅ 09-02: Remove navbar logout and move signout to profile bottom section (Complete)
 - ✅ 09-03: Responsive polish + human verification checkpoint (approved) (Complete)
+
+### Phase 10 - Add Dockerfile and Compose
+
+**Status**: In Progress
+**Plans**: 2 total
+
+- ✅ 10-01: Multi-stage Dockerfile + standalone Next.js output + Docker build context rules (Complete)
+- [ ] 10-02: Compose stack (app + PostgreSQL) + env template + docker lifecycle scripts
 
 ---
 
@@ -207,11 +216,13 @@
 - Phase 09 Plan 01 completed: user navbar converted to compact island layout with title + icon-only profile/discovery/chat and no right-side dropdown
 - Phase 09 Plan 02 completed: navbar logout removed and signout relocated into dedicated profile-bottom account section
 - Phase 09 Plan 03 completed: responsive spacing polish finalized and human verification approved
+- Phase 10 added: add dockerfile and compose
+- Phase 10 Plan 01 completed: standalone Next.js output + multi-stage Dockerfile + verified docker build
 
 ---
 
-_Last Updated_: 2026-02-28 (Phase 09 complete)
+_Last Updated_: 2026-03-16 (Completed 10-01)
 
-**Next Focus**: Resolve remaining Phase 08 Plan 03 checkpoint/finalization to align phase ordering.
+**Next Focus**: Execute 10-02 compose stack while preserving completion of pending Phase 05/08 items.
 
-Run `/execute-phase.md 8` to complete the pending discovery animation checkpoint path.
+Run `/execute-phase.md 10` to continue Phase 10 execution.
